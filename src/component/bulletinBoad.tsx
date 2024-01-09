@@ -129,7 +129,7 @@ const BulletinBoad = () => {
 
     return (
         <div className='board'>
-            <p className='welcome'>こんにちは、{user && user.nickname} </p>
+            <p className='welcome'>こんにちは、{user?.nickname} </p>
             <p className='logout' onClick={() => { localStorage.clear(); window.location.reload() }}>ログアウト</p>
             <div className="create-news">
                 <TextArea name='情報' value={infor} onChange={(e) => setinfor(e.target.value)} />
@@ -140,11 +140,11 @@ const BulletinBoad = () => {
                     posts.map((item, index) =>
                         <div key={index}>
                             <div className="msg" >
-                                <div className="author">{item.nicknameId.nickname} <span>{moment(item.createDate).format('YY/MM/DD HH:mm')}</span></div>
+                                <div className="author">{item.nicknameId?.nickname} <span>{moment(item.createDate).format('YY/MM/DD HH:mm')}</span></div>
                                 <div className="content" dangerouslySetInnerHTML={{ __html: item ? item.content.replace(/\n/g, '<br>') : "" }}>
                                 </div>
                                 <div className='tool'>
-                                    {user && user.id === item.nicknameId._id &&
+                                    {user && user.id === item.nicknameId?._id &&
                                         <EditIcon onClick={() => { setPostId(item._id); setModalOpen(true) }} />
                                     }
                                     <CommentIcon onClick={() => { setPostId(item._id), setComments([]) }} />
