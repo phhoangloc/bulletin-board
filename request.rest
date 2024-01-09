@@ -1,0 +1,28 @@
+
+GET  http://localhost:3000/api/post
+###
+POST  http://localhost:3000/api/signup
+Content-Type: application/json
+
+{
+    "nickname":"hoangloc",
+    "password":"123456",
+    "email":"ph.hoangloc@gmail.com"
+}
+###
+ POST  http://localhost:3000/api/login
+Content-Type: application/json
+
+{
+    "nickname":"hoangloc",
+    "password":"123456"
+}
+###
+
+GET http://localhost:3000/api/auth/comment?postId=6597c97b0e29e243fa7d4976
+Content-Type: application/json
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1OGQwOGU3ZDFlNjViYmVhMzIzN2FmZCIsImlhdCI6MTcwNDQyMjI3NiwiZXhwIjoxNzA0NTA4Njc2fQ.50LgL5GkFo5utYNcGY2nFTfchqseH_Z6m7J9RQ9zTO8
+
+{
+    "content":"おやすみなさい"
+}
