@@ -445,7 +445,6 @@ main .board .item .reply .replyItem .content svg {
   height: 20px;
   width: 20px;
   border-radius: 5px;
-  cursor: pointer;
   opacity: 0;
   transition: all 0.25s;
 }
@@ -485,6 +484,8 @@ main .board .item .reply .replyItem .content .commentEditModalBlock {
 main .board .item .reply .replyItem .content .editCommentBox textarea {
   background: none;
   border: none;
+  resize: none;
+  overflow: hidden;
 }
 
 main .board .item .reply .replyItem .content .editCommentBox textarea:focus {
@@ -514,6 +515,10 @@ main .board .item .reply .reply-input {
   position: relative;
 }
 
+main .board .item .reply .reply-input .input {
+  border: 1px solid #ddd;
+}
+
 main .board .item .reply .reply-input .inputFocus p {
   opacity: 0;
 }
@@ -521,12 +526,15 @@ main .board .item .reply .reply-input .inputFocus p {
 main .board .item .reply .reply-input svg {
   cursor: pointer;
   position: absolute;
-  bottom: 0;
-  right: 0;
-  background: white;
+  bottom: 2.5px;
+  right: 2.5px;
   z-index: 2;
   border-radius: 50%;
   color: var(--border-color);
+  padding: 5px;
+  background-color: var(--background-color);
+  width: 20px;
+  height: 20px;
 }
 
 main .board .item .reply .reply-input svg:hover {
