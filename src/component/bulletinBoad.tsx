@@ -52,7 +52,7 @@ const BulletinBoad = () => {
     const [commentContent, setCommentContent] = useState<string>("")
     const [comment, setComment] = useState<string>("")
     const [pageComment, setPageCommnet] = useState<number>(1)
-    const [limitComment, setLimitComment] = useState<number>(2)
+    const [limitComment, setLimitComment] = useState<number>(10)
     const getPost = async () => {
         const result = await axios.get(`/api/post?limit=${limit}&sort=true&skip=${(page - 1) * limit}`)
         if (result.data.success) {
