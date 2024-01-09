@@ -129,7 +129,7 @@ const BulletinBoad = () => {
 
     return (
         <div className='board'>
-            <p className='welcome'>こんにちは、{user?.nickname} </p>
+            <p className='welcome'>こんにちは、{user && user.nickname} </p>
             <p className='logout' onClick={() => { localStorage.clear(); window.location.reload() }}>ログアウト</p>
             <div className="create-news">
                 <TextArea name='情報' value={infor} onChange={(e) => setinfor(e.target.value)} />
