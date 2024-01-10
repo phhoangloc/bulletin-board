@@ -40,8 +40,8 @@ const createUser = async (
             to: req.body.email,
             subject: 'Active your Account',
             html: `
-            <p style="text-align:center">Thanks for you registering!<p>
-            <p style="text-align:center">Please click <a style="font-weight:bold;color:green" href="${process.env.HOMEPAGE_URL}api/active?email=${req.body.email}">here</a> to acctive your account<p>`
+            <p style="text-align:center">ご登録いただきありがとうございます！<p>
+            <p style="text-align:center">アカウントを有効にするには<a style="font-weight:bold;color:green" href="${process.env.HOMEPAGE_URL}api/active?email=${req.body.email}">ここ</a>をクリックしてください<p>`
         };
 
         await transporter.sendMail(mainOptions)
@@ -52,7 +52,7 @@ const createUser = async (
                 throw error.message
             }).then(() => {
                 result.success = true
-                result.message = "please check your email to active your account"
+                result.message = "アカウントを有効にするためにメールを確認してください"
                 res.json(result)
             })
     } else {

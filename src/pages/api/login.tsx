@@ -26,7 +26,7 @@ const login = async (
 
             result = {
                 success: false,
-                message: "account is not existed",
+                message: "アカウントは存在しません",
             }
 
             res.json(result)
@@ -36,7 +36,7 @@ const login = async (
 
                 result = {
                     success: false,
-                    message: "account is not actived",
+                    message: "アカウントは無効です。",
                 }
 
                 res.json(result)
@@ -61,7 +61,7 @@ const login = async (
                 } else {
                     result = {
                         success: false,
-                        message: "password is not correct",
+                        message: "パスワードが合ってないんです。",
                     }
 
                     res.json(result)

@@ -25,7 +25,7 @@ const Active =
                         res.json(false)
                     })
                     .then((data: any) => {
-                        res.json("your account have been active! ")
+                        res.json("あなたのアカウントは有効になりました！ ")
                     })
             })
     }

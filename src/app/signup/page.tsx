@@ -5,6 +5,7 @@ import Input from '@/items/Input'
 import Button from '@/items/Button'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
+import Header from '@/component/header'
 type Props = {}
 
 const SignUp = (props: Props) => {
@@ -28,25 +29,25 @@ const SignUp = (props: Props) => {
         let errors: { nickname?: string, password?: string, email?: string } = {}
 
         if (nickname.length != 0 && 6 > nickname.length) {
-            errors.nickname = 'nickname must be at least than 6'
+            errors.nickname = 'ニックネームは少なくとも6文字でなければなりません。'
         }
         if (nickname) {
             const isnickname = await fetch("/api/user?nickname=" + nickname)
                 .then((res) => res.json())
                 .then((data) => data)
-            if (isnickname) { errors.nickname = "this nickname is existed" }
+            if (isnickname) { errors.nickname = "ニックネームは存在します" }
         }
         if (!/\S+@\S+\.\S+/.test(email) && email.length != 0) {
-            errors.email = 'Email is invalid';
+            errors.email = 'イメールは無効です';
         }
         if (email) {
             const isEmail = await fetch("/api/user?email=" + email)
                 .then((res) => res.json())
                 .then((data) => data)
-            if (isEmail) { errors.email = "this email is existed" }
+            if (isEmail) { errors.email = "イメールは存在します" }
         }
         if (password.length != 0 && password.length < 6) {
-            errors.password = 'Password must be at least 6 characters.';
+            errors.password = 'パスワードは少なくとも6文字でなければなりません。';
         }
 
         setIsErrors(Object.keys(errors).length || nickname === "" || password === "" || email === "" ? true : false);
@@ -65,15 +66,15 @@ const SignUp = (props: Props) => {
 
     return (
         <main className='center'>
-            <h1>アステムの掲示板</h1>
+            <Header />
             <p className='notice'>{notice}</p>
             <div className='signup center'>
                 <div className="box">
-                    <h2>Sign Up</h2>
+                    <h2>登録</h2>
                     <Input name='nickname' onChange={(e) => setNickname(e.target.value)} value={nickname} warn={Error.nickname} />
                     <Input type='password' name='password' onChange={(e) => setPassword(e.target.value)} value={password} warn={Error.password} />
                     <Input name='email' onChange={(e) => setEmail(e.target.value)} value={email} warn={Error.email} />
-                    <Button name='Sign Up' onClick={() => SignUp()} />
+                    <Button name='登録' onClick={() => SignUp()} />
                     <p className='link' onClick={() => toPage.push('/login')}>ログイン</p>
 
                 </div>

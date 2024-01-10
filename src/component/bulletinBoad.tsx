@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react'
 import React from 'react'
 import store from '@/redux/store'
 import { UserLogin } from '@/redux/reducer/UserReducer'
-import ReplyIcon from '@mui/icons-material/Reply';
+import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
+import SkipNextIcon from '@mui/icons-material/SkipNext';
 import EditIcon from '@mui/icons-material/Edit';
 import SendIcon from '@mui/icons-material/Send';
-import Icon from '@/items/Icon';
 import TextArea from '@/items/TextArea';
 import axios from 'axios';
 import { setRefresh } from '@/redux/reducer/RefreshReducer';
@@ -53,6 +53,8 @@ const BulletinBoad = () => {
     const [comment, setComment] = useState<string>("")
     const [pageComment, setPageCommnet] = useState<number>(1)
     const [limitComment, setLimitComment] = useState<number>(10)
+    const [nextComment, setNextComment] = useState<boolean>(false)
+
     const getPost = async () => {
         const result = await axios.get(`/api/post?limit=${limit}&sort=true&skip=${(page - 1) * limit}`)
         if (result.data.success) {
@@ -79,6 +81,21 @@ const BulletinBoad = () => {
         if (result.data.success) {
             setComments(result.data.data)
         }
+
+        const nextResult = await axios.get(`api/auth/comment?postId=${id}&limit=${limitComment}&skip=${(pageComment) * limitComment}`,
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': localStorage.token,
+                }
+
+            })
+        if (nextResult.data.data.length !== 0) {
+            setNextComment(true)
+        } else {
+            setNextComment(false)
+        }
+
     }
 
     const sendComment = async (comment: String) => {
@@ -174,7 +191,12 @@ const BulletinBoad = () => {
                                             </div>
                                         </div>
                                     ) : null}
-                                {comments.length ? <p className='page-comment'><span onClick={() => setPageCommnet(pre => pre + 1)}>つづき</span></p> : null}
+                                {comments.length ?
+                                    <div className='page-comment'>
+                                        {pageComment === 1 ? null : <span onClick={() => setPageCommnet(pre => pre - 1)}><SkipPreviousIcon /></span>}
+                                        {nextComment ? <span onClick={() => setPageCommnet(pre => pre + 1)}><SkipNextIcon /></span> : null}
+                                    </div> :
+                                    null}
 
                                 {/* <ModalComment id={postId} /> */}
                                 <div className="reply-input">
@@ -187,14 +209,14 @@ const BulletinBoad = () => {
                 }
 
                 <div className="page">
-                    {limit * (page - 1) > 0 && <p onClick={() => { setPage(pre => pre - 1) }}>prev</p>}
+                    {limit * (page - 1) > 0 && <p onClick={() => { setPage(pre => pre - 1) }}><SkipPreviousIcon /></p>}
                     {page && <p>{page}</p>}
-                    {posts.length - limit >= 0 && <p onClick={() => { setPage(pre => pre + 1) }}>next</p>}
+                    {posts.length - limit >= 0 && <p onClick={() => { setPage(pre => pre + 1) }}><SkipNextIcon /></p>}
                 </div>
 
             </div>
             <ModalEdit id={postId} modalOpen={modalOpen} cancel={() => { setPostId(""); setModalOpen(false) }} />
-        </div>
+        </div >
     )
 }
 

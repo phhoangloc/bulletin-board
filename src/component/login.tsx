@@ -30,11 +30,11 @@ const Login = () => {
     return (
         <div className='login center'>
             <div className="box">
-                <h2>Login</h2>
+                <h2>ログイン</h2>
                 <Input name='nickname' onChange={(e) => setNickname(e.target.value)} value={nickname} />
                 <Input type='password' name='password' onChange={(e) => setPassword(e.target.value)} value={password} />
                 <p className='notice'>{notice}</p>
-                <Button name='Log In' onClick={() => login()} />
+                <Button name='ログイン' onClick={() => login()} />
                 <p className='link' onClick={() => toPage.push('/signup')}>登録</p>
             </div>
         </div>
