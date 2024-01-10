@@ -73,8 +73,8 @@ const ModalEdit = ({ modalOpen, id, cancel }: Props) => {
     return (
         <div className={`modalEdit center ${modalOpen ? "modalOpen" : ""}`}>
             <div className="box">
-                <h2>Edit</h2>
-                <TextArea name='情報' value={infor} onChange={(e) => setinfor(e.target.value)} />
+                <h2>編集</h2>
+                <TextArea name='' value={infor} onChange={(e) => setinfor(e.target.value)} />
                 <div className="tool">
                     <DeleteIcon onClick={() => { id && deletePostbyId(id) }} />
                     <Button name='cancel' onClick={() => cancel()} />
