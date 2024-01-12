@@ -378,6 +378,21 @@ main {
                     svg:hover {
                         color: #444;
                     }
+
+                    .commentNumber {
+                        position: absolute;
+                        font-size: 10px;
+                        width: 20px;
+                        height: 20px;
+                        background-color: red;
+                        color: white;
+                        text-align: center;
+                        line-height: 20px;
+                        bottom: 20px;
+                        right: 0;
+                        border-radius: 50%;
+                        font-weight: bold;
+                    }
                 }
 
             }
@@ -629,6 +644,28 @@ main {
 
         .modalOpen {
             display: block;
+        }
+    }
+}
+
+.upload {
+    .button {
+        margin: 0;
+        background-color: #4db8ff;
+        color: white;
+        height: 30px;
+    }
+
+    table {
+        border-collapse: collapse;
+        margin-top: 10px;
+
+        tr {
+            td {
+                width: 100px;
+                text-align: center;
+                border: 1px solid;
+            }
         }
     }
 }

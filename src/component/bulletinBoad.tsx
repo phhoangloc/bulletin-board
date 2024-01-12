@@ -144,6 +144,28 @@ const BulletinBoad = () => {
         postId && getComment(postId)
     }, [pageComment])
 
+    const CommentNumber = (id: any) => {
+        const [number, setNumber] = useState<any>(0)
+        const getCommentNumber = async () => {
+            const result = await axios.get('/api/auth/comment?postId=' + id.id,
+
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': localStorage.token,
+                    }
+
+                }
+            )
+            // console.log(result)
+            setNumber(result.data.data.length);
+        }
+        useEffect(() => {
+            getCommentNumber()
+        }, [])
+
+        return number !== 0 ? <p className='commentNumber'>{number}</p> : null
+    }
     return (
         <div className='board'>
             <p className='welcome'>こんにちは、{user?.nickname} </p>
@@ -165,6 +187,7 @@ const BulletinBoad = () => {
                                         <EditIcon onClick={() => { setPostId(item._id); setModalOpen(true) }} />
                                     }
                                     <CommentIcon onClick={() => { setPostId(item._id), setComments([]) }} />
+                                    <CommentNumber id={item._id} />
                                 </div>
                             </div>
                             <div className={`reply ${postId === item._id ? "reply-on" : ""}`}>
@@ -204,8 +227,7 @@ const BulletinBoad = () => {
                                     <SendIcon onClick={() => sendComment(comment)} />
                                 </div>
                             </div>
-                        </div>
-                    )
+                        </div>)
                 }
 
                 <div className="page">

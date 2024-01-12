@@ -1,5 +1,5 @@
 
-GET  http://localhost:3000/api/user_number
+GET  http://localhost:3000/api/user_number?userNumber=P011
 ###
 PUT  http://localhost:3000/api/user_number?id=65a0d2a149a2d867cbd0f40d
 Content-Type: application/json

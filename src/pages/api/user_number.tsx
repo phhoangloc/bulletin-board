@@ -44,6 +44,16 @@ export default async function handler(
                     res.json(data)
                 })
             break;
+        case "DELETE":
+            await userNumberModel.deleteOne({ "userNumber": query.userNumber })
+                .catch((error: Error) => {
+                    res.json(false)
+                    throw error.message
+                })
+                .then((data: any) => {
+                    res.json(data)
+                })
+            break;
         default:
             res.send("your method is not supplied")
     }

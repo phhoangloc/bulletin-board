@@ -39,6 +39,16 @@ const Upload = () => {
 
             console.log("update success")
         })
+
+        const users = await axios.get("/api/user_number")
+        if (users.data.length > lists.length) {
+            const lmap = lists.map((item: any) => item.userNumber)
+            users.data.map(async (user: any) => {
+                if (!lmap.includes(user.userNumber)) {
+                    await axios.delete("/api/user_number?userNumber=" + user.userNumber)
+                }
+            })
+        }
     }
 
     const getList = async () => {
@@ -53,12 +63,15 @@ const Upload = () => {
     useEffect(() => {
         getList()
     }, [])
+
     return (
-        <div>
-            <h1>Upload</h1>
-            <ButtonUpload onChange={(e) => handleFileChangeParent(e)} />
+        <div className='upload'>
+            <h1>Upload</h1><ButtonUpload onChange={(e) => handleFileChangeParent(e)} />
             <Button name='save' onClick={() => save(lists)} />
             <table>
+                <thead>
+                    <tr><td>メンバー番号</td><td>名前</td></tr>
+                </thead>
                 <tbody>
                     {
                         lists.map((item: any, index: any) =>
