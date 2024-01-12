@@ -12,21 +12,29 @@ const SignUp = (props: Props) => {
     const toPage = useRouter()
     const [notice, setNotice] = useState<string>("")
 
+    const [userNumber, setUserNumber] = useState<string>("")
     const [nickname, setNickname] = useState<string>("")
     const [password, setPassword] = useState<string>("")
     const [email, setEmail] = useState<string>("")
-    const body = { nickname, password, email }
+    const body = { nickname, password, email, userNumber }
 
     const [isError, setIsErrors] = useState<boolean>(true)
 
-    const [Error, setErrors] = useState<{ nickname?: string, password?: string, email?: string }>({})
+    const [Error, setErrors] = useState<{ nickname?: string, password?: string, email?: string, userNumber?: string }>({})
 
     useEffect(() => {
         validateForm && validateForm();
-    }, [nickname, password, email]);
+    }, [nickname, password, email, userNumber]);
 
     const validateForm = async () => {
-        let errors: { nickname?: string, password?: string, email?: string } = {}
+        let errors: { nickname?: string, password?: string, email?: string, userNumber?: string } = {}
+
+        if (userNumber) {
+            const isUserNumber = await fetch("/api/user_number?userNumber=" + userNumber)
+                .then((res) => res.json())
+                .then((data) => data.length ? true : false)
+            if (!isUserNumber) { errors.userNumber = "メンバー番号が存在しません。" }
+        }
 
         if (nickname.length != 0 && 6 > nickname.length) {
             errors.nickname = 'ニックネームは少なくとも6文字でなければなりません。'
@@ -50,7 +58,7 @@ const SignUp = (props: Props) => {
             errors.password = 'パスワードは少なくとも6文字でなければなりません。';
         }
 
-        setIsErrors(Object.keys(errors).length || nickname === "" || password === "" || email === "" ? true : false);
+        setIsErrors(Object.keys(errors).length || nickname === "" || password === "" || email === "" || userNumber === "" ? true : false);
         setErrors(errors)
     }
 
@@ -81,9 +89,10 @@ const SignUp = (props: Props) => {
             <div className='signup center'>
                 <div className="box">
                     <h2>登録</h2>
-                    <Input name='nickname' onChange={(e) => setNickname(e.target.value)} value={nickname} warn={Error.nickname} />
-                    <Input type='password' name='password' onChange={(e) => setPassword(e.target.value)} value={password} warn={Error.password} />
-                    <Input name='email' onChange={(e) => setEmail(e.target.value)} value={email} warn={Error.email} />
+                    <Input name='メンバー番号' onChange={(e) => setUserNumber(e.target.value)} value={userNumber} warn={Error.userNumber} />
+                    <Input name='ニックネーム' onChange={(e) => setNickname(e.target.value)} value={nickname} warn={Error.nickname} />
+                    <Input type='password' name='パスワード' onChange={(e) => setPassword(e.target.value)} value={password} warn={Error.password} />
+                    <Input name='イメール' onChange={(e) => setEmail(e.target.value)} value={email} warn={Error.email} />
                     <p className='notice'>{notice}</p>
                     <Button name='登録' onClick={() => SignUp()} />
                     <p className='link' onClick={() => toPage.push('/login')}>ログイン</p>

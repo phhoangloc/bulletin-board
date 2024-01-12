@@ -1,13 +1,12 @@
 
-GET  http://localhost:3000/api/post
+GET  http://localhost:3000/api/user_number
 ###
-POST  http://localhost:3000/api/signup
+PUT  http://localhost:3000/api/user_number?id=65a0d2a149a2d867cbd0f40d
 Content-Type: application/json
 
 {
-    "nickname":"hoangloc",
-    "password":"123456",
-    "email":"ph.hoangloc@gmail.com"
+    "userNumber":"P002",
+    "name":"Loc"
 }
 ###
  POST  http://localhost:3000/api/login

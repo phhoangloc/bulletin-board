@@ -3,9 +3,8 @@ const Schema = mongoose.Schema
 
 const userSchema = new Schema({
     userNumber: {
-        type: Number,
+        type: String,
         unique: true,
-        max: [150, ' the number of user is limited by 150'],
     },
     nickname: {
         type: String,
