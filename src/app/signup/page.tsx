@@ -57,23 +57,34 @@ const SignUp = (props: Props) => {
     const SignUp = async () => {
         if (!isError) {
             const result = await axios.post("/api/signup", body)
-            setNickname("")
-            setEmail("")
-            setPassword("")
-            setNotice(result.data.message)
+            if (result.data.success) {
+                setNickname("")
+                setEmail("")
+                setPassword("")
+                setNotice(result.data.message)
+                setTimeout(() => {
+                    setNotice("")
+                }, 5000)
+            } else {
+                setNotice(result.data.message)
+                setTimeout(() => {
+                    setNotice("")
+                }, 5000)
+            }
         }
     }
 
     return (
         <main className='center'>
             <Header />
-            <p className='notice'>{notice}</p>
+            {/* <p className='notice'>{notice}</p> */}
             <div className='signup center'>
                 <div className="box">
                     <h2>登録</h2>
                     <Input name='nickname' onChange={(e) => setNickname(e.target.value)} value={nickname} warn={Error.nickname} />
                     <Input type='password' name='password' onChange={(e) => setPassword(e.target.value)} value={password} warn={Error.password} />
                     <Input name='email' onChange={(e) => setEmail(e.target.value)} value={email} warn={Error.email} />
+                    <p className='notice'>{notice}</p>
                     <Button name='登録' onClick={() => SignUp()} />
                     <p className='link' onClick={() => toPage.push('/login')}>ログイン</p>
 
