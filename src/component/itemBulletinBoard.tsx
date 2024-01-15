@@ -11,6 +11,7 @@ import axios from 'axios';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
+import { setRefresh } from '@/redux/reducer/RefreshReducer';
 type Props = {
     post: { _id: string, nicknameId: { _id: string, nickname: string }, content: string, createDate: Date },
     func: (modalOpen: boolean, postId: String) => void
@@ -19,7 +20,6 @@ type Props = {
 const ItemBulletinBoard = ({ post, func }: Props) => {
     const [user, setCurrentUser] = useState<UserLogin | undefined>(store.getState().user)
     const [number, setCurrentNumber] = useState<number>(0)
-    const [infor, setinfor] = useState<string>("")
     const update = () => {
         store.subscribe(() => setCurrentUser(store.getState().user))
         store.subscribe(() => setCurrentNumber(store.getState().refresh))
@@ -39,9 +39,9 @@ const ItemBulletinBoard = ({ post, func }: Props) => {
     const [pageComment, setPageCommnet] = useState<number>(1)
     const [limitComment, setLimitComment] = useState<number>(10)
     const [nextComment, setNextComment] = useState<boolean>(false)
-
     const [CommentNumber, setCommentNumber] = useState<number>(0)
 
+    const [refresh, setRefresh] = useState<number>(0)
     const countComment = async (id: string) => {
         const result = await axios.get(`api/auth/comment?postId=${id}`,
             {
@@ -95,7 +95,7 @@ const ItemBulletinBoard = ({ post, func }: Props) => {
         getComment(postId)
         setComment("")
         setPageCommnet(1)
-
+        setRefresh(refresh + 1)
     }
 
     const editComment = async () => {
@@ -111,6 +111,7 @@ const ItemBulletinBoard = ({ post, func }: Props) => {
         setCommentContent("")
         setcommentEditContent(false)
         getComment(postId)
+        setRefresh(refresh + 1)
     }
 
     const deleteComment = async () => {
@@ -123,6 +124,7 @@ const ItemBulletinBoard = ({ post, func }: Props) => {
 
             })
         getComment(postId)
+        setRefresh(refresh + 1)
     }
 
     useEffect(() => {
@@ -131,7 +133,7 @@ const ItemBulletinBoard = ({ post, func }: Props) => {
 
     useEffect(() => {
         countComment(post._id)
-    }, [])
+    }, [refresh])
 
     return (
         <div>

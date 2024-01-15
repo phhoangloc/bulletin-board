@@ -46,15 +46,6 @@ const BulletinBoad = () => {
     const [limit, setLimit] = useState<number>(10)
     const [postId, setPostId] = useState<String | undefined>()
     const [modalOpen, setModalOpen] = useState<boolean>(false)
-    const [commentIndex, setCommentIndex] = useState<number>(-1)
-    const [commentId, setCommentId] = useState<String>("")
-    const [commentEditModal, setcommentEditModal] = useState<boolean>(false)
-    const [commentEditcontent, setcommentEditContent] = useState<boolean>(false)
-    const [commentContent, setCommentContent] = useState<string>("")
-    const [comment, setComment] = useState<string>("")
-    const [pageComment, setPageCommnet] = useState<number>(1)
-    const [limitComment, setLimitComment] = useState<number>(10)
-    const [nextComment, setNextComment] = useState<boolean>(false)
 
     const getPost = async () => {
         const result = await axios.get(`/api/post?limit=${limit}&sort=true&skip=${(page - 1) * limit}`)
@@ -67,28 +58,6 @@ const BulletinBoad = () => {
         getPost()
     }, [number, page])
 
-    const CommentNumber = (id: any) => {
-        const [number, setNumber] = useState<any>(0)
-        const getCommentNumber = async () => {
-            const result = await axios.get('/api/auth/comment?postId=' + id.id,
-
-                {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': localStorage.token,
-                    }
-
-                }
-            )
-            // console.log(result)
-            setNumber(result.data.data.length);
-        }
-        useEffect(() => {
-            getCommentNumber()
-        }, [])
-
-        return number !== 0 ? <p className='commentNumber'>{number}</p> : null
-    }
     return (
         <div className='board'>
             <p className='welcome'>こんにちは、{user?.nickname} </p>
