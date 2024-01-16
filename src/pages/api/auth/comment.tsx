@@ -5,6 +5,7 @@ import connectMongoDB from "@/connect/database/mogoseDB"
 import { isDataType } from "@/type/resultType"
 import { postModel } from "@/model/post.model"
 import { commentModel } from "@/model/comment"
+import { transporter } from "../signup"
 const jwt = require('jsonwebtoken')
 
 const Cooment =
@@ -26,6 +27,7 @@ const Cooment =
 
         const comment = await commentModel.findOne({ "_id": query.id })
         const nicknameId = comment && comment.nicknameId && comment.nicknameId._id
+
 
         switch (method) {
             case "GET":
@@ -49,6 +51,14 @@ const Cooment =
                 break;
             case "POST":
                 body.nicknameId = id
+                const userPost = await userModel.findOne({ "_id": body.nicknameId })
+                const userComment = await userModel.findOne({ "_id": id })
+                const post = await postModel.findOne({ "_id": body.postId })
+
+                const emailPost = userPost.email
+                const emailComment = userComment.email
+                const nicknameComment = userComment.nickname
+                const postContent = post.content
                 await commentModel.create(body)
                     .catch((error: Error) => {
                         result.success = false
@@ -56,9 +66,37 @@ const Cooment =
                         res.send(result)
                         throw error.message
                     }).then(async (data: any) => {
-                        result.success = true
-                        result.message = "your comment is created"
-                        res.json(result)
+
+                        const mainOptions = {
+                            from: '掲示板 (astem@gmail.com) <no-reply>',
+                            to: emailPost,
+                            subject: 'コメントについて',
+                            html:
+                                `こんばんは！<br>
+                                こんにちは。掲示板 の ${nicknameComment} さんはあなたの掲示板にコメントしました。<br>
+                                <br>
+                                あなたの掲示板  ${postContent}<br>
+                                <br>
+                                イメールから    ${emailComment}<br>
+                                <br>
+                                コンテンツ  ${body.content}<br>
+                                <br>
+                                上記の内容を確認するには、<a href="${process.env.HOMEPAGE_URL}" target="_blank">${process.env.HOMEPAGE_URL} </a>にアクセスしてください。
+
+                                `
+                        };
+
+                        await transporter.sendMail(mainOptions)
+                            .catch((error: Error) => {
+                                result.success = false
+                                result.message = error.message
+                                res.send(result)
+                                throw error.message
+                            }).then(() => {
+                                result.success = true
+                                result.message = "your comment is created"
+                                res.json(result)
+                            })
                     })
                 break;
             case "PUT":
