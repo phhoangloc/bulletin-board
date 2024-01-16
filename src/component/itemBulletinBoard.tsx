@@ -151,35 +151,38 @@ const ItemBulletinBoard = ({ post, func }: Props) => {
             </div>
             <div className={`reply ${postId === post._id ? "reply-on" : ""}`}>
                 <p className='text-comment' onClick={() => { getComment(postId), setPageCommnet(1) }}>コメントをもっと読みます。</p>
-                {postId && comments.length ?
-                    comments.map((com, index) =>
-                        <div className="replyItem" key={index}>
-                            <div className="author">{com.nicknameId.nickname}</div>
-                            <div className="content">
-                                {commentEditcontent && commentIndex === index ?
-                                    <div className="editCommentBox">
-                                        <textarea onChange={(e) => setCommentContent(e.target.value)} value={commentContent} />
-                                        <button onClick={() => { editComment() }}>確認</button>
-                                        <button onClick={() => { setcommentEditContent(false) }}>キャンセル</button>
-                                    </div> :
-                                    <p className='text'>{com.content}</p>}
-                                {com.nicknameId._id.toString() === user?.id?.toString() ? <MoreHorizIcon onClick={() => { setcommentEditModal(!commentEditModal); setCommentIndex(index); setCommentId(com._id.toString()) }} /> : null}
-                                {com.nicknameId._id.toString() === user?.id?.toString() ?
-                                    <div className={`commentEditModal ${commentEditModal && commentIndex === index ? "commentEditModalBlock" : ""}`} onMouseLeave={() => setcommentEditModal(false)}>
-                                        <p className='item' onClick={() => { setcommentEditContent(true), setcommentEditModal(false), setCommentContent(com.content.toString()) }}>編集</p>
-                                        <p className='item' onClick={() => deleteComment()}>削除</p>
-                                    </div> :
-                                    null}
+                {
+                    postId && comments.length ?
+                        comments.map((com, index) =>
+                            <div className="replyItem" key={index}>
+                                <div className="author">{com.nicknameId.nickname}</div>
+                                <div className="content">
+                                    {commentEditcontent && commentIndex === index ?
+                                        <div className="editCommentBox">
+                                            <textarea onChange={(e) => setCommentContent(e.target.value)} value={commentContent} />
+                                            <button onClick={() => { editComment() }}>確認</button>
+                                            <button onClick={() => { setcommentEditContent(false) }}>キャンセル</button>
+                                        </div> :
+                                        <p className='text'>{com.content}</p>}
+                                    {com.nicknameId._id.toString() === user?.id?.toString() ? <MoreHorizIcon onClick={() => { setcommentEditModal(!commentEditModal); setCommentIndex(index); setCommentId(com._id.toString()) }} /> : null}
+                                    {com.nicknameId._id.toString() === user?.id?.toString() ?
+                                        <div className={`commentEditModal ${commentEditModal && commentIndex === index ? "commentEditModalBlock" : ""}`} onMouseLeave={() => setcommentEditModal(false)}>
+                                            <p className='item' onClick={() => { setcommentEditContent(true), setcommentEditModal(false), setCommentContent(com.content.toString()) }}>編集</p>
+                                            <p className='item' onClick={() => deleteComment()}>削除</p>
+                                        </div> :
+                                        null}
+                                </div>
                             </div>
-                        </div>
-                    ) : null}
-                {comments.length ?
-                    <div className='page-comment'>
-                        {pageComment === 1 ? null : <span onClick={() => setPageCommnet(pre => pre - 1)}><SkipPreviousIcon /></span>}
-                        {nextComment ? <span onClick={() => setPageCommnet(pre => pre + 1)}><SkipNextIcon /></span> : null}
-                    </div> :
-                    null}
-
+                        ) : null
+                }
+                {
+                    postId && comments.length ?
+                        <div className='page-comment'>
+                            {pageComment === 1 ? null : <span onClick={() => setPageCommnet(pre => pre - 1)}><SkipPreviousIcon /></span>}
+                            {nextComment ? <span onClick={() => setPageCommnet(pre => pre + 1)}><SkipNextIcon /></span> : null}
+                        </div> :
+                        null
+                }
                 <div className="reply-input">
                     <TextArea name="コメント。。。" value={comment} onChange={(e) => setComment(e.target.value)} />
                     <SendIcon onClick={() => sendComment(comment)} />

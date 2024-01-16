@@ -46,5 +46,6 @@ export type InforType = {
 
 export type ButtonUploadType = {
     onChange: (e: any) => void,
-    multiple?: boolean
+    multiple?: boolean,
+    icon?: React.ReactNode
 }

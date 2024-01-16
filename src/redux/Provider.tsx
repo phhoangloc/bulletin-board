@@ -5,6 +5,7 @@ import { Provider } from "react-redux"
 import { setUser } from "./reducer/UserReducer"
 import { UserLogin } from "./reducer/UserReducer"
 import { setRefresh } from "./reducer/RefreshReducer"
+import Loading from "@/app/loading"
 type Props = {
     children: React.ReactNode
 }
@@ -21,7 +22,10 @@ const ProviderExport = ({ children }: Props) => {
 
     update()
 
+    const [loading, setLoading] = useState<boolean>(true)
+
     const checkLogin = async (token: any) => {
+        setLoading(true)
         await fetch('/api/auth', {
             headers: {
                 'Authorization': token,
@@ -37,6 +41,7 @@ const ProviderExport = ({ children }: Props) => {
                 } else {
                     store.dispatch(setUser(undefined))
                 }
+                setLoading(false)
             })
     }
 
@@ -46,7 +51,7 @@ const ProviderExport = ({ children }: Props) => {
 
     return (
         <Provider store={store}>
-            {children}
+            {loading ? <Loading /> : children}
         </Provider>
     )
 }

@@ -4,16 +4,14 @@ import store from '@/redux/store'
 import { UserLogin } from '@/redux/reducer/UserReducer'
 import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
-import EditIcon from '@mui/icons-material/Edit';
 import SendIcon from '@mui/icons-material/Send';
 import TextArea from '@/items/TextArea';
 import axios from 'axios';
 import { setRefresh } from '@/redux/reducer/RefreshReducer';
 import ModalEdit from './modalEdit';
-import moment from 'moment';
-import CommentIcon from '@mui/icons-material/Comment';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import ItemBulletinBoard from './itemBulletinBoard';
+import ButtonUpload from '@/items/ButtonUpload';
+import TextAreaV2 from '@/items/TextAreaVer2';
 const BulletinBoad = () => {
 
     const [user, setCurrentUser] = useState<UserLogin | undefined>(store.getState().user)
@@ -37,7 +35,7 @@ const BulletinBoad = () => {
 
             })
 
-        store.dispatch(setRefresh())
+        window.location.reload()
         setinfor("")
     }
 
@@ -63,7 +61,7 @@ const BulletinBoad = () => {
             <p className='welcome'>こんにちは、{user?.nickname} </p>
             <p className='logout' onClick={() => { localStorage.clear(); window.location.reload() }}>ログアウト</p>
             <div className="create-news">
-                <TextArea name='情報' value={infor} onChange={(e) => setinfor(e.target.value)} />
+                <TextAreaV2 name='情報を入力してください' value={infor} onInput={(data) => setinfor(data)} />
                 <SendIcon onClick={() => createPost(infor)} />
             </div>
             <div className='item'>

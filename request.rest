@@ -1,5 +1,8 @@
 
-GET  http://localhost:3000/api/user_number?userNumber=P011
+GET  http://localhost:3000/api/auth/comment?postId=659f570ef6fd92ca04cedc90
+Content-Type: application/json
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1OWNkODc3YjRjYjAxZWY5MTdkZGFjZCIsImlhdCI6MTcwNTA0Nzk5OSwiZXhwIjoxNzA1MTM0Mzk5fQ.RYiFf59mA24sbUrwCO87ZX_cP0-oQ1DjFy9ds0hdJEc
+
 ###
 PUT  http://localhost:3000/api/user_number?id=65a0d2a149a2d867cbd0f40d
 Content-Type: application/json

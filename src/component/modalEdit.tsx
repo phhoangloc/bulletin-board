@@ -7,6 +7,8 @@ import { UserLogin } from '@/redux/reducer/UserReducer'
 import store from '@/redux/store'
 import { setRefresh } from '@/redux/reducer/RefreshReducer'
 import DeleteIcon from '@mui/icons-material/Delete';
+import TextAreaV2 from '@/items/TextAreaVer2'
+
 type Props = {
     id?: String,
     modalOpen: Boolean
@@ -16,13 +18,6 @@ type Props = {
 const ModalEdit = ({ modalOpen, id, cancel }: Props) => {
 
     const [infor, setinfor] = useState<string>("")
-
-    const [user, setCurrentUser] = useState<UserLogin | undefined>(undefined)
-    const [number, setCurrentNumber] = useState<number>(0)
-    const update = () => {
-        store.subscribe(() => setCurrentUser(store.getState().user))
-        store.subscribe(() => setCurrentNumber(store.getState().refresh))
-    }
 
     const getPostbyId = async (id: String) => {
         const result = await axios.get(`/api/auth/post?id=${id}`,
@@ -62,7 +57,7 @@ const ModalEdit = ({ modalOpen, id, cancel }: Props) => {
 
             })
         if (result.data.success) {
-            store.dispatch(setRefresh())
+            window.location.reload()
             cancel()
         }
     }
@@ -70,11 +65,12 @@ const ModalEdit = ({ modalOpen, id, cancel }: Props) => {
     useEffect(() => {
         id && getPostbyId(id)
     }, [id])
+
     return (
         <div className={`modalEdit center ${modalOpen ? "modalOpen" : ""}`}>
             <div className="box">
                 <h2>編集</h2>
-                <TextArea name='' value={infor} onChange={(e) => setinfor(e.target.value)} />
+                <TextAreaV2 name='' value={infor} onInput={(data) => setinfor(data)} id={id} />
                 <div className="tool">
                     <DeleteIcon onClick={() => { id && deletePostbyId(id) }} />
                     <Button name='cancel' onClick={() => cancel()} />

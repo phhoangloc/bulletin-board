@@ -84,7 +84,8 @@ body {
             color: inherit;
         }
 
-        textarea {
+        textarea,
+        .textarea {
             width: 100%;
             height: 300px;
             z-index: 1;
@@ -93,11 +94,13 @@ body {
             font-size: 1rem;
             margin-top: 1rem;
             color: inherit;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: left;
         }
 
         input:focus,
-        textarea:focus {
+        textarea:focus,
+        .textarea:focus {
             outline: none;
         }
 
@@ -261,6 +264,8 @@ main {
             font-size: 0.75rem;
             color: var(--border-color);
             cursor: pointer;
+            width: max-content;
+            margin: auto;
         }
 
         .logout:hover {
@@ -278,10 +283,12 @@ main {
             overflow: hidden;
 
             .input {
-                height: 50px;
+                height: 80px;
                 transition: all 0.25s;
                 overflow: hidden;
                 margin: 0;
+                padding: 15px;
+
 
                 p {
                     top: 10px;
@@ -293,15 +300,72 @@ main {
                 .inputBox {
                     height: 100%;
 
-                    textarea {
-                        height: 100px;
+                    textarea,
+                    .textarea {
+                        // height: 100px;
                         resize: none;
-                        overflow: hidden;
-                        margin: 25px 0;
+                        overflow: auto;
+                        margin: 10px 0 40px;
+                    }
+
+                    .textarea::-webkit-scrollbar {
+                        display: none;
                     }
 
                 }
 
+
+
+                .tool_news {
+                    position: absolute;
+                    bottom: 0;
+                    display: flex;
+
+                    svg {
+                        position: relative;
+                        bottom: inherit;
+                        right: inherit;
+                        padding: 5px;
+                    }
+
+                    .input_modal {
+                        display: none;
+                        position: relative;
+                    }
+
+                    .input_modal_open {
+                        display: flex;
+                        height: 30px;
+                        margin: auto;
+                        position: absolute;
+                        z-index: 5;
+                        left: 90px;
+
+                        .input_text {
+                            width: 100px;
+                            text-align: left;
+                            border: 1px solid #aaa;
+                            font-size: 0.9rem;
+                            padding: 5px;
+                            overflow: scroll;
+                        }
+
+                        .input_text::-webkit-scrollbar {
+                            display: none;
+                        }
+
+                        .input_text:focus {
+                            outline: none;
+                        }
+
+                        .button {
+                            background-color: whitesmoke;
+                            width: max-content;
+                            height: 100%;
+                            margin-left: 5px;
+                        }
+                    }
+                }
 
             }
 
@@ -321,12 +385,14 @@ main {
                 cursor: pointer;
                 position: absolute;
                 right: 10px;
-                bottom: 10px
+                bottom: 10px;
+                z-index: 5
             }
 
             svg:hover {
                 color: var(--main-color);
             }
+
         }
 
         .item {
@@ -590,7 +656,7 @@ main {
             height: 100vh;
             top: 0;
             backdrop-filter: blur(2px) brightness(0.5);
-            z-index: 2;
+            z-index: 5;
             display: none;
             padding-top: 50px;
 
@@ -631,13 +697,100 @@ main {
             }
 
             .input {
-                width: 90%;
-                margin: auto;
+                height: 80px;
+                transition: all 0.25s;
+                overflow: hidden;
+                margin: 0;
+                padding: 15px;
+
+
+                p {
+                    top: 10px;
+                    font-size: 20px;
+                    left: 10px;
+                    color: #888;
+                }
 
                 .inputBox {
-                    textarea {
-                        height: 50%;
+                    height: 100%;
+
+                    textarea,
+                    .textarea {
+                        // height: 100px;
+                        resize: none;
+                        overflow: auto;
+                        margin: 10px 0 40px;
                     }
+
+                    .textarea::-webkit-scrollbar {
+                        display: none;
+                    }
+
+                }
+
+
+
+                .tool_news {
+                    position: absolute;
+                    bottom: 0;
+                    display: flex;
+                    z-index: 6;
+
+                    svg {
+                        position: relative;
+                        bottom: inherit;
+                        right: inherit;
+                        padding: 5px;
+                        cursor: pointer;
+                    }
+
+                    .input_modal {
+                        display: none;
+                        position: relative;
+                    }
+
+                    .input_modal_open {
+                        display: flex;
+                        height: 30px;
+                        margin: auto;
+                        position: absolute;
+                        z-index: 5;
+                        left: 90px;
+
+                        .input_text {
+                            width: 100px;
+                            text-align: left;
+                            border: 1px solid #aaa;
+                            font-size: 0.9rem;
+                            padding: 5px;
+                            overflow: scroll;
+                        }
+
+                        .input_text::-webkit-scrollbar {
+                            display: none;
+                        }
+
+                        .input_text:focus {
+                            outline: none;
+                        }
+
+                        .button {
+                            background-color: whitesmoke;
+                            width: max-content;
+                            height: 100%;
+                            margin-left: 5px;
+                        }
+                    }
+                }
+
+            }
+
+            .inputFocus {
+                height: max-content;
+
+                p {
+                    opacity: 0;
+                    top: 1rem;
                 }
             }
         }

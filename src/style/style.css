@@ -83,7 +83,8 @@ body {
   color: inherit;
 }
 
-.input .inputBox textarea {
+.input .inputBox textarea,
+.input .inputBox .textarea {
   width: 100%;
   height: 300px;
   z-index: 1;
@@ -93,10 +94,12 @@ body {
   margin-top: 1rem;
   color: inherit;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: left;
 }
 
 .input .inputBox input:focus,
-.input .inputBox textarea:focus {
+.input .inputBox textarea:focus,
+.input .inputBox .textarea:focus {
   outline: none;
 }
 
@@ -258,6 +261,8 @@ main .board .logout {
   font-size: 0.75rem;
   color: var(--border-color);
   cursor: pointer;
+  width: max-content;
+  margin: auto;
 }
 
 main .board .logout:hover {
@@ -276,10 +281,11 @@ main .board .create-news {
 }
 
 main .board .create-news .input {
-  height: 50px;
+  height: 80px;
   transition: all 0.25s;
   overflow: hidden;
   margin: 0;
+  padding: 15px;
 }
 
 main .board .create-news .input p {
@@ -293,11 +299,66 @@ main .board .create-news .input .inputBox {
   height: 100%;
 }
 
-main .board .create-news .input .inputBox textarea {
-  height: 100px;
+main .board .create-news .input .inputBox textarea,
+main .board .create-news .input .inputBox .textarea {
   resize: none;
-  overflow: hidden;
-  margin: 25px 0;
+  overflow: auto;
+  margin: 10px 0 40px;
+}
+
+main .board .create-news .input .inputBox .textarea::-webkit-scrollbar {
+  display: none;
+}
+
+main .board .create-news .input .tool_news {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+}
+
+main .board .create-news .input .tool_news svg {
+  position: relative;
+  bottom: inherit;
+  right: inherit;
+  padding: 5px;
+}
+
+main .board .create-news .input .tool_news .input_modal {
+  display: none;
+  position: relative;
+}
+
+main .board .create-news .input .tool_news .input_modal_open {
+  display: flex;
+  height: 30px;
+  margin: auto;
+  position: absolute;
+  z-index: 5;
+  left: 90px;
+}
+
+main .board .create-news .input .tool_news .input_modal_open .input_text {
+  width: 100px;
+  text-align: left;
+  border: 1px solid #aaa;
+  font-size: 0.9rem;
+  padding: 5px;
+  overflow: scroll;
+}
+
+main .board .create-news .input .tool_news .input_modal_open .input_text::-webkit-scrollbar {
+  display: none;
+}
+
+main .board .create-news .input .tool_news .input_modal_open .input_text:focus {
+  outline: none;
+}
+
+main .board .create-news .input .tool_news .input_modal_open .button {
+  background-color: whitesmoke;
+  width: max-content;
+  height: 100%;
+  margin-left: 5px;
 }
 
 main .board .create-news .inputFocus {
@@ -317,6 +378,7 @@ main .board .create-news svg {
   position: absolute;
   right: 10px;
   bottom: 10px;
+  z-index: 5;
 }
 
 main .board .create-news svg:hover {
@@ -572,7 +634,7 @@ main .board .modalEdit {
   height: 100vh;
   top: 0;
   backdrop-filter: blur(2px) brightness(0.5);
-  z-index: 2;
+  z-index: 5;
   display: none;
   padding-top: 50px;
 }
@@ -610,12 +672,95 @@ main .board .modalEdit .box .tool svg {
 }
 
 main .board .modalEdit .input {
-  width: 90%;
-  margin: auto;
+  height: 80px;
+  transition: all 0.25s;
+  overflow: hidden;
+  margin: 0;
+  padding: 15px;
 }
 
-main .board .modalEdit .input .inputBox textarea {
-  height: 50%;
+main .board .modalEdit .input p {
+  top: 10px;
+  font-size: 20px;
+  left: 10px;
+  color: #888;
+}
+
+main .board .modalEdit .input .inputBox {
+  height: 100%;
+}
+
+main .board .modalEdit .input .inputBox textarea,
+main .board .modalEdit .input .inputBox .textarea {
+  resize: none;
+  overflow: auto;
+  margin: 10px 0 40px;
+}
+
+main .board .modalEdit .input .inputBox .textarea::-webkit-scrollbar {
+  display: none;
+}
+
+main .board .modalEdit .input .tool_news {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  z-index: 6;
+}
+
+main .board .modalEdit .input .tool_news svg {
+  position: relative;
+  bottom: inherit;
+  right: inherit;
+  padding: 5px;
+  cursor: pointer;
+}
+
+main .board .modalEdit .input .tool_news .input_modal {
+  display: none;
+  position: relative;
+}
+
+main .board .modalEdit .input .tool_news .input_modal_open {
+  display: flex;
+  height: 30px;
+  margin: auto;
+  position: absolute;
+  z-index: 5;
+  left: 90px;
+}
+
+main .board .modalEdit .input .tool_news .input_modal_open .input_text {
+  width: 100px;
+  text-align: left;
+  border: 1px solid #aaa;
+  font-size: 0.9rem;
+  padding: 5px;
+  overflow: scroll;
+}
+
+main .board .modalEdit .input .tool_news .input_modal_open .input_text::-webkit-scrollbar {
+  display: none;
+}
+
+main .board .modalEdit .input .tool_news .input_modal_open .input_text:focus {
+  outline: none;
+}
+
+main .board .modalEdit .input .tool_news .input_modal_open .button {
+  background-color: whitesmoke;
+  width: max-content;
+  height: 100%;
+  margin-left: 5px;
+}
+
+main .board .modalEdit .inputFocus {
+  height: max-content;
+}
+
+main .board .modalEdit .inputFocus p {
+  opacity: 0;
+  top: 1rem;
 }
 
 main .board .modalOpen {
