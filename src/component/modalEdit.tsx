@@ -67,7 +67,7 @@ const ModalEdit = ({ modalOpen, id, cancel }: Props) => {
     }, [id])
 
     return (
-        <div className={`modalEdit center ${modalOpen ? "modalOpen" : ""}`}>
+        <div className={`modalEdit center ${modalOpen ? "modalOpen" : ""} `}>
             <div className="box">
                 <h2>編集</h2>
                 <TextAreaV2 name='' value={infor} onInput={(data) => setinfor(data)} id={id} />

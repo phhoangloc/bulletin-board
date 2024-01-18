@@ -5,7 +5,7 @@ import ProviderExport from '@/redux/Provider'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'アステムの掲示板',
+  title: '掲示板',
   description: 'みんなをお知らせしましょう',
 }
 

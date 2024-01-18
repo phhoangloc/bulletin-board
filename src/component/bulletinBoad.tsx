@@ -2,15 +2,12 @@ import { useEffect, useState } from 'react'
 import React from 'react'
 import store from '@/redux/store'
 import { UserLogin } from '@/redux/reducer/UserReducer'
-import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
-import SkipNextIcon from '@mui/icons-material/SkipNext';
+import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import SendIcon from '@mui/icons-material/Send';
-import TextArea from '@/items/TextArea';
 import axios from 'axios';
-import { setRefresh } from '@/redux/reducer/RefreshReducer';
 import ModalEdit from './modalEdit';
 import ItemBulletinBoard from './itemBulletinBoard';
-import ButtonUpload from '@/items/ButtonUpload';
 import TextAreaV2 from '@/items/TextAreaVer2';
 const BulletinBoad = () => {
 
@@ -72,9 +69,9 @@ const BulletinBoad = () => {
                 }
 
                 <div className="page">
-                    {limit * (page - 1) > 0 && <p onClick={() => { setPage(pre => pre - 1) }}><SkipPreviousIcon /></p>}
+                    {limit * (page - 1) > 0 && <p onClick={() => { setPage(pre => pre - 1) }}><ArrowLeftIcon /></p>}
                     {page && <p>{page}</p>}
-                    {posts.length - limit >= 0 && <p onClick={() => { setPage(pre => pre + 1) }}><SkipNextIcon /></p>}
+                    {posts.length - limit >= 0 && <p onClick={() => { setPage(pre => pre + 1) }}><ArrowRightIcon /></p>}
                 </div>
 
             </div>

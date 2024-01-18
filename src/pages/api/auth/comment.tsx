@@ -51,9 +51,11 @@ const Cooment =
                 break;
             case "POST":
                 body.nicknameId = id
-                const userPost = await userModel.findOne({ "_id": body.nicknameId })
                 const userComment = await userModel.findOne({ "_id": id })
                 const post = await postModel.findOne({ "_id": body.postId })
+                const userPostId = post.nicknameId
+                const userPost = await userModel.findOne({ "_id": userPostId })
+
 
                 const emailPost = userPost.email
                 const emailComment = userComment.email

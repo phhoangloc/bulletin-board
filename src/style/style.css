@@ -413,7 +413,7 @@ main .board .item .msg .author span {
 main .board .item .msg .content {
   background-color: white;
   border-radius: 5px;
-  padding: 5px;
+  padding: 10px;
   box-shadow: 0px 0px 2px #ccc;
   min-height: 60px;
   width: 100%;
@@ -485,6 +485,12 @@ main .board .item .reply .page-comment {
   font-size: 0.6rem;
   cursor: pointer;
   width: max-content;
+  display: flex;
+}
+
+main .board .item .reply .page-comment span {
+  display: flex;
+  line-height: 25px;
 }
 
 main .board .item .reply .replyItem {
@@ -636,7 +642,6 @@ main .board .modalEdit {
   backdrop-filter: blur(2px) brightness(0.5);
   z-index: 5;
   display: none;
-  padding-top: 50px;
 }
 
 main .board .modalEdit .box {
@@ -764,7 +769,7 @@ main .board .modalEdit .inputFocus p {
 }
 
 main .board .modalOpen {
-  display: block;
+  display: flex;
 }
 
 .upload .button {

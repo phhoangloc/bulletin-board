@@ -11,6 +11,8 @@ import axios from 'axios';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import { setRefresh } from '@/redux/reducer/RefreshReducer';
 type Props = {
     post: { _id: string, nicknameId: { _id: string, nickname: string }, content: string, createDate: Date },
@@ -145,12 +147,18 @@ const ItemBulletinBoard = ({ post, func }: Props) => {
                     {user && user.id === post.nicknameId?._id &&
                         <EditIcon onClick={() => func(true, post._id)} />
                     }
-                    {postId ? <CloseIcon onClick={() => { setPostId(undefined) }} /> : <CommentIcon onClick={() => { setPostId(post._id) }} />}
+                    {postId ?
+                        <CloseIcon onClick={() => { setPostId(undefined) }} /> :
+                        <CommentIcon onClick={() => { setPostId(post._id), getComment(post._id), setPageCommnet(1) }} />
+                    }
                     {CommentNumber !== 0 && <p className='commentNumber'>{CommentNumber}</p>}
                 </div>
             </div>
             <div className={`reply ${postId === post._id ? "reply-on" : ""}`}>
-                <p className='text-comment' onClick={() => { getComment(postId), setPageCommnet(1) }}>コメントをもっと読みます。</p>
+                <div className="reply-input">
+                    <TextArea name="コメント。。。" value={comment} onChange={(e) => setComment(e.target.value)} />
+                    <SendIcon onClick={() => sendComment(comment)} />
+                </div>
                 {
                     postId && comments.length ?
                         comments.map((com, index) =>
@@ -178,15 +186,11 @@ const ItemBulletinBoard = ({ post, func }: Props) => {
                 {
                     postId && comments.length ?
                         <div className='page-comment'>
-                            {pageComment === 1 ? null : <span onClick={() => setPageCommnet(pre => pre - 1)}><SkipPreviousIcon /></span>}
-                            {nextComment ? <span onClick={() => setPageCommnet(pre => pre + 1)}><SkipNextIcon /></span> : null}
+                            {pageComment === 1 ? null : <span onClick={() => setPageCommnet(pre => pre - 1)}>前に<ArrowLeftIcon /></span>}
+                            {nextComment ? <span onClick={() => setPageCommnet(pre => pre + 1)}><ArrowRightIcon />つづき</span> : null}
                         </div> :
                         null
                 }
-                <div className="reply-input">
-                    <TextArea name="コメント。。。" value={comment} onChange={(e) => setComment(e.target.value)} />
-                    <SendIcon onClick={() => sendComment(comment)} />
-                </div>
             </div>
         </div>
     )
