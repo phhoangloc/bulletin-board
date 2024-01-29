@@ -9,11 +9,9 @@ import store from '@/redux/store';
 import moment from 'moment';
 import axios from 'axios';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
-import SkipNextIcon from '@mui/icons-material/SkipNext';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
-import { setRefresh } from '@/redux/reducer/RefreshReducer';
+
 type Props = {
     post: { _id: string, nicknameId: { _id: string, nickname: string }, content: string, createDate: Date },
     func: (modalOpen: boolean, postId: String) => void
@@ -172,7 +170,9 @@ const ItemBulletinBoard = ({ post, func }: Props) => {
                                             <button onClick={() => { setcommentEditContent(false) }}>キャンセル</button>
                                         </div> :
                                         <p className='text'>{com.content}</p>}
-                                    {com.nicknameId._id.toString() === user?.id?.toString() ? <MoreHorizIcon onClick={() => { setcommentEditModal(!commentEditModal); setCommentIndex(index); setCommentId(com._id.toString()) }} /> : null}
+                                    {com.nicknameId._id.toString() === user?.id?.toString() ?
+                                        <MoreHorizIcon onClick={() => { setcommentEditModal(!commentEditModal); setCommentIndex(index); setCommentId(com._id.toString()) }} /> :
+                                        null}
                                     {com.nicknameId._id.toString() === user?.id?.toString() ?
                                         <div className={`commentEditModal ${commentEditModal && commentIndex === index ? "commentEditModalBlock" : ""}`} onMouseLeave={() => setcommentEditModal(false)}>
                                             <p className='item' onClick={() => { setcommentEditContent(true), setcommentEditModal(false), setCommentContent(com.content.toString()) }}>編集</p>

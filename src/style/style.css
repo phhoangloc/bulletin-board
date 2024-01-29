@@ -413,10 +413,16 @@ main .board .item .msg .author span {
 main .board .item .msg .content {
   background-color: white;
   border-radius: 5px;
-  padding: 10px;
+  padding: 10px 10px 40px;
   box-shadow: 0px 0px 2px #ccc;
   min-height: 60px;
   width: 100%;
+}
+
+main .board .item .msg .content div {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 90%;
 }
 
 main .board .item .msg .tool {

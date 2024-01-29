@@ -85,7 +85,6 @@ const SignUp = (props: Props) => {
     return (
         <main className='center'>
             <Header />
-            {/* <p className='notice'>{notice}</p> */}
             <div className='signup center'>
                 <div className="box">
                     <h2>登録</h2>
@@ -99,7 +98,6 @@ const SignUp = (props: Props) => {
 
                 </div>
             </div>
-
         </main>
     )
 }
