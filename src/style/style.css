@@ -422,7 +422,6 @@ main .board .item .msg .content {
 main .board .item .msg .content div {
   overflow: hidden;
   text-overflow: ellipsis;
-  width: 90%;
 }
 
 main .board .item .msg .tool {
