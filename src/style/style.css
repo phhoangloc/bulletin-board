@@ -1,6 +1,6 @@
 :root {
-  --background-color: #eee;
-  --main-color: #4db8ff;
+  --background-color: #fff1cd;
+  --main-color: #f35f17;
   --border-color: #aaaaaa;
 }
 
@@ -245,7 +245,11 @@ main .header {
   height: 50px;
   width: 100%;
   background-color: white;
-  box-shadow: 1px 0px 10px #ddd;
+}
+
+main .header img {
+  width: auto;
+  margin-top: 5px;
 }
 
 main .board {
@@ -259,7 +263,7 @@ main .board .welcome {
 
 main .board .logout {
   font-size: 0.75rem;
-  color: var(--border-color);
+  color: var(--main-color);
   cursor: pointer;
   width: max-content;
   margin: auto;
@@ -275,8 +279,8 @@ main .board .create-news {
   margin: 20px auto;
   position: relative;
   background-color: white;
-  box-shadow: 0px 0px 2px #ccc;
-  border-radius: 25px;
+  box-shadow: 0px 5px 10px -5px #aaa;
+  border-radius: 10px;
   overflow: hidden;
 }
 
@@ -408,15 +412,21 @@ main .board .item .msg .author span {
   color: #aaa;
   position: absolute;
   right: 0;
+  bottom: 0;
 }
 
 main .board .item .msg .content {
   background-color: white;
   border-radius: 5px;
   padding: 10px 10px 40px;
-  box-shadow: 0px 0px 2px #ccc;
+  box-shadow: 0px 5px 10px -5px #aaa;
   min-height: 60px;
   width: 100%;
+}
+
+main .board .item .msg .content img {
+  width: auto !important;
+  height: 250px;
 }
 
 main .board .item .msg .content div {
@@ -440,7 +450,7 @@ main .board .item .msg .tool svg {
 }
 
 main .board .item .msg .tool svg:hover {
-  color: #444;
+  color: var(--main-color);
 }
 
 main .board .item .msg .tool .commentNumber {
@@ -461,7 +471,7 @@ main .board .item .msg .tool .commentNumber {
 main .board .item .page {
   display: flex;
   width: max-content;
-  margin: 0 auto;
+  margin: 50px auto 25px;
 }
 
 main .board .item .page p {
@@ -488,7 +498,6 @@ main .board .item .reply .page-comment {
   margin: 10px 0 0 auto;
   opacity: 0.5;
   font-size: 0.6rem;
-  cursor: pointer;
   width: max-content;
   display: flex;
 }
@@ -496,6 +505,11 @@ main .board .item .reply .page-comment {
 main .board .item .reply .page-comment span {
   display: flex;
   line-height: 25px;
+  cursor: pointer;
+}
+
+main .board .item .reply .page-comment span:hover {
+  color: var(--main-color);
 }
 
 main .board .item .reply .replyItem {
@@ -562,7 +576,7 @@ main .board .item .reply .replyItem .content .commentEditModal .item {
 }
 
 main .board .item .reply .replyItem .content .commentEditModal .item:hover {
-  color: #4db8ff;
+  color: var(--main-color);
 }
 
 main .board .item .reply .replyItem .content .commentEditModalBlock {
@@ -571,17 +585,19 @@ main .board .item .reply .replyItem .content .commentEditModalBlock {
 
 main .board .item .reply .replyItem .content .editCommentBox textarea {
   background: none;
-  border: none;
   resize: none;
   overflow: hidden;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   width: 100%;
   border-radius: 5px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
 }
 
 main .board .item .reply .replyItem .content .editCommentBox textarea:focus {
   background: white;
   outline: none;
+  box-shadow: 0px 5px 10px -5px #ccc;
 }
 
 main .board .item .reply .replyItem .content .editCommentBox button {
@@ -594,6 +610,7 @@ main .board .item .reply .replyItem .content .editCommentBox button {
 
 main .board .item .reply .replyItem .content .editCommentBox button:hover {
   opacity: 1;
+  color: var(--main-color);
 }
 
 main .board .item .reply .replyItem .content .editCommentBox button:active {
@@ -606,7 +623,12 @@ main .board .item .reply .reply-input {
 }
 
 main .board .item .reply .reply-input .input {
-  border: 1px solid #ddd;
+  border: 1px solid #ccc;
+}
+
+main .board .item .reply .reply-input .inputFocus {
+  box-shadow: 0px 5px 10px -5px #aaa;
+  border: none;
 }
 
 main .board .item .reply .reply-input .inputFocus p {
@@ -619,7 +641,7 @@ main .board .item .reply .reply-input svg {
   bottom: 2.5px;
   right: 2.5px;
   z-index: 2;
-  border-radius: 50%;
+  border-radius: 5px;
   color: var(--border-color);
   padding: 5px;
   background-color: var(--background-color);
@@ -650,7 +672,7 @@ main .board .modalEdit {
 }
 
 main .board .modalEdit .box {
-  background-color: whitesmoke;
+  background-color: var(--background-color);
   width: 90%;
   height: max-content;
   max-width: 768px;

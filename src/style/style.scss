@@ -1,6 +1,6 @@
 :root {
-    --background-color: #eee;
-    --main-color: #4db8ff;
+    --background-color: #fff1cd;
+    --main-color: #f35f17;
     --border-color: #aaaaaa;
 }
 
@@ -249,7 +249,11 @@ main {
         height: 50px;
         width: 100%;
         background-color: white;
-        box-shadow: 1px 0px 10px #ddd;
+
+        img {
+            width: auto;
+            margin-top: 5px;
+        }
     }
 
     .board {
@@ -262,7 +266,7 @@ main {
 
         .logout {
             font-size: 0.75rem;
-            color: var(--border-color);
+            color: var(--main-color);
             cursor: pointer;
             width: max-content;
             margin: auto;
@@ -278,8 +282,8 @@ main {
             margin: 20px auto;
             position: relative;
             background-color: white;
-            box-shadow: 0px 0px 2px #ccc;
-            border-radius: 25px;
+            box-shadow: 0px 5px 10px -5px #aaa;
+            border-radius: 10px;
             overflow: hidden;
 
             .input {
@@ -415,6 +419,7 @@ main {
                         color: #aaa;
                         position: absolute;
                         right: 0;
+                        bottom: 0;
                     }
                 }
 
@@ -422,9 +427,14 @@ main {
                     background-color: white;
                     border-radius: 5px;
                     padding: 10px 10px 40px;
-                    box-shadow: 0px 0px 2px #ccc;
+                    box-shadow: 0px 5px 10px -5px #aaa;
                     min-height: 60px;
                     width: 100%;
+
+                    img {
+                        width: auto !important;
+                        height: 250px;
+                    }
 
                     div {
                         overflow: hidden;
@@ -447,7 +457,7 @@ main {
                     }
 
                     svg:hover {
-                        color: #444;
+                        color: var(--main-color)
                     }
 
                     .commentNumber {
@@ -471,7 +481,7 @@ main {
             .page {
                 display: flex;
                 width: max-content;
-                margin: 0 auto;
+                margin: 50px auto 25px;
 
                 p {
                     width: 50px;
@@ -497,13 +507,17 @@ main {
                     margin: 10px 0 0 auto;
                     opacity: 0.5;
                     font-size: 0.6rem;
-                    cursor: pointer;
                     width: max-content;
                     display: flex;
 
                     span {
                         display: flex;
                         line-height: 25px;
+                        cursor: pointer;
+                    }
+
+                    span:hover {
+                        color: var(--main-color);
                     }
                 }
 
@@ -568,7 +582,7 @@ main {
                             }
 
                             .item:hover {
-                                color: #4db8ff;
+                                color: var(--main-color);
                             }
                         }
 
@@ -579,18 +593,19 @@ main {
                         .editCommentBox {
                             textarea {
                                 background: none;
-                                border: none;
                                 resize: none;
                                 overflow: hidden;
                                 font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
                                 width: 100%;
                                 border-radius: 5px;
-
+                                box-sizing: border-box;
+                                border: 1px solid #ccc
                             }
 
                             textarea:focus {
                                 background: white;
                                 outline: none;
+                                box-shadow: 0px 5px 10px -5px #ccc;
                             }
 
                             button {
@@ -603,6 +618,7 @@ main {
 
                             button:hover {
                                 opacity: 1;
+                                color: var(--main-color);
                             }
 
                             button:active {
@@ -618,11 +634,15 @@ main {
                     position: relative;
 
                     .input {
-                        border: 1px solid #ddd;
-
+                        border: 1px solid #ccc;
+                        // box-shadow: 0px 2px 10px -5px #aaa;
+                        // background-color: rgba($color: white, $alpha: 0.5)
                     }
 
                     .inputFocus {
+                        box-shadow: 0px 5px 10px -5px #aaa;
+
+                        border: none;
 
                         p {
                             opacity: 0
@@ -636,7 +656,7 @@ main {
                         bottom: 2.5px;
                         right: 2.5px;
                         z-index: 2;
-                        border-radius: 50%;
+                        border-radius: 5px;
                         color: var(--border-color);
                         padding: 5px;
                         background-color: var(--background-color);
@@ -671,7 +691,7 @@ main {
             display: none;
 
             .box {
-                background-color: whitesmoke;
+                background-color: var(--background-color);
                 width: 90%;
                 height: max-content;
                 max-width: 768px;

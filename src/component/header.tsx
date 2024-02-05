@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import React from 'react'
 
 type Props = {}
@@ -5,7 +6,7 @@ type Props = {}
 const Header = (props: Props) => {
     return (
         <div className='header'>
-            <h1>掲示板</h1>
+            <Image src={"/img/header_logo.gif"} width={50} height={40} alt='headerlogo' />
         </div>
     )
 }

@@ -71,9 +71,7 @@ const TextAreaV2 = ({
                 <div className='textarea'
                     ref={inputRef}
                     contentEditable={true}
-                    onInput={(e) => {
-                        onInput(e.currentTarget.innerHTML);
-                    }}
+                    onInput={(e) => { onInput(e.currentTarget.innerHTML) }}
                     onFocus={() => setFocus(true)}
                     onBlur={() => { setFocus(false) }}
                 >
