@@ -30,7 +30,7 @@ const TextAreaV2 = ({
         var reader: any = new FileReader();
         reader.readAsDataURL(file);
         reader.onloadend = function () {
-            inputRef.current.innerHTML += `<img src=${reader.result} style="width:100%"/>`
+            inputRef.current.innerHTML += `<img src=${reader.result} />`
             onInput(inputRef.current.innerHTML)
         }
 

@@ -23,6 +23,15 @@ body {
   background-color: var(--background-color);
 }
 
+body::-webkit-scrollbar {
+  width: 5px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: var(--border-color);
+  border-radius: 5px;
+}
+
 .icon {
   margin: auto;
   width: 40px;
@@ -421,17 +430,22 @@ main .board .item .msg .content {
   padding: 10px 10px 40px;
   box-shadow: 0px 5px 10px -5px #aaa;
   min-height: 60px;
+  max-height: 400px;
+  overflow: auto;
   width: 100%;
 }
 
 main .board .item .msg .content img {
-  width: auto !important;
-  height: 250px;
+  width: 75% !important;
+  box-shadow: 1px 5px 10px -2.5px #aaa;
+  display: block;
+  margin: 10px auto;
 }
 
-main .board .item .msg .content div {
-  overflow: hidden;
-  text-overflow: ellipsis;
+@media (min-width: 768px) {
+  main .board .item .msg .content img {
+    width: 50% !important;
+  }
 }
 
 main .board .item .msg .tool {
@@ -468,6 +482,58 @@ main .board .item .msg .tool .commentNumber {
   font-weight: bold;
 }
 
+main .board .item .msg .content::-webkit-scrollbar {
+  width: 5px;
+}
+
+main .board .item .msg .content::-webkit-scrollbar-thumb {
+  background-color: var(--border-color);
+  border-radius: 5px;
+}
+
+main .board .item .tool_slug {
+  display: flex;
+  position: relative;
+  height: 30px;
+  border-radius: 5px;
+  background-color: white;
+  box-shadow: 0px 5px 10px -5px #aaa;
+}
+
+main .board .item .tool_slug p {
+  width: max-content;
+  text-align: center;
+  line-height: 30px;
+  display: flex;
+  margin: auto;
+  position: relative;
+}
+
+main .board .item .tool_slug p svg {
+  width: 20px;
+  height: 20px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+main .board .item .tool_slug p .commentNumber {
+  position: absolute;
+  font-size: 10px;
+  width: 20px;
+  height: 20px;
+  background-color: red;
+  color: white;
+  text-align: center;
+  line-height: 20px;
+  bottom: 20px;
+  right: -5px;
+  border-radius: 50%;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 main .board .item .page {
   display: flex;
   width: max-content;
@@ -477,6 +543,7 @@ main .board .item .page {
 main .board .item .page p {
   width: 50px;
   cursor: pointer;
+  text-align: center;
 }
 
 main .board .item .reply {
@@ -558,8 +625,8 @@ main .board .item .reply .replyItem .content svg:hover {
 main .board .item .reply .replyItem .content .commentEditModal {
   display: none;
   position: absolute;
-  top: 100%;
-  left: -20px;
+  top: -200%;
+  left: -40px;
   width: max-content;
   box-shadow: 0px 0px 2.5px #ccc;
   background-color: white;
@@ -657,6 +724,18 @@ main .board .item .reply-on {
   height: max-content;
 }
 
+main .board .item .reply-on-slugpage {
+  max-width: unset;
+  width: 100%;
+  margin: 10px 0;
+}
+
+main .board .item .reply-on-slugpage .reply-input,
+main .board .item .reply-on-slugpage .replyItem {
+  width: 100%;
+  margin: auto;
+}
+
 main .board .item .inputBox textarea {
   height: 50px;
 }
@@ -666,6 +745,7 @@ main .board .modalEdit {
   width: 100%;
   height: 100vh;
   top: 0;
+  left: 0;
   backdrop-filter: blur(2px) brightness(0.5);
   z-index: 5;
   display: none;
@@ -727,6 +807,21 @@ main .board .modalEdit .input .inputBox .textarea {
   resize: none;
   overflow: auto;
   margin: 10px 0 40px;
+}
+
+main .board .modalEdit .input .inputBox textarea img,
+main .board .modalEdit .input .inputBox .textarea img {
+  width: 75% !important;
+  box-shadow: 1px 5px 10px -2.5px #aaa;
+  display: block;
+  margin: 10px auto;
+}
+
+@media (min-width: 768px) {
+  main .board .modalEdit .input .inputBox textarea img,
+  main .board .modalEdit .input .inputBox .textarea img {
+    width: 50% !important;
+  }
 }
 
 main .board .modalEdit .input .inputBox .textarea::-webkit-scrollbar {

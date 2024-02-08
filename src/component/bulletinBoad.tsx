@@ -37,6 +37,7 @@ const BulletinBoad = () => {
     }
 
     const [posts, setPosts] = useState<{ _id: string, nicknameId: { _id: string, nickname: string }, content: string, createDate: Date }[]>([])
+    const [isNextPage, setIsNextPage] = useState<Boolean>(true)
     const [page, setPage] = useState<number>(1)
     const [limit, setLimit] = useState<number>(10)
     const [postId, setPostId] = useState<String | undefined>()
@@ -46,6 +47,16 @@ const BulletinBoad = () => {
         const result = await axios.get(`/api/post?limit=${limit}&sort=true&skip=${(page - 1) * limit}`)
         if (result.data.success) {
             setPosts(result.data.data)
+        }
+
+        const resultNext = await axios.get(`/api/post?limit=${limit}&sort=true&skip=${(page) * limit}`)
+        if (result.data.success) {
+            if (resultNext.data.data.length === 0) {
+                console.log(resultNext.data.data.length)
+                setIsNextPage(false)
+            } else {
+                setIsNextPage(true)
+            }
         }
     }
 
@@ -69,9 +80,9 @@ const BulletinBoad = () => {
                 }
 
                 <div className="page">
-                    {limit * (page - 1) > 0 && <p onClick={() => { setPage(pre => pre - 1) }}><ArrowLeftIcon /></p>}
-                    {page && <p>{page}</p>}
-                    {posts.length - limit >= 0 && <p onClick={() => { setPage(pre => pre + 1) }}><ArrowRightIcon /></p>}
+                    <p>{page === 1 ? null : <ArrowLeftIcon onClick={() => setPage(prev => prev - 1)} />}</p>
+                    <p>{page}</p>
+                    <p>{isNextPage ? <ArrowRightIcon onClick={() => setPage(prev => prev + 1)} /> : null}</p>
                 </div>
 
             </div>

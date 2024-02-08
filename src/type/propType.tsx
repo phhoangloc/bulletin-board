@@ -27,6 +27,7 @@ export type InputType = {
     value: string,
     onChange: (e: any) => void,
     warn?: string,
+    isFocus?: number
 }
 
 export type PageDetailType = {

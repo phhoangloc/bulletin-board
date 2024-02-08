@@ -55,8 +55,6 @@ const Cooment =
                 const post = await postModel.findOne({ "_id": body.postId })
                 const userPostId = post.nicknameId
                 const userPost = await userModel.findOne({ "_id": userPostId })
-
-
                 const emailPost = userPost.email
                 const emailComment = userComment.email
                 const nicknameComment = userComment.nickname
@@ -83,7 +81,7 @@ const Cooment =
                                 <br>
                                 コンテンツ  ${body.content}<br>
                                 <br>
-                                上記の内容を確認するには、<a href="${process.env.HOMEPAGE_URL}" target="_blank">${process.env.HOMEPAGE_URL} </a>にアクセスしてください。
+                                上記の内容を確認するには、<a href="${process.env.HOMEPAGE_URL + "post/" + body.postId}" target="_blank">${process.env.HOMEPAGE_URL} </a>にアクセスしてください。
 
                                 `
                         };

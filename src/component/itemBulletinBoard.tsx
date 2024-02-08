@@ -28,7 +28,6 @@ const ItemBulletinBoard = ({ post, func }: Props) => {
     update()
 
     const [postId, setPostId] = useState<String | undefined>()
-
     const [comments, setComments] = useState<{ _id: String, postId: String, nicknameId: { _id: String, nickname: String }, content: String, createDate: Date }[]>([])
     const [commentIndex, setCommentIndex] = useState<number>(-1)
     const [commentId, setCommentId] = useState<String>("")
@@ -40,10 +39,10 @@ const ItemBulletinBoard = ({ post, func }: Props) => {
     const [limitComment, setLimitComment] = useState<number>(10)
     const [nextComment, setNextComment] = useState<boolean>(false)
     const [CommentNumber, setCommentNumber] = useState<number>(0)
-
     const [refresh, setRefresh] = useState<number>(0)
+
     const countComment = async (id: string) => {
-        const result = await axios.get(`api/auth/comment?postId=${id}`,
+        const result = await axios.get(`/api/auth/comment?postId=${id}`,
             {
                 headers: {
                     'Content-Type': 'application/json',
@@ -54,7 +53,7 @@ const ItemBulletinBoard = ({ post, func }: Props) => {
         setCommentNumber(result.data.data.length)
     }
     const getComment = async (id: String | undefined) => {
-        const result = await axios.get(`api/auth/comment?postId=${id}&limit=${limitComment}&skip=${(pageComment - 1) * limitComment}`,
+        const result = await axios.get(`/api/auth/comment?postId=${id}&limit=${limitComment}&skip=${(pageComment - 1) * limitComment}`,
             {
                 headers: {
                     'Content-Type': 'application/json',
@@ -67,7 +66,7 @@ const ItemBulletinBoard = ({ post, func }: Props) => {
             setComments(result.data.data)
         }
 
-        const nextResult = await axios.get(`api/auth/comment?postId=${id}&limit=${limitComment}&skip=${(pageComment) * limitComment}`,
+        const nextResult = await axios.get(`/api/auth/comment?postId=${id}&limit=${limitComment}&skip=${(pageComment) * limitComment}`,
             {
                 headers: {
                     'Content-Type': 'application/json',
@@ -82,9 +81,8 @@ const ItemBulletinBoard = ({ post, func }: Props) => {
         }
 
     }
-
     const sendComment = async (comment: String) => {
-        const result = comment && await axios.post("api/auth/comment", { postId: postId, content: comment },
+        const result = comment && await axios.post("/api/auth/comment", { postId: postId, content: comment },
             {
                 headers: {
                     'Content-Type': 'application/json',
@@ -99,7 +97,7 @@ const ItemBulletinBoard = ({ post, func }: Props) => {
     }
 
     const editComment = async () => {
-        const result = await axios.put(`api/auth/comment?id=${commentId}`,
+        const result = await axios.put(`/api/auth/comment?id=${commentId}`,
             { content: commentContent },
             {
                 headers: {
@@ -115,7 +113,7 @@ const ItemBulletinBoard = ({ post, func }: Props) => {
     }
 
     const deleteComment = async () => {
-        const result = await axios.delete(`api/auth/comment?id=${commentId}`,
+        const result = await axios.delete(`/api/auth/comment?id=${commentId}`,
             {
                 headers: {
                     'Content-Type': 'application/json',
