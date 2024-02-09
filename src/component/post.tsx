@@ -1,3 +1,4 @@
+'use client'
 import React, { useState, useEffect } from 'react'
 import { UserLogin } from '@/redux/reducer/UserReducer'
 import store from '@/redux/store'
@@ -21,147 +22,145 @@ type Props = {
 }
 
 const Post = ({ slug }: Props) => {
+    const [user, setCurrentUser] = useState<UserLogin | undefined>(store.getState().user)
+    const [number, setCurrentNumber] = useState<number>(0)
+
+    const update = () => {
+        store.subscribe(() => setCurrentUser(store.getState().user))
+        store.subscribe(() => setCurrentNumber(store.getState().refresh))
+    }
+
+    update()
+
+    const [item, setItem] = useState<any>()
+    const [modalOpen, setModalOpen] = useState<boolean>(false)
+    const [postId, setPostId] = useState<String | undefined>()
+    const [loading, setLoading] = useState<boolean>(true)
+    const [sending, setSending] = useState<boolean>(false)
+    const getPost = async () => {
+        const result = await axios.get(`/api/post?id=${slug}`,
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': localStorage.token,
+                }
+            })
+        if (result.data.success) {
+            setLoading(false)
+            setItem(result.data.data[0])
+        }
+    }
+
+    useEffect(() => {
+        getPost()
+    }, [])
+
+    const [comments, setComments] = useState<{ _id: String, postId: String, nicknameId: { _id: String, nickname: String }, content: String, createDate: Date }[]>([])
+    const [commentIndex, setCommentIndex] = useState<number>(-1)
+    const [commentId, setCommentId] = useState<String>("")
+    const [commentEditModal, setcommentEditModal] = useState<boolean>(false)
+    const [commentEditcontent, setcommentEditContent] = useState<boolean>(false)
+    const [commentContent, setCommentContent] = useState<string>("")
+    const [comment, setComment] = useState<string>("")
+    const [pageComment, setPageCommnet] = useState<number>(1)
+    const [limitComment, setLimitComment] = useState<number>(10)
+    const [nextComment, setNextComment] = useState<boolean>(false)
+    const [CommentNumber, setCommentNumber] = useState<number>(0)
+    const [refresh, setRefresh] = useState<number>(0)
+    const [commentFocus, setcommentFocus] = useState<number>(0)
+    const countComment = async (id: string) => {
+        const result = await axios.get(`/api/auth/comment?postId=${id}`,
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': localStorage.token,
+                }
+
+            })
+        setCommentNumber(result.data.data.length)
+    }
+    const getComment = async (id: String | undefined) => {
+        const result = await axios.get(`/api/auth/comment?postId=${id}&limit=${limitComment}&skip=${(pageComment - 1) * limitComment}`,
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': localStorage.token,
+                }
+
+            })
+        if (result.data.success) {
+            setComments(result.data.data)
+        }
+
+        const nextResult = await axios.get(`/api/auth/comment?postId=${id}&limit=${limitComment}&skip=${(pageComment) * limitComment}`,
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': localStorage.token,
+                }
+
+            })
+        if (nextResult.data.data?.length !== 0) {
+            setNextComment(true)
+        } else {
+            setNextComment(false)
+        }
+
+    }
+    const sendComment = async (slug: string, comment: String) => {
+        setSending(true)
+        const result = comment && await axios.post("/api/auth/comment", { postId: slug, content: comment },
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': localStorage.token,
+                }
+
+            })
+        getComment(slug)
+        setComment("")
+        setPageCommnet(1)
+        setRefresh(refresh + 1)
+        result.data.success && setSending(false)
+    }
+
+    const editComment = async () => {
+        const result = await axios.put(`/api/auth/comment?id=${commentId}`,
+            { content: commentContent },
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': localStorage.token,
+                }
+
+            })
+        setCommentContent("")
+        setcommentEditContent(false)
+        getComment(slug)
+        setRefresh(refresh + 1)
+    }
+
+    const deleteComment = async () => {
+        const result = await axios.delete(`/api/auth/comment?id=${commentId}`,
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': localStorage.token,
+                }
+
+            })
+        getComment(slug)
+        setRefresh(refresh + 1)
+    }
+
+    useEffect(() => {
+        getComment(slug)
+    }, [pageComment])
+
+    useEffect(() => {
+        countComment(slug)
+    }, [refresh])
     if (slug.length === 24) {
-        const [user, setCurrentUser] = useState<UserLogin | undefined>(store.getState().user)
-        const [number, setCurrentNumber] = useState<number>(0)
-
-        const update = () => {
-            store.subscribe(() => setCurrentUser(store.getState().user))
-            store.subscribe(() => setCurrentNumber(store.getState().refresh))
-        }
-
-        update()
-
-        const [item, setItem] = useState<any>()
-        const [modalOpen, setModalOpen] = useState<boolean>(false)
-        const [postId, setPostId] = useState<String | undefined>()
-        const [loading, setLoading] = useState<boolean>(true)
-        const [sending, setSending] = useState<boolean>(false)
-        const getPost = async () => {
-            const result = await axios.get(`/api/post?id=${slug}`,
-                {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': localStorage.token,
-                    }
-                })
-            if (result.data.success) {
-                setLoading(false)
-                setItem(result.data.data[0])
-            }
-        }
-
-        useEffect(() => {
-            getPost()
-        }, [])
-
-        const [comments, setComments] = useState<{ _id: String, postId: String, nicknameId: { _id: String, nickname: String }, content: String, createDate: Date }[]>([])
-        const [commentIndex, setCommentIndex] = useState<number>(-1)
-        const [commentId, setCommentId] = useState<String>("")
-        const [commentEditModal, setcommentEditModal] = useState<boolean>(false)
-        const [commentEditcontent, setcommentEditContent] = useState<boolean>(false)
-        const [commentContent, setCommentContent] = useState<string>("")
-        const [comment, setComment] = useState<string>("")
-        const [pageComment, setPageCommnet] = useState<number>(1)
-        const [limitComment, setLimitComment] = useState<number>(10)
-        const [nextComment, setNextComment] = useState<boolean>(false)
-        const [CommentNumber, setCommentNumber] = useState<number>(0)
-        const [refresh, setRefresh] = useState<number>(0)
-        const [commentFocus, setcommentFocus] = useState<number>(0)
-        const countComment = async (id: string) => {
-            const result = await axios.get(`/api/auth/comment?postId=${id}`,
-                {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': localStorage.token,
-                    }
-
-                })
-            setCommentNumber(result.data.data.length)
-        }
-        const getComment = async (id: String | undefined) => {
-            const result = await axios.get(`/api/auth/comment?postId=${id}&limit=${limitComment}&skip=${(pageComment - 1) * limitComment}`,
-                {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': localStorage.token,
-                    }
-
-                })
-            if (result.data.success) {
-                setComments(result.data.data)
-            }
-
-            const nextResult = await axios.get(`/api/auth/comment?postId=${id}&limit=${limitComment}&skip=${(pageComment) * limitComment}`,
-                {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': localStorage.token,
-                    }
-
-                })
-            if (nextResult.data.data?.length !== 0) {
-                setNextComment(true)
-            } else {
-                setNextComment(false)
-            }
-
-        }
-        const sendComment = async (slug: string, comment: String) => {
-            setSending(true)
-            const result = comment && await axios.post("/api/auth/comment", { postId: slug, content: comment },
-                {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': localStorage.token,
-                    }
-
-                })
-            getComment(slug)
-            setComment("")
-            setPageCommnet(1)
-            setRefresh(refresh + 1)
-            result.data.success && setSending(false)
-        }
-
-        const editComment = async () => {
-            const result = await axios.put(`/api/auth/comment?id=${commentId}`,
-                { content: commentContent },
-                {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': localStorage.token,
-                    }
-
-                })
-            setCommentContent("")
-            setcommentEditContent(false)
-            getComment(slug)
-            setRefresh(refresh + 1)
-        }
-
-        const deleteComment = async () => {
-            const result = await axios.delete(`/api/auth/comment?id=${commentId}`,
-                {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': localStorage.token,
-                    }
-
-                })
-            getComment(slug)
-            setRefresh(refresh + 1)
-        }
-
-        useEffect(() => {
-            getComment(slug)
-        }, [pageComment])
-
-        useEffect(() => {
-            countComment(slug)
-        }, [refresh])
-
-
         return (
             loading ? <Loading /> :
                 <div className='board'>
