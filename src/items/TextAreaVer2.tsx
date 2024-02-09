@@ -5,7 +5,7 @@ import InsertLinkIcon from '@mui/icons-material/InsertLink';
 import ButtonUpload from './ButtonUpload';
 import Button from './Button';
 import axios from 'axios';
-
+import Resizer from 'react-image-file-resizer';
 type TextAreaType = {
     id?: String
     name: string,
@@ -22,11 +22,19 @@ const TextAreaV2 = ({ id, name, value, onInput }: TextAreaType) => {
     const getFile = async (e: any) => {
         var file = e.target.files[0];
         var reader: any = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onloadend = function () {
-            inputRef.current.innerHTML += `<img src=${reader.result} />`
-            onInput(inputRef.current.innerHTML)
-        }
+        Resizer.imageFileResizer(
+            file,
+            300,
+            300,
+            'JPEG',
+            100,
+            0,
+            (result) => {
+                inputRef.current.innerHTML += `<img src=${result} />`
+                onInput(inputRef.current.innerHTML)
+            },
+            'base64',
+        );
 
     }
     const getLink = (link: string) => {

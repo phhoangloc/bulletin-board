@@ -16,6 +16,7 @@ const BulletinBoad = () => {
     const [number, setCurrentNumber] = useState<number>(0)
 
     const [infor, setinfor] = useState<string>("")
+
     const update = () => {
         store.subscribe(() => setCurrentUser(store.getState().user))
         store.subscribe(() => setCurrentNumber(store.getState().refresh))
