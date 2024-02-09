@@ -315,7 +315,6 @@ main {
 
                     textarea,
                     .textarea {
-                        // height: 100px;
                         resize: none;
                         overflow: auto;
                         margin: 10px 0 40px;
@@ -325,6 +324,17 @@ main {
                         display: none;
                     }
 
+                    img {
+                        width: 75% !important;
+                        box-shadow: 1px 5px 10px -2.5px #aaa;
+                        display: block;
+                        margin: 10px auto;
+
+                        @media (min-width:768px) {
+                            width: 50% !important;
+
+                        }
+                    }
                 }
 
 

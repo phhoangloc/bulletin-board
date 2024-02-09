@@ -323,6 +323,19 @@ main .board .create-news .input .inputBox .textarea::-webkit-scrollbar {
   display: none;
 }
 
+main .board .create-news .input .inputBox img {
+  width: 75% !important;
+  box-shadow: 1px 5px 10px -2.5px #aaa;
+  display: block;
+  margin: 10px auto;
+}
+
+@media (min-width: 768px) {
+  main .board .create-news .input .inputBox img {
+    width: 50% !important;
+  }
+}
+
 main .board .create-news .input .tool_news {
   position: absolute;
   bottom: 0;

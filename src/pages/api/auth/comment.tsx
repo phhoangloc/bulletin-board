@@ -8,7 +8,7 @@ import { commentModel } from "@/model/comment"
 import { transporter } from "../signup"
 const jwt = require('jsonwebtoken')
 
-const Cooment =
+const Comment =
     async (
         req: NextApiRequest,
         res: NextApiResponse
@@ -135,4 +135,4 @@ const Cooment =
         }
     }
 
-export default Cooment
+export default Comment
