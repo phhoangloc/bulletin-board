@@ -13,6 +13,8 @@ import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import Loading from '@/app/loading'
 import NotFound from '@/app/not-found'
+import SyncIcon from '@mui/icons-material/Sync';
+
 
 type Props = {
     slug: string
@@ -34,6 +36,7 @@ const Post = ({ slug }: Props) => {
         const [modalOpen, setModalOpen] = useState<boolean>(false)
         const [postId, setPostId] = useState<String | undefined>()
         const [loading, setLoading] = useState<boolean>(true)
+        const [sending, setSending] = useState<boolean>(false)
         const getPost = async () => {
             const result = await axios.get(`/api/post?id=${slug}`,
                 {
@@ -105,7 +108,7 @@ const Post = ({ slug }: Props) => {
 
         }
         const sendComment = async (slug: string, comment: String) => {
-
+            setSending(true)
             const result = comment && await axios.post("/api/auth/comment", { postId: slug, content: comment },
                 {
                     headers: {
@@ -118,6 +121,7 @@ const Post = ({ slug }: Props) => {
             setComment("")
             setPageCommnet(1)
             setRefresh(refresh + 1)
+            result.data.success && setSending(false)
         }
 
         const editComment = async () => {
@@ -177,7 +181,7 @@ const Post = ({ slug }: Props) => {
                         <div className={`reply reply-on reply-on-slugpage`}>
                             <div className="reply-input">
                                 <TextArea name="コメント。。。" value={comment} onChange={(e) => setComment(e.target.value)} isFocus={commentFocus} />
-                                <SendIcon onClick={() => sendComment(slug, comment)} />
+                                {sending ? <SyncIcon /> : <SendIcon onClick={() => sendComment(slug, comment)} />}
                             </div>
                             {<div className='page-comment'>
                                 {pageComment === 1 ? null : <span onClick={() => setPageCommnet(pre => pre - 1)}>前に<ArrowLeftIcon /></span>}

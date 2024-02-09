@@ -75,8 +75,6 @@ const Cooment =
                                 `こんばんは！<br>
                                 こんにちは。掲示板 の ${nicknameComment} さんはあなたの掲示板にコメントしました。<br>
                                 <br>
-                                あなたの掲示板  ${postContent}<br>
-                                <br>
                                 イメールから    ${emailComment}<br>
                                 <br>
                                 コンテンツ  ${body.content}<br>
