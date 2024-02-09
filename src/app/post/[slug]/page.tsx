@@ -1,6 +1,5 @@
 'use client'
-import { useEffect, useState } from 'react'
-import BulletinBoad from '@/component/bulletinBoad'
+import { useState } from 'react'
 import Login from '@/component/login'
 import store from '@/redux/store'
 import { UserLogin } from '@/redux/reducer/UserReducer'

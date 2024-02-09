@@ -409,10 +409,7 @@ main {
                 position: absolute;
                 right: 10px;
                 bottom: 10px;
-                z-index: 5
-            }
-
-            svg:hover {
+                z-index: 5;
                 color: var(--main-color);
             }
 
@@ -432,6 +429,8 @@ main {
                     font-size: 0.75rem;
                     margin: 0px 0px 4px 2px;
                     position: relative;
+                    color: var(--main-color);
+                    font-weight: bold;
 
                     span {
                         font-size: 0.6rem;
@@ -439,6 +438,7 @@ main {
                         position: absolute;
                         right: 0;
                         bottom: 0;
+                        font-weight: 400;
                     }
                 }
 
@@ -603,11 +603,19 @@ main {
                     width: 80%;
                     text-align: right;
                     margin: 5px 0 0 auto;
-                    font-size: 0.8rem;
+                    font-size: 0.9rem;
 
                     .author {
                         margin: 0px 2px 2px 0px;
-                        font-size: 0.7rem;
+                        font-size: 0.8rem;
+                        font-weight: bold;
+                        color: var(--main-color);
+
+                        span {
+                            font-size: 0.6rem;
+                            font-weight: 400;
+                            color: #aaa;
+                        }
                     }
 
                     .content {
@@ -769,8 +777,6 @@ main {
                 }
             }
         }
-
-
 
         .modalEdit {
             position: fixed;

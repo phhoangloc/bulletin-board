@@ -405,9 +405,6 @@ main .board .create-news svg {
   right: 10px;
   bottom: 10px;
   z-index: 5;
-}
-
-main .board .create-news svg:hover {
   color: var(--main-color);
 }
 
@@ -427,6 +424,8 @@ main .board .item .msg .author {
   font-size: 0.75rem;
   margin: 0px 0px 4px 2px;
   position: relative;
+  color: var(--main-color);
+  font-weight: bold;
 }
 
 main .board .item .msg .author span {
@@ -435,6 +434,7 @@ main .board .item .msg .author span {
   position: absolute;
   right: 0;
   bottom: 0;
+  font-weight: 400;
 }
 
 main .board .item .msg .content {
@@ -597,12 +597,20 @@ main .board .item .reply .replyItem {
   width: 80%;
   text-align: right;
   margin: 5px 0 0 auto;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
 }
 
 main .board .item .reply .replyItem .author {
   margin: 0px 2px 2px 0px;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: var(--main-color);
+}
+
+main .board .item .reply .replyItem .author span {
+  font-size: 0.6rem;
+  font-weight: 400;
+  color: #aaa;
 }
 
 main .board .item .reply .replyItem .content {

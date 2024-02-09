@@ -159,7 +159,7 @@ const ItemBulletinBoard = ({ post, func }: Props) => {
                     postId && comments.length ?
                         comments.map((com, index) =>
                             <div className="replyItem" key={index}>
-                                <div className="author">{com.nicknameId.nickname}</div>
+                                <div className="author"><span>{moment(com.createDate).format('YY/MM/DD HH:mm')}</span><br></br>{com.nicknameId.nickname}  </div>
                                 <div className="content">
                                     {commentEditcontent && commentIndex === index ?
                                         <div className="editCommentBox">

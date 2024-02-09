@@ -174,7 +174,7 @@ const Post = ({ slug }: Props) => {
                         <div className='tool_slug'>
                             <p>修正{user?.id === item?.nicknameId?._id && <EditIcon onClick={() => setModalOpen(true)} />}</p>
                             <p>コメント <CommentIcon onClick={() => setcommentFocus(prev => prev + 1)} />
-                                {CommentNumber !== 0 && <p className='commentNumber'>{CommentNumber}</p>}
+                                {CommentNumber !== 0 && <span className='commentNumber'>{CommentNumber}</span>}
                             </p>
                         </div>
                         <div className={`reply reply-on reply-on-slugpage`}>
@@ -188,7 +188,7 @@ const Post = ({ slug }: Props) => {
                             </div>}
                             {comments.map((com, index) =>
                                 <div className="replyItem" key={index}>
-                                    <div className="author">{com.nicknameId.nickname}</div>
+                                    <div className="author"><span>{moment(com?.createDate).format('YY/MM/DD HH:mm')}</span> <br></br>{com.nicknameId.nickname}</div>
                                     <div className="content">
                                         {commentEditcontent && commentIndex === index ?
                                             <div className="editCommentBox">
@@ -196,7 +196,7 @@ const Post = ({ slug }: Props) => {
                                                 <button onClick={() => { editComment() }}>確認</button>
                                                 <button onClick={() => { setcommentEditContent(false) }}>キャンセル</button>
                                             </div> :
-                                            <p className='text'>{com.content}</p>}
+                                            <div className='text'>{com.content}</div>}
                                         {com.nicknameId._id.toString() === user?.id?.toString() ?
                                             <MoreHorizIcon onClick={() => { setcommentEditModal(!commentEditModal); setCommentIndex(index); setCommentId(com._id.toString()) }} /> :
                                             null}

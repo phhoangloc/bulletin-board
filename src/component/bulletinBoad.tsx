@@ -9,6 +9,7 @@ import axios from 'axios';
 import ModalEdit from './modalEdit';
 import ItemBulletinBoard from './itemBulletinBoard';
 import TextAreaV2 from '@/items/TextAreaVer2';
+import LoopIcon from '@mui/icons-material/Loop';
 const BulletinBoad = () => {
 
     const [user, setCurrentUser] = useState<UserLogin | undefined>(store.getState().user)
@@ -22,7 +23,11 @@ const BulletinBoad = () => {
 
     update()
 
+    const [sending, setSending] = useState<boolean>(false)
+
+
     const createPost = async (infor: string) => {
+        setSending(true)
         const result = await axios.post("api/auth/post", { content: infor },
             {
                 headers: {
@@ -31,9 +36,11 @@ const BulletinBoad = () => {
                 }
 
             })
-
-        window.location.reload()
-        setinfor("")
+        if (result.data.success) {
+            setSending(false)
+            window.location.reload()
+            setinfor("")
+        }
     }
 
     const [posts, setPosts] = useState<{ _id: string, nicknameId: { _id: string, nickname: string }, content: string, createDate: Date }[]>([])
@@ -70,7 +77,7 @@ const BulletinBoad = () => {
             <p className='logout' onClick={() => { localStorage.clear(); window.location.reload() }}>ログアウト</p>
             <div className="create-news">
                 <TextAreaV2 name='情報を入力してください' value={infor} onInput={(data) => setinfor(data)} />
-                <SendIcon onClick={() => createPost(infor)} />
+                {sending ? <LoopIcon /> : <SendIcon onClick={() => createPost(infor)} sx={infor ? { opacity: 1 } : { opacity: 0.1 }} />}
             </div>
             <div className='item'>
                 {

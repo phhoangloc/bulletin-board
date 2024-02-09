@@ -19,7 +19,7 @@ const Login = () => {
         if (result.data.success) {
             const token = result.data.result
             localStorage.token = "token " + token
-            toPage.push("/")
+            toPage.refresh()
             setNickname("")
             setPassword("")
             store.dispatch(setRefresh())

@@ -13,13 +13,7 @@ type TextAreaType = {
     onInput: (e: any) => void
 }
 
-const TextAreaV2 = ({
-    id,
-    name,
-    value,
-    onInput
-
-}: TextAreaType) => {
+const TextAreaV2 = ({ id, name, value, onInput }: TextAreaType) => {
 
     const [focus, setFocus] = useState<boolean>(false)
     const inputRef = useRef<any>()
