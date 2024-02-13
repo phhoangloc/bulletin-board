@@ -4,6 +4,10 @@
   --border-color: #aaaaaa;
 }
 
+html {
+  font-size: 15px;
+}
+
 * {
   margin: 0;
 }
