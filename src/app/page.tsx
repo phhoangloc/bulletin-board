@@ -5,6 +5,7 @@ import Login from '@/component/login'
 import store from '@/redux/store'
 import { UserLogin } from '@/redux/reducer/UserReducer'
 import Header from '@/component/header'
+import Footer from '@/component/footer'
 export default function Home() {
 
   const [user, setCurrentUser] = useState<UserLogin | undefined>(store.getState().user)
@@ -24,6 +25,7 @@ export default function Home() {
     <main className='center'>
       <Header />
       {reCom}
+      <Footer />
     </main>
   )
 }

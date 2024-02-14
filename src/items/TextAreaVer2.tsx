@@ -6,6 +6,7 @@ import ButtonUpload from './ButtonUpload';
 import Button from './Button';
 import axios from 'axios';
 import Resizer from 'react-image-file-resizer';
+import PhotoIcon from '@mui/icons-material/Photo';
 type TextAreaType = {
     id?: String
     name: string,
@@ -80,7 +81,7 @@ const TextAreaV2 = ({ id, name, value, onInput }: TextAreaType) => {
                 </div>
             </div>
             <div className='tool_news'>
-                <ButtonUpload icon={<AddPhotoAlternateIcon />} onChange={(e) => { setFocus(true); getFile(e) }} />
+                <ButtonUpload icon={<PhotoIcon />} onChange={(e) => { setFocus(true); getFile(e) }} />
                 <InsertLinkIcon onClick={() => { setInputModal(!inputModal); setFocus(true) }} />
                 <div className={`input_modal ${inputModal ? "input_modal_open" : ""}`}>
                     <input className='input_text' value={link} onChange={(e) => setLink(e.target.value)} />

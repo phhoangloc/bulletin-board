@@ -250,6 +250,39 @@ body::-webkit-scrollbar-thumb {
   cursor: pointer;
 }
 
+.itemLoading {
+  width: 60px;
+  margin: 50px auto 25px;
+  display: flex;
+}
+
+.itemLoading .circle {
+  width: 20%;
+  aspect-ratio: 1;
+  background-color: #aaa;
+  border-radius: 50%;
+  margin: 2.5%;
+  animation: itemloading 1s infinite;
+}
+
+.itemLoading .circle:nth-child(2) {
+  animation-delay: 0.25s;
+}
+
+.itemLoading .circle:nth-child(3) {
+  animation-delay: 0.5s;
+}
+
+.itemLoading .circle:nth-child(4) {
+  animation-delay: 0.75s;
+}
+
+main {
+  max-width: 1600px;
+  margin: auto;
+  min-height: 100vh;
+}
+
 main .notice {
   color: red;
 }
@@ -258,11 +291,42 @@ main .header {
   height: 50px;
   width: 100%;
   background-color: white;
+  display: flex;
+  padding: 0 10px;
 }
 
 main .header img {
+  height: 30px;
   width: auto;
-  margin-top: 5px;
+  margin: 10px 0;
+}
+
+main .header .account {
+  margin: auto 0 auto auto;
+  height: max-content;
+  font-size: 12px;
+}
+
+main .header .account .logout {
+  color: var(--main-color);
+  cursor: pointer;
+  width: max-content;
+  margin: auto;
+  font-weight: bold;
+}
+
+main .header .account .logout:hover {
+  color: var(--main-color);
+}
+
+@media (min-width: 575px) {
+  main .header img {
+    height: 40px;
+    margin: 5px 0;
+  }
+  main .header .account {
+    font-size: 14px;
+  }
 }
 
 main .board {
@@ -272,18 +336,6 @@ main .board {
 main .board .welcome {
   height: 40px;
   line-height: 40px;
-}
-
-main .board .logout {
-  font-size: 0.75rem;
-  color: var(--main-color);
-  cursor: pointer;
-  width: max-content;
-  margin: auto;
-}
-
-main .board .logout:hover {
-  color: var(--main-color);
 }
 
 main .board .create-news {
@@ -298,17 +350,17 @@ main .board .create-news {
 }
 
 main .board .create-news .input {
-  height: 80px;
+  width: calc(100% - 20px);
+  height: 90px;
   transition: all 0.25s;
   overflow: hidden;
-  margin: 0;
-  padding: 15px;
+  margin: 0 auto;
+  padding: 0px;
 }
 
 main .board .create-news .input p {
   top: 10px;
   font-size: 20px;
-  left: 10px;
   color: #888;
 }
 
@@ -317,10 +369,12 @@ main .board .create-news .input .inputBox {
 }
 
 main .board .create-news .input .inputBox textarea,
+main .board .create-news .input .inputBox input,
 main .board .create-news .input .inputBox .textarea {
   resize: none;
   overflow: auto;
   margin: 10px 0 40px;
+  font-size: 17px;
 }
 
 main .board .create-news .input .inputBox .textarea::-webkit-scrollbar {
@@ -391,13 +445,26 @@ main .board .create-news .input .tool_news .input_modal_open .button {
   margin-left: 5px;
 }
 
+main .board .create-news .input:nth-child(1) {
+  height: 40px;
+  border-bottom: 1px solid var(--main-color);
+  border-radius: 0;
+}
+
+main .board .create-news .input:nth-child(1) p {
+  font-size: 17px;
+}
+
+main .board .create-news .input:nth-child(1) .inputBox input {
+  color: var(--main-color);
+}
+
 main .board .create-news .inputFocus {
   height: max-content;
 }
 
 main .board .create-news .inputFocus p {
   opacity: 0;
-  top: 1rem;
 }
 
 main .board .create-news svg {
@@ -465,6 +532,39 @@ main .board .item .msg .content img {
   }
 }
 
+main .board .item .msg .content .content_title {
+  display: flex;
+}
+
+main .board .item .msg .content .content_title p {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: bolder;
+  font-size: 1.2rem;
+  color: var(--main-color);
+  width: calc(100% - 30px);
+  cursor: pointer;
+}
+
+main .board .item .msg .content .content_title svg {
+  margin: 0 0 0 auto;
+  color: #888;
+  cursor: pointer;
+}
+
+main .board .item .msg .content .content_title_post {
+  height: max-content;
+}
+
+main .board .item .msg .content .content_title_post p {
+  white-space: normal;
+  width: 100%;
+  overflow: inherit;
+  text-overflow: inherit;
+  text-align: center;
+}
+
 main .board .item .msg .tool {
   position: absolute;
   bottom: 0;
@@ -485,18 +585,11 @@ main .board .item .msg .tool svg:hover {
 }
 
 main .board .item .msg .tool .commentNumber {
-  position: absolute;
-  font-size: 10px;
-  width: 20px;
-  height: 20px;
-  background-color: red;
-  color: white;
-  text-align: center;
-  line-height: 20px;
-  bottom: 20px;
-  right: 0;
-  border-radius: 50%;
+  font-size: 1rem;
   font-weight: bold;
+  height: max-content;
+  margin: auto 5px auto 0;
+  color: #888;
 }
 
 main .board .item .msg .content::-webkit-scrollbar {
@@ -511,56 +604,58 @@ main .board .item .msg .content::-webkit-scrollbar-thumb {
 main .board .item .tool_slug {
   display: flex;
   position: relative;
-  height: 30px;
   border-radius: 5px;
   background-color: white;
   box-shadow: 0px 5px 10px -5px #aaa;
+  padding: 5px;
+  font-size: 1.1rem;
 }
 
 main .board .item .tool_slug p {
   width: max-content;
   text-align: center;
-  line-height: 30px;
   display: flex;
   margin: auto;
   position: relative;
 }
 
 main .board .item .tool_slug p svg {
-  width: 20px;
-  height: 20px;
-  margin: 5px;
+  width: 25px;
+  height: 25px;
   cursor: pointer;
+  color: #888;
+  margin: auto 5px;
+}
+
+main .board .item .tool_slug p svg:hover {
+  color: var(--main-color);
 }
 
 main .board .item .tool_slug p .commentNumber {
-  position: absolute;
-  font-size: 10px;
-  width: 20px;
-  height: 20px;
-  background-color: red;
-  color: white;
-  text-align: center;
-  line-height: 20px;
-  bottom: 20px;
-  right: -5px;
-  border-radius: 50%;
+  font-size: 1rem;
   font-weight: bold;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  height: max-content;
+  margin: auto 5px auto 0;
+  color: #888;
 }
 
 main .board .item .page {
   display: flex;
   width: max-content;
   margin: 50px auto 25px;
+  color: var(--main-color);
+  font-weight: bold;
 }
 
 main .board .item .page p {
   width: 50px;
   cursor: pointer;
   text-align: center;
+}
+
+main .board .item .page p svg {
+  width: 25px;
+  height: 25px;
 }
 
 main .board .item .reply {
@@ -580,7 +675,6 @@ main .board .item .reply .text-comment {
 
 main .board .item .reply .page-comment {
   margin: 10px 0 0 auto;
-  opacity: 0.5;
   font-size: 0.6rem;
   width: max-content;
   display: flex;
@@ -590,10 +684,18 @@ main .board .item .reply .page-comment span {
   display: flex;
   line-height: 25px;
   cursor: pointer;
+  color: var(--main-color);
+  opacity: 0.75;
 }
 
 main .board .item .reply .page-comment span:hover {
   color: var(--main-color);
+  opacity: 1;
+}
+
+main .board .item .reply .page-comment .itemLoading {
+  width: 40px;
+  margin: 0;
 }
 
 main .board .item .reply .replyItem {
@@ -788,6 +890,133 @@ main .board .modalEdit .box h2 {
   margin: 10px 0;
 }
 
+main .board .modalEdit .box .input {
+  height: max-content;
+  transition: all 0.25s;
+  overflow: hidden;
+  background-color: white;
+  padding: 0;
+  padding: 0 15px;
+}
+
+main .board .modalEdit .box .input p {
+  top: 5px;
+  font-size: 20px;
+  left: 15px;
+  color: #888;
+}
+
+main .board .modalEdit .box .input .inputBox {
+  height: 100%;
+  width: 100%;
+}
+
+main .board .modalEdit .box .input .inputBox input {
+  width: 100%;
+  color: var(--main-color);
+  font-weight: bold;
+}
+
+main .board .modalEdit .box .input .inputBox textarea,
+main .board .modalEdit .box .input .inputBox .textarea {
+  resize: none;
+  overflow: auto;
+  margin: 10px 0 40px;
+}
+
+main .board .modalEdit .box .input .inputBox textarea img,
+main .board .modalEdit .box .input .inputBox .textarea img {
+  width: 75% !important;
+  box-shadow: 1px 5px 10px -2.5px #aaa;
+  display: block;
+  margin: 10px auto;
+}
+
+@media (min-width: 768px) {
+  main .board .modalEdit .box .input .inputBox textarea img,
+  main .board .modalEdit .box .input .inputBox .textarea img {
+    width: 50% !important;
+  }
+}
+
+main .board .modalEdit .box .input .inputBox .textarea::-webkit-scrollbar {
+  display: none;
+}
+
+main .board .modalEdit .box .input .tool_news {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  z-index: 6;
+}
+
+main .board .modalEdit .box .input .tool_news svg {
+  position: relative;
+  bottom: inherit;
+  right: inherit;
+  padding: 5px;
+  cursor: pointer;
+  color: var(--main-color);
+}
+
+main .board .modalEdit .box .input .tool_news .input_modal {
+  display: none;
+  position: relative;
+}
+
+main .board .modalEdit .box .input .tool_news .input_modal_open {
+  display: flex;
+  height: 30px;
+  margin: auto;
+  position: absolute;
+  z-index: 5;
+  left: 90px;
+}
+
+main .board .modalEdit .box .input .tool_news .input_modal_open .input_text {
+  width: 100px;
+  text-align: left;
+  border: 1px solid #aaa;
+  font-size: 0.9rem;
+  padding: 5px;
+  overflow: scroll;
+}
+
+main .board .modalEdit .box .input .tool_news .input_modal_open .input_text::-webkit-scrollbar {
+  display: none;
+}
+
+main .board .modalEdit .box .input .tool_news .input_modal_open .input_text:focus {
+  outline: none;
+}
+
+main .board .modalEdit .box .input .tool_news .input_modal_open .button {
+  background-color: whitesmoke;
+  width: max-content;
+  height: 100%;
+  margin-left: 5px;
+}
+
+main .board .modalEdit .box .input:nth-child(2) {
+  height: 40px;
+}
+
+main .board .modalEdit .box .input:nth-child(2) input {
+  margin: 0;
+  height: 100%;
+  line-height: 100%;
+  font-size: 1.2rem;
+}
+
+main .board .modalEdit .box .inputFocus {
+  height: max-content;
+}
+
+main .board .modalEdit .box .inputFocus p {
+  opacity: 0;
+  top: 1rem;
+}
+
 main .board .modalEdit .box .tool {
   display: flex;
   width: 90%;
@@ -806,117 +1035,78 @@ main .board .modalEdit .box .tool svg {
   height: 25px;
   margin: 10px;
   cursor: pointer;
-}
-
-main .board .modalEdit .input {
-  height: 80px;
-  transition: all 0.25s;
-  overflow: hidden;
-  margin: 0;
-  padding: 15px;
-}
-
-main .board .modalEdit .input p {
-  top: 10px;
-  font-size: 20px;
-  left: 10px;
-  color: #888;
-}
-
-main .board .modalEdit .input .inputBox {
-  height: 100%;
-}
-
-main .board .modalEdit .input .inputBox textarea,
-main .board .modalEdit .input .inputBox .textarea {
-  resize: none;
-  overflow: auto;
-  margin: 10px 0 40px;
-}
-
-main .board .modalEdit .input .inputBox textarea img,
-main .board .modalEdit .input .inputBox .textarea img {
-  width: 75% !important;
-  box-shadow: 1px 5px 10px -2.5px #aaa;
-  display: block;
-  margin: 10px auto;
-}
-
-@media (min-width: 768px) {
-  main .board .modalEdit .input .inputBox textarea img,
-  main .board .modalEdit .input .inputBox .textarea img {
-    width: 50% !important;
-  }
-}
-
-main .board .modalEdit .input .inputBox .textarea::-webkit-scrollbar {
-  display: none;
-}
-
-main .board .modalEdit .input .tool_news {
-  position: absolute;
-  bottom: 0;
-  display: flex;
-  z-index: 6;
-}
-
-main .board .modalEdit .input .tool_news svg {
-  position: relative;
-  bottom: inherit;
-  right: inherit;
-  padding: 5px;
-  cursor: pointer;
-}
-
-main .board .modalEdit .input .tool_news .input_modal {
-  display: none;
-  position: relative;
-}
-
-main .board .modalEdit .input .tool_news .input_modal_open {
-  display: flex;
-  height: 30px;
-  margin: auto;
-  position: absolute;
-  z-index: 5;
-  left: 90px;
-}
-
-main .board .modalEdit .input .tool_news .input_modal_open .input_text {
-  width: 100px;
-  text-align: left;
-  border: 1px solid #aaa;
-  font-size: 0.9rem;
-  padding: 5px;
-  overflow: scroll;
-}
-
-main .board .modalEdit .input .tool_news .input_modal_open .input_text::-webkit-scrollbar {
-  display: none;
-}
-
-main .board .modalEdit .input .tool_news .input_modal_open .input_text:focus {
-  outline: none;
-}
-
-main .board .modalEdit .input .tool_news .input_modal_open .button {
-  background-color: whitesmoke;
-  width: max-content;
-  height: 100%;
-  margin-left: 5px;
-}
-
-main .board .modalEdit .inputFocus {
-  height: max-content;
-}
-
-main .board .modalEdit .inputFocus p {
-  opacity: 0;
-  top: 1rem;
+  color: var(--main-color);
 }
 
 main .board .modalOpen {
   display: flex;
+}
+
+main .board .tool_search {
+  background-color: white;
+  border-radius: 25px;
+  box-shadow: 0px 5px 10px -5px #888;
+  padding: 10px;
+  display: flex;
+  width: 80%;
+  margin: 50px auto 10px;
+  color: var(--main-color);
+  padding-right: 15px;
+}
+
+main .board .tool_search input {
+  display: block;
+  border: none;
+  margin-left: 5px;
+  font-size: 1.2rem;
+  color: var(--main-color);
+  width: 100%;
+}
+
+main .board .tool_search input:focus {
+  outline: none;
+}
+
+main .board .tool_search svg {
+  color: var(--main-color);
+  cursor: pointer;
+}
+
+@media (min-width: 1200px) {
+  main .board .tool_search {
+    left: calc(50vw - 600px);
+  }
+}
+
+main .board .toolOn {
+  width: max-content;
+}
+
+main .footer {
+  height: 50px;
+  background-color: var(--main-color);
+  justify-content: end;
+  color: white;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  margin-top: auto;
+  margin-bottom: 0;
+  padding-bottom: 5px;
+}
+
+@keyframes itemloading {
+  0% {
+    background-color: #aaa;
+  }
+  25% {
+    background-color: var(--main-color);
+  }
+  50% {
+    background-color: #aaa;
+  }
+  100% {
+    background-color: #aaa;
+  }
 }
 
 .upload .button {

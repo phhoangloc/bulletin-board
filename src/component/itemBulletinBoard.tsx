@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import EditIcon from '@mui/icons-material/Edit';
 import SendIcon from '@mui/icons-material/Send';
-import CommentIcon from '@mui/icons-material/Comment';
 import CloseIcon from '@mui/icons-material/Close';
 import TextArea from '@/items/TextArea';
 import { UserLogin } from '@/redux/reducer/UserReducer';
@@ -11,13 +9,18 @@ import axios from 'axios';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
-
+import CommentOutlinedIcon from '@mui/icons-material/CommentOutlined';
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import { useRouter } from 'next/navigation';
+import ItemLoading from './itemLoading';
+import Loading from '@/app/loading';
 type Props = {
-    post: { _id: string, nicknameId: { _id: string, nickname: string }, content: string, createDate: Date },
+    post: { _id: string, nicknameId: { _id: string, nickname: string }, title: string, content: string, createDate: Date },
     func: (modalOpen: boolean, postId: String) => void
 }
 
 const ItemBulletinBoard = ({ post, func }: Props) => {
+    const toPage = useRouter()
     const [user, setCurrentUser] = useState<UserLogin | undefined>(store.getState().user)
     const [number, setCurrentNumber] = useState<number>(0)
     const update = () => {
@@ -41,6 +44,8 @@ const ItemBulletinBoard = ({ post, func }: Props) => {
     const [CommentNumber, setCommentNumber] = useState<number>(0)
     const [refresh, setRefresh] = useState<number>(0)
 
+    const [loading, setLoading] = useState<boolean>(false)
+
     const countComment = async (id: string) => {
         const result = await axios.get(`/api/auth/comment?postId=${id}`,
             {
@@ -52,7 +57,9 @@ const ItemBulletinBoard = ({ post, func }: Props) => {
             })
         setCommentNumber(result.data.data.length)
     }
+
     const getComment = async (id: String | undefined) => {
+        setLoading(true)
         const result = await axios.get(`/api/auth/comment?postId=${id}&limit=${limitComment}&skip=${(pageComment - 1) * limitComment}`,
             {
                 headers: {
@@ -79,7 +86,7 @@ const ItemBulletinBoard = ({ post, func }: Props) => {
         } else {
             setNextComment(false)
         }
-
+        setLoading(true)
     }
     const sendComment = async (comment: String) => {
         const result = comment && await axios.post("/api/auth/comment", { postId: postId, content: comment },
@@ -137,17 +144,22 @@ const ItemBulletinBoard = ({ post, func }: Props) => {
         <div>
             <div className="msg" >
                 <div className="author">{post.nicknameId?.nickname} <span>{moment(post.createDate).format('YY/MM/DD HH:mm')}</span></div>
-                <div className="content" dangerouslySetInnerHTML={{ __html: post ? post.content.replace(/\n/g, '<br>') : "" }}>
+                <div className="content">
+                    <div className="content_title">
+                        <p onClick={() => toPage.push(`/post/${post._id}`)}>{post?.title}</p>
+                        {user && user.id === post.nicknameId?._id &&
+                            <EditOutlinedIcon onClick={() => func(true, post._id)} />
+                        }
+                    </div>
+                    <div className="content_content" dangerouslySetInnerHTML={{ __html: post ? post.content.replace(/\n/g, '<br>') : "" }}>
+                    </div>
                 </div>
                 <div className='tool'>
-                    {user && user.id === post.nicknameId?._id &&
-                        <EditIcon onClick={() => func(true, post._id)} />
-                    }
                     {postId ?
                         <CloseIcon onClick={() => { setPostId(undefined) }} /> :
-                        <CommentIcon onClick={() => { setPostId(post._id), getComment(post._id), setPageCommnet(1) }} />
+                        <CommentOutlinedIcon onClick={() => { setPostId(post._id), getComment(post._id), setPageCommnet(1) }} />
                     }
-                    {CommentNumber !== 0 && <p className='commentNumber'>{CommentNumber}</p>}
+                    <p className='commentNumber'>{CommentNumber}</p>
                 </div>
             </div>
             <div className={`reply ${postId === post._id ? "reply-on" : ""}`}>
@@ -179,15 +191,16 @@ const ItemBulletinBoard = ({ post, func }: Props) => {
                                         null}
                                 </div>
                             </div>
-                        ) : null
+                        ) :
+                        null
                 }
                 {
                     postId && comments.length ?
                         <div className='page-comment'>
-                            {pageComment === 1 ? null : <span onClick={() => setPageCommnet(pre => pre - 1)}>前に<ArrowLeftIcon /></span>}
-                            {nextComment ? <span onClick={() => setPageCommnet(pre => pre + 1)}><ArrowRightIcon />つづき</span> : null}
+                            {pageComment === 1 ? null : <span onClick={() => { setPageCommnet(pre => pre - 1); setComments([]) }}>前に<ArrowLeftIcon /></span>}
+                            {nextComment ? <span onClick={() => { setPageCommnet(pre => pre + 1); setComments([]) }}><ArrowRightIcon />つづき</span> : null}
                         </div> :
-                        null
+                        loading ? <div className='page-comment'><ItemLoading /></div> : null
                 }
             </div>
         </div>

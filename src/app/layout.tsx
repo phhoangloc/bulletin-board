@@ -8,7 +8,7 @@ const notoSansJP = Noto_Sans_JP({
 })
 
 export const metadata: Metadata = {
-  title: '掲示板',
+  title: 'おおさかパルコップ掲示板',
   description: 'みんなをお知らせしましょう',
 }
 

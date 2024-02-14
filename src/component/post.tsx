@@ -15,7 +15,9 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import Loading from '@/app/loading'
 import NotFound from '@/app/not-found'
 import SyncIcon from '@mui/icons-material/Sync';
-
+import CommentOutlinedIcon from '@mui/icons-material/CommentOutlined';
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import ItemLoading from './itemLoading'
 
 type Props = {
     slug: string
@@ -36,6 +38,7 @@ const Post = ({ slug }: Props) => {
     const [modalOpen, setModalOpen] = useState<boolean>(false)
     const [postId, setPostId] = useState<String | undefined>()
     const [loading, setLoading] = useState<boolean>(true)
+    const [loadingCom, setLoadingCom] = useState<boolean>(false)
     const [sending, setSending] = useState<boolean>(false)
     const getPost = async () => {
         const result = await axios.get(`/api/post?id=${slug}`,
@@ -80,6 +83,7 @@ const Post = ({ slug }: Props) => {
         setCommentNumber(result.data.data.length)
     }
     const getComment = async (id: String | undefined) => {
+        setLoadingCom(true)
         const result = await axios.get(`/api/auth/comment?postId=${id}&limit=${limitComment}&skip=${(pageComment - 1) * limitComment}`,
             {
                 headers: {
@@ -105,6 +109,7 @@ const Post = ({ slug }: Props) => {
         } else {
             setNextComment(false)
         }
+        setLoadingCom(false)
 
     }
     const sendComment = async (slug: string, comment: String) => {
@@ -164,16 +169,20 @@ const Post = ({ slug }: Props) => {
         return (
             loading ? <Loading /> :
                 <div className='board'>
-                    <p className='welcome'>こんにちは、{user?.nickname} </p>
-                    <p className='logout' onClick={() => { localStorage.clear(); window.location.reload() }}>ログアウト</p>
                     <div className='item'>
                         <div className="msg" >
                             <div className="author">{item?.nicknameId?.nickname} <span>{moment(item?.createDate).format('YY/MM/DD HH:mm')}</span></div>
-                            <div className="content" dangerouslySetInnerHTML={{ __html: item?.content.replace(/\n/g, '<br>') }}></div>
+                            <div className="content">
+                                <div className="content_title content_title_post ">
+                                    <p>{item?.title}</p>
+                                </div>
+                                <div className="content_content" dangerouslySetInnerHTML={{ __html: item ? item.content.replace(/\n/g, '<br>') : "" }}>
+                                </div>
+                            </div>
                         </div>
                         <div className='tool_slug'>
-                            <p>修正{user?.id === item?.nicknameId?._id && <EditIcon onClick={() => setModalOpen(true)} />}</p>
-                            <p>コメント <CommentIcon onClick={() => setcommentFocus(prev => prev + 1)} />
+                            <p>修正{user?.id === item?.nicknameId?._id && <EditOutlinedIcon onClick={() => setModalOpen(true)} />}</p>
+                            <p>コメント <CommentOutlinedIcon onClick={() => setcommentFocus(prev => prev + 1)} />
                                 {CommentNumber !== 0 && <span className='commentNumber'>{CommentNumber}</span>}
                             </p>
                         </div>
@@ -183,8 +192,14 @@ const Post = ({ slug }: Props) => {
                                 {sending ? <SyncIcon /> : <SendIcon onClick={() => sendComment(slug, comment)} />}
                             </div>
                             {<div className='page-comment'>
-                                {pageComment === 1 ? null : <span onClick={() => setPageCommnet(pre => pre - 1)}>前に<ArrowLeftIcon /></span>}
-                                {nextComment ? <span onClick={() => setPageCommnet(pre => pre + 1)}><ArrowRightIcon />つづき</span> : null}
+                                {/* {pageComment === 1 ? null : <span onClick={() => setPageCommnet(pre => pre - 1)}>前に<ArrowLeftIcon /></span>}
+                                {nextComment ? <span onClick={() => setPageCommnet(pre => pre + 1)}><ArrowRightIcon />つづき</span> : null} */}
+                                {comments.length ?
+                                    <div className='page-comment'>
+                                        {pageComment === 1 ? null : <span onClick={() => { setPageCommnet(pre => pre - 1); setComments([]) }}>前に<ArrowLeftIcon /></span>}
+                                        {nextComment ? <span onClick={() => { setPageCommnet(pre => pre + 1); setComments([]) }}><ArrowRightIcon />つづき</span> : null}
+                                    </div> :
+                                    loadingCom ? <div className='page-comment'><ItemLoading /></div> : null}
                             </div>}
                             {comments.map((com, index) =>
                                 <div className="replyItem" key={index}>

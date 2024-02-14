@@ -5,6 +5,7 @@ import store from '@/redux/store'
 import { UserLogin } from '@/redux/reducer/UserReducer'
 import Header from '@/component/header'
 import Post from '@/component/post'
+import Footer from '@/component/footer'
 
 type Props = {
   params: { slug: string }
@@ -28,6 +29,7 @@ export default function Home({ params }: Props) {
     <main className='center'>
       <Header />
       {reCom}
+      <Footer />
     </main>
   )
 }

@@ -15,7 +15,7 @@ const post = async (
     const result: isDataType = { success: false }
     postModel.find()
         .find(query.id ? { "_id": query.id } : {})
-        .find(query.search ? { "content": { $regex: query.search } } : {})
+        .find(query.search ? { "title": { $regex: query.search } } : {})
         .find(query.nickname ? { "nickname": { $regex: query.search } } : {})
         .sort({ "createDate": -1 })
         .skip(query.skip)

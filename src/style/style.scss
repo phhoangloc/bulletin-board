@@ -252,8 +252,39 @@ body::-webkit-scrollbar-thumb {
     }
 }
 
+.itemLoading {
+    width: 60px;
+    margin: 50px auto 25px;
+    display: flex;
+
+    .circle {
+        width: 20%;
+        aspect-ratio: 1;
+        background-color: #aaa;
+        border-radius: 50%;
+        margin: 2.5%;
+        animation: itemloading 1s infinite;
+    }
+
+    .circle:nth-child(2) {
+        animation-delay: 0.25s;
+    }
+
+    .circle:nth-child(3) {
+        animation-delay: 0.5s;
+    }
+
+    .circle:nth-child(4) {
+        animation-delay: 0.75s;
+    }
+}
+
 //main
 main {
+    max-width: 1600px;
+    margin: auto;
+    min-height: 100vh;
+
     .notice {
         color: red;
     }
@@ -262,10 +293,43 @@ main {
         height: 50px;
         width: 100%;
         background-color: white;
+        display: flex;
+        padding: 0 10px;
+
 
         img {
+            height: 30px;
             width: auto;
-            margin-top: 5px;
+            margin: 10px 0;
+        }
+
+        .account {
+            margin: auto 0 auto auto;
+            height: max-content;
+            font-size: 12px;
+
+            .logout {
+                color: var(--main-color);
+                cursor: pointer;
+                width: max-content;
+                margin: auto;
+                font-weight: bold;
+            }
+
+            .logout:hover {
+                color: var(--main-color);
+            }
+        }
+
+        @media (min-width:575px) {
+            img {
+                height: 40px;
+                margin: 5px 0;
+            }
+
+            .account {
+                font-size: 14px;
+            }
         }
     }
 
@@ -275,18 +339,6 @@ main {
         .welcome {
             height: 40px;
             line-height: 40px;
-        }
-
-        .logout {
-            font-size: 0.75rem;
-            color: var(--main-color);
-            cursor: pointer;
-            width: max-content;
-            margin: auto;
-        }
-
-        .logout:hover {
-            color: var(--main-color);
         }
 
         .create-news {
@@ -300,17 +352,16 @@ main {
             overflow: hidden;
 
             .input {
-                height: 80px;
+                width: calc(100% - 20px);
+                height: 90px;
                 transition: all 0.25s;
                 overflow: hidden;
-                margin: 0;
-                padding: 15px;
-
+                margin: 0 auto;
+                padding: 0px;
 
                 p {
                     top: 10px;
                     font-size: 20px;
-                    left: 10px;
                     color: #888;
                 }
 
@@ -318,10 +369,12 @@ main {
                     height: 100%;
 
                     textarea,
+                    input,
                     .textarea {
                         resize: none;
                         overflow: auto;
                         margin: 10px 0 40px;
+                        font-size: 17px;
                     }
 
                     .textarea::-webkit-scrollbar {
@@ -396,14 +449,31 @@ main {
 
             }
 
+            .input:nth-child(1) {
+                height: 40px;
+                border-bottom: 1px solid var(--main-color);
+                border-radius: 0;
+
+                p {
+                    font-size: 17px;
+                }
+
+                .inputBox {
+                    input {
+                        color: var(--main-color);
+                    }
+                }
+            }
+
             .inputFocus {
                 height: max-content;
 
+
                 p {
                     opacity: 0;
-                    top: 1rem;
                 }
             }
+
 
             svg {
                 width: 30px;
@@ -468,6 +538,38 @@ main {
                         }
                     }
 
+                    .content_title {
+                        display: flex;
+
+                        p {
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            font-weight: bolder;
+                            font-size: 1.2rem;
+                            color: var(--main-color);
+                            width: calc(100% - 30px);
+                            cursor: pointer;
+                        }
+
+                        svg {
+                            margin: 0 0 0 auto;
+                            color: #888;
+                            cursor: pointer;
+                        }
+                    }
+
+                    .content_title_post {
+                        height: max-content;
+
+                        p {
+                            white-space: normal;
+                            width: 100%;
+                            overflow: inherit;
+                            text-overflow: inherit;
+                            text-align: center;
+                        }
+                    }
                 }
 
                 .tool {
@@ -489,18 +591,11 @@ main {
                     }
 
                     .commentNumber {
-                        position: absolute;
-                        font-size: 10px;
-                        width: 20px;
-                        height: 20px;
-                        background-color: red;
-                        color: white;
-                        text-align: center;
-                        line-height: 20px;
-                        bottom: 20px;
-                        right: 0;
-                        border-radius: 50%;
+                        font-size: 1rem;
                         font-weight: bold;
+                        height: max-content;
+                        margin: auto 5px auto 0;
+                        color: #888;
                     }
                 }
 
@@ -518,56 +613,61 @@ main {
             .tool_slug {
                 display: flex;
                 position: relative;
-                height: 30px;
                 border-radius: 5px;
                 background-color: white;
                 box-shadow: 0px 5px 10px -5px #aaa;
+                padding: 5px;
+                font-size: 1.1rem;
 
                 p {
                     width: max-content;
                     text-align: center;
-                    line-height: 30px;
                     display: flex;
                     margin: auto;
                     position: relative;
 
                     svg {
-                        width: 20px;
-                        height: 20px;
-                        margin: 5px;
+                        width: 25px;
+                        height: 25px;
                         cursor: pointer;
+                        color: #888;
+                        margin: auto 5px;
+                    }
+
+                    svg:hover {
+                        color: var(--main-color)
                     }
 
                     .commentNumber {
-                        position: absolute;
-                        font-size: 10px;
-                        width: 20px;
-                        height: 20px;
-                        background-color: red;
-                        color: white;
-                        text-align: center;
-                        line-height: 20px;
-                        bottom: 20px;
-                        right: -5px;
-                        border-radius: 50%;
+                        font-size: 1rem;
                         font-weight: bold;
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: center;
+                        height: max-content;
+                        margin: auto 5px auto 0;
+                        color: #888;
                     }
                 }
+
+
             }
 
             .page {
                 display: flex;
                 width: max-content;
                 margin: 50px auto 25px;
+                color: var(--main-color);
+                font-weight: bold;
 
                 p {
                     width: 50px;
                     cursor: pointer;
                     text-align: center;
+
+                    svg {
+                        width: 25px;
+                        height: 25px;
+                    }
                 }
+
             }
 
             .reply {
@@ -586,7 +686,6 @@ main {
 
                 .page-comment {
                     margin: 10px 0 0 auto;
-                    opacity: 0.5;
                     font-size: 0.6rem;
                     width: max-content;
                     display: flex;
@@ -595,10 +694,18 @@ main {
                         display: flex;
                         line-height: 25px;
                         cursor: pointer;
+                        color: var(--main-color);
+                        opacity: 0.75
                     }
 
                     span:hover {
                         color: var(--main-color);
+                        opacity: 1
+                    }
+
+                    .itemLoading {
+                        width: 40px;
+                        margin: 0;
                     }
                 }
 
@@ -803,6 +910,137 @@ main {
                     margin: 10px 0;
                 }
 
+                .input {
+                    height: max-content;
+                    transition: all 0.25s;
+                    overflow: hidden;
+                    background-color: white;
+                    padding: 0;
+                    padding: 0 15px;
+
+                    p {
+                        top: 5px;
+                        font-size: 20px;
+                        left: 15px;
+                        color: #888;
+                    }
+
+                    .inputBox {
+                        height: 100%;
+                        width: 100%;
+
+
+                        input {
+                            width: 100%;
+                            color: var(--main-color);
+                            font-weight: bold;
+                        }
+
+
+                        textarea,
+                        .textarea {
+                            resize: none;
+                            overflow: auto;
+                            margin: 10px 0 40px;
+
+                            img {
+                                width: 75% !important;
+                                box-shadow: 1px 5px 10px -2.5px #aaa;
+                                display: block;
+                                margin: 10px auto;
+
+                                @media (min-width:768px) {
+                                    width: 50% !important;
+
+                                }
+                            }
+
+                        }
+
+                        .textarea::-webkit-scrollbar {
+                            display: none;
+                        }
+
+                    }
+
+
+
+                    .tool_news {
+                        position: absolute;
+                        bottom: 0;
+                        display: flex;
+                        z-index: 6;
+
+                        svg {
+                            position: relative;
+                            bottom: inherit;
+                            right: inherit;
+                            padding: 5px;
+                            cursor: pointer;
+                            color: var(--main-color);
+                        }
+
+                        .input_modal {
+                            display: none;
+                            position: relative;
+                        }
+
+                        .input_modal_open {
+                            display: flex;
+                            height: 30px;
+                            margin: auto;
+                            position: absolute;
+                            z-index: 5;
+                            left: 90px;
+
+                            .input_text {
+                                width: 100px;
+                                text-align: left;
+                                border: 1px solid #aaa;
+                                font-size: 0.9rem;
+                                padding: 5px;
+                                overflow: scroll;
+                            }
+
+                            .input_text::-webkit-scrollbar {
+                                display: none;
+                            }
+
+                            .input_text:focus {
+                                outline: none;
+                            }
+
+                            .button {
+                                background-color: whitesmoke;
+                                width: max-content;
+                                height: 100%;
+                                margin-left: 5px;
+                            }
+                        }
+                    }
+
+                }
+
+                .input:nth-child(2) {
+                    height: 40px;
+
+                    input {
+                        margin: 0;
+                        height: 100%;
+                        line-height: 100%;
+                        font-size: 1.2rem;
+                    }
+                }
+
+                .inputFocus {
+                    height: max-content;
+
+                    p {
+                        opacity: 0;
+                        top: 1rem;
+                    }
+                }
+
                 .tool {
                     display: flex;
                     width: 90%;
@@ -821,123 +1059,88 @@ main {
                         height: 25px;
                         margin: 10px;
                         cursor: pointer;
+                        color: var(--main-color);
                     }
                 }
             }
 
-            .input {
-                height: 80px;
-                transition: all 0.25s;
-                overflow: hidden;
-                margin: 0;
-                padding: 15px;
 
-                p {
-                    top: 10px;
-                    font-size: 20px;
-                    left: 10px;
-                    color: #888;
-                }
-
-                .inputBox {
-                    height: 100%;
-
-                    textarea,
-                    .textarea {
-                        resize: none;
-                        overflow: auto;
-                        margin: 10px 0 40px;
-
-                        img {
-                            width: 75% !important;
-                            box-shadow: 1px 5px 10px -2.5px #aaa;
-                            display: block;
-                            margin: 10px auto;
-
-                            @media (min-width:768px) {
-                                width: 50% !important;
-
-                            }
-                        }
-
-                    }
-
-                    .textarea::-webkit-scrollbar {
-                        display: none;
-                    }
-
-                }
-
-
-
-                .tool_news {
-                    position: absolute;
-                    bottom: 0;
-                    display: flex;
-                    z-index: 6;
-
-                    svg {
-                        position: relative;
-                        bottom: inherit;
-                        right: inherit;
-                        padding: 5px;
-                        cursor: pointer;
-                    }
-
-                    .input_modal {
-                        display: none;
-                        position: relative;
-                    }
-
-                    .input_modal_open {
-                        display: flex;
-                        height: 30px;
-                        margin: auto;
-                        position: absolute;
-                        z-index: 5;
-                        left: 90px;
-
-                        .input_text {
-                            width: 100px;
-                            text-align: left;
-                            border: 1px solid #aaa;
-                            font-size: 0.9rem;
-                            padding: 5px;
-                            overflow: scroll;
-                        }
-
-                        .input_text::-webkit-scrollbar {
-                            display: none;
-                        }
-
-                        .input_text:focus {
-                            outline: none;
-                        }
-
-                        .button {
-                            background-color: whitesmoke;
-                            width: max-content;
-                            height: 100%;
-                            margin-left: 5px;
-                        }
-                    }
-                }
-
-            }
-
-            .inputFocus {
-                height: max-content;
-
-                p {
-                    opacity: 0;
-                    top: 1rem;
-                }
-            }
         }
 
         .modalOpen {
             display: flex;
         }
+
+        .tool_search {
+            background-color: white;
+            border-radius: 25px;
+            box-shadow: 0px 5px 10px -5px #888;
+            padding: 10px;
+            display: flex;
+            width: 80%;
+            margin: 50px auto 10px;
+            color: var(--main-color);
+            padding-right: 15px;
+
+            input {
+                display: block;
+                border: none;
+                margin-left: 5px;
+                font-size: 1.2rem;
+                color: var(--main-color);
+                width: 100%;
+            }
+
+            input:focus {
+                outline: none;
+
+            }
+
+            svg {
+                color: var(--main-color);
+                cursor: pointer;
+            }
+
+
+            @media (min-width:1200px) {
+                left: calc(50vw - 600px);
+            }
+        }
+
+        .toolOn {
+            width: max-content;
+
+        }
+    }
+
+    .footer {
+        height: 50px;
+        background-color: var(--main-color);
+        justify-content: end;
+        color: white;
+        font-size: 0.9rem;
+        letter-spacing: 1px;
+        margin-top: auto;
+        margin-bottom: 0;
+        padding-bottom: 5px;
+    }
+}
+
+@keyframes itemloading {
+    0% {
+        background-color: #aaa;
+    }
+
+    25% {
+        background-color: var(--main-color);
+    }
+
+    50% {
+        background-color: #aaa;
+    }
+
+    100% {
+        background-color: #aaa;
     }
 }
 

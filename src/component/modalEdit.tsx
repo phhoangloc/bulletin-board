@@ -8,7 +8,7 @@ import store from '@/redux/store'
 import { setRefresh } from '@/redux/reducer/RefreshReducer'
 import DeleteIcon from '@mui/icons-material/Delete';
 import TextAreaV2 from '@/items/TextAreaVer2'
-
+import Input from '@/items/Input'
 type Props = {
     id?: String,
     modalOpen: Boolean
@@ -18,6 +18,7 @@ type Props = {
 const ModalEdit = ({ modalOpen, id, cancel }: Props) => {
 
     const [infor, setinfor] = useState<string>("")
+    const [title, setTitle] = useState<string>("")
 
     const getPostbyId = async (id: String) => {
         const result = await axios.get(`/api/auth/post?id=${id}`,
@@ -30,11 +31,12 @@ const ModalEdit = ({ modalOpen, id, cancel }: Props) => {
             })
         if (result.data.success) {
             setinfor(result.data.data.content)
+            setTitle(result.data.data.title)
         }
     }
     const updatePostbyId = async (id: String) => {
         const result = await axios.put(`/api/auth/post?id=${id}`,
-            { content: infor },
+            { title, content: infor },
             {
                 headers: {
                     'Content-Type': 'application/json',
@@ -70,10 +72,11 @@ const ModalEdit = ({ modalOpen, id, cancel }: Props) => {
         <div className={`modalEdit center ${modalOpen ? "modalOpen" : ""} `}>
             <div className="box">
                 <h2>編集</h2>
-                <TextAreaV2 name='' value={infor} onInput={(data) => setinfor(data)} id={id} />
+                <Input name='タイトル' value={title} onChange={(e) => setTitle(e.target.value)} />
+                <TextAreaV2 name='内容' value={infor} onInput={(data) => setinfor(data)} id={id} />
                 <div className="tool">
                     <DeleteIcon onClick={() => { id && deletePostbyId(id) }} />
-                    <Button name='cancel' onClick={() => cancel()} />
+                    <Button name='cancel' onClick={() => { cancel(), setTitle("") }} />
                     <Button name="save" onClick={() => { id && updatePostbyId(id) }} />
                 </div>
             </div>
