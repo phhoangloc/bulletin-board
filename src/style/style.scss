@@ -293,7 +293,7 @@ main {
         background-color: white;
 
         .header_box {
-            max-width: 1600px;
+            max-width: 1200px;
             margin: auto;
             padding: 0 10px;
             display: flex;
@@ -557,6 +557,10 @@ main {
                             margin: 0 0 0 auto;
                             color: #888;
                             cursor: pointer;
+                        }
+
+                        svg:hover {
+                            color: var(--main-color);
                         }
                     }
 

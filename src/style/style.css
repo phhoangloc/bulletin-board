@@ -292,7 +292,7 @@ main .header {
 }
 
 main .header .header_box {
-  max-width: 1600px;
+  max-width: 1200px;
   margin: auto;
   padding: 0 10px;
   display: flex;
@@ -555,6 +555,10 @@ main .board .item .msg .content .content_title svg {
   margin: 0 0 0 auto;
   color: #888;
   cursor: pointer;
+}
+
+main .board .item .msg .content .content_title svg:hover {
+  color: var(--main-color);
 }
 
 main .board .item .msg .content .content_title_post {
