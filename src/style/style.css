@@ -278,8 +278,6 @@ body::-webkit-scrollbar-thumb {
 }
 
 main {
-  max-width: 1600px;
-  margin: auto;
   min-height: 100vh;
 }
 
@@ -291,8 +289,13 @@ main .header {
   height: 50px;
   width: 100%;
   background-color: white;
-  display: flex;
+}
+
+main .header .header_box {
+  max-width: 1600px;
+  margin: auto;
   padding: 0 10px;
+  display: flex;
 }
 
 main .header img {
@@ -366,6 +369,7 @@ main .board .create-news .input p {
 
 main .board .create-news .input .inputBox {
   height: 100%;
+  width: 100%;
 }
 
 main .board .create-news .input .inputBox textarea,
@@ -895,8 +899,8 @@ main .board .modalEdit .box .input {
   transition: all 0.25s;
   overflow: hidden;
   background-color: white;
-  padding: 0;
   padding: 0 15px;
+  margin: 0;
 }
 
 main .board .modalEdit .box .input p {

@@ -281,8 +281,6 @@ body::-webkit-scrollbar-thumb {
 
 //main
 main {
-    max-width: 1600px;
-    margin: auto;
     min-height: 100vh;
 
     .notice {
@@ -293,9 +291,13 @@ main {
         height: 50px;
         width: 100%;
         background-color: white;
-        display: flex;
-        padding: 0 10px;
 
+        .header_box {
+            max-width: 1600px;
+            margin: auto;
+            padding: 0 10px;
+            display: flex;
+        }
 
         img {
             height: 30px;
@@ -367,6 +369,7 @@ main {
 
                 .inputBox {
                     height: 100%;
+                    width: 100%;
 
                     textarea,
                     input,
@@ -393,8 +396,6 @@ main {
                         }
                     }
                 }
-
-
 
                 .tool_news {
                     position: absolute;
@@ -915,8 +916,8 @@ main {
                     transition: all 0.25s;
                     overflow: hidden;
                     background-color: white;
-                    padding: 0;
                     padding: 0 15px;
+                    margin: 0;
 
                     p {
                         top: 5px;

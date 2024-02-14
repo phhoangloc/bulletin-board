@@ -21,11 +21,13 @@ const Header = () => {
 
     return (
         <div className='header'>
-            <Link href={"/"}><Image src={"/img/header_logo.gif"} width={200} height={40} alt='headerlogo' /></Link>
-            <div className="account">
-                {user?.nickname ?
-                    <p className='welcome'>ようこそ、{user?.nickname}さん</p> : null}
-                <p className='logout' onClick={() => { localStorage.clear(); window.location.reload() }}>ログアウト</p>
+            <div className="header_box">
+                <Link href={"/"}><Image src={"/img/header_logo.gif"} width={200} height={40} alt='headerlogo' /></Link>
+                <div className="account">
+                    {user?.nickname ?
+                        <p className='welcome'>ようこそ、{user?.nickname}さん</p> : null}
+                    <p className='logout' onClick={() => { localStorage.clear(); window.location.reload() }}>ログアウト</p>
+                </div>
             </div>
         </div>
     )
