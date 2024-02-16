@@ -1,5 +1,5 @@
 :root {
-  --background-color: #fff1cd;
+  --background-color: #fafaf8;
   --main-color: #F35F18;
   --border-color: #aaaaaa;
 }
@@ -222,6 +222,7 @@ body::-webkit-scrollbar-thumb {
   padding: 10px 25px;
   background-color: white;
   border-radius: 10px;
+  box-shadow: 0px 5px 10px -5px #888;
 }
 
 .login .box h2,
@@ -296,13 +297,13 @@ main .header {
 }
 
 main .header .grey {
-  height: 10px;
+  height: 0px;
   background: #FAFAF8;
 }
 
 main .header .gradiant {
   height: 10px;
-  background: linear-gradient(to right, #F35F18, #ffcc00);
+  background: linear-gradient(to right, #f2c386, #f4ebb1);
 }
 
 main .header .header_box {
@@ -321,6 +322,7 @@ main .header img {
 main .header .account {
   margin: auto 0 auto auto;
   height: max-content;
+  text-align: right;
 }
 
 main .header .account .welcome {
@@ -331,8 +333,6 @@ main .header .account .welcome {
 
 main .header .account .logout {
   cursor: pointer;
-  width: max-content;
-  margin: auto;
 }
 
 main .header .account .logout:hover {

@@ -5,16 +5,17 @@ import React from 'react'
 import { UserLogin } from '@/redux/reducer/UserReducer'
 import { useState, useEffect } from 'react'
 import store from '@/redux/store'
-import PersonIcon from '@mui/icons-material/Person';
+import { M_PLUS_1 } from 'next/font/google'
+
+const m_plus = M_PLUS_1({
+    subsets: ['latin'],
+})
+
 const Header = () => {
     const [user, setCurrentUser] = useState<UserLogin | undefined>(store.getState().user)
-    const [number, setCurrentNumber] = useState<number>(0)
-
-    const [infor, setinfor] = useState<string>("")
 
     const update = () => {
         store.subscribe(() => setCurrentUser(store.getState().user))
-        store.subscribe(() => setCurrentNumber(store.getState().refresh))
     }
 
     update()
@@ -25,7 +26,7 @@ const Header = () => {
             <div className="gradiant"></div>
             <div className="header_box">
                 <Link href={"/"}><Image src={"/img/header_logo.gif"} width={200} height={40} alt='headerlogo' /></Link>
-                <div className="account">
+                <div className={"account " + m_plus.className}>
                     {user?.nickname ?
                         <p className='welcome'>ようこそ、{user?.nickname}さん</p> : null}
                     <p className='logout' onClick={() => { localStorage.clear(); window.location.reload() }}>ログアウト</p>
