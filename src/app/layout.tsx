@@ -1,8 +1,11 @@
 import type { Metadata } from 'next'
-import { Inter, Noto_Sans_JP } from 'next/font/google'
+import { Inter, Noto_Sans_JP, Zen_Maru_Gothic } from 'next/font/google'
 import "../style/style.css"
 import ProviderExport from '@/redux/Provider'
-const inter = Inter({ subsets: ['latin'] })
+const zen = Zen_Maru_Gothic({
+  subsets: ['latin'],
+  weight: ["300", "400", "500", "700", "900"]
+})
 const notoSansJP = Noto_Sans_JP({
   subsets: ['latin']
 })
@@ -19,7 +22,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={notoSansJP.className}>
+      <body className={zen.className}>
         <ProviderExport>
           {children}
         </ProviderExport>

@@ -90,13 +90,13 @@ const BulletinBoad = () => {
 
     return (
         <div className='board'>
+            <div className="user_create">{user?.nickname}</div>
             <div className="create-news">
-                <Input name='タイトル' value={title} onChange={(e) => setTitle(e.target.value)} />
-                <TextAreaV2 name='内容' value={infor} onInput={(data) => setinfor(data)} />
+                <div className="title_header">Title<Input name='' value={title} onChange={(e) => setTitle(e.target.value)} /></div>
+                <TextAreaV2 name='' value={infor} onInput={(data) => setinfor(data)} />
                 {sending ? <LoopIcon /> : <SendIcon onClick={() => createPost(title, infor)} sx={infor ? { opacity: 1 } : { opacity: 0.1 }} />}
             </div>
             <div className='item'>
-                <Tool func={(e) => setSearch(e)} />
                 {posts.map((item, index) => <ItemBulletinBoard post={item} key={index} func={(modalOpen, postId) => { setModalOpen(modalOpen), setPostId(postId) }} />)}
                 {loading ? <ItemLoading /> :
                     <div className="page">
@@ -107,6 +107,7 @@ const BulletinBoad = () => {
 
             </div>
             <ModalEdit id={postId} modalOpen={modalOpen} cancel={() => { setPostId(""); setModalOpen(false) }} />
+            <Tool func={(e) => setSearch(e)} />
         </div >
     )
 }

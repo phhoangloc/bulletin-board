@@ -21,6 +21,8 @@ const Header = () => {
 
     return (
         <div className='header'>
+            <div className="grey"></div>
+            <div className="gradiant"></div>
             <div className="header_box">
                 <Link href={"/"}><Image src={"/img/header_logo.gif"} width={200} height={40} alt='headerlogo' /></Link>
                 <div className="account">

@@ -1,15 +1,21 @@
 :root {
   --background-color: #fff1cd;
-  --main-color: #f35f17;
+  --main-color: #F35F18;
   --border-color: #aaaaaa;
 }
 
 html {
-  font-size: 15px;
+  font-size: 16px;
+  letter-spacing: 0.5px;
 }
 
 * {
   margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: inherit;
 }
 
 div {
@@ -288,7 +294,16 @@ main .notice {
 main .header {
   height: 50px;
   width: 100%;
-  background-color: white;
+}
+
+main .header .grey {
+  height: 10px;
+  background: #FAFAF8;
+}
+
+main .header .gradiant {
+  height: 10px;
+  background: linear-gradient(to right, #F35F18, #ffcc00);
 }
 
 main .header .header_box {
@@ -307,18 +322,22 @@ main .header img {
 main .header .account {
   margin: auto 0 auto auto;
   height: max-content;
-  font-size: 12px;
+}
+
+main .header .account .welcome {
+  font-size: 15px;
+  font-weight: bold;
+  color: var(--main-color);
 }
 
 main .header .account .logout {
-  color: var(--main-color);
   cursor: pointer;
   width: max-content;
   margin: auto;
-  font-weight: bold;
 }
 
 main .header .account .logout:hover {
+  text-decoration: underline;
   color: var(--main-color);
 }
 
@@ -334,17 +353,25 @@ main .header .account .logout:hover {
 
 main .board {
   position: relative;
+  padding-top: 50px;
 }
 
-main .board .welcome {
-  height: 40px;
-  line-height: 40px;
+main .board .user_create {
+  width: 90%;
+  max-width: 768px;
+  margin: 4px auto 4px;
+  font-size: 0.75rem;
+  text-align: left;
+  position: relative;
+  color: var(--main-color);
+  font-weight: bold;
+  padding: 0 2px;
 }
 
 main .board .create-news {
   width: 90%;
   max-width: 768px;
-  margin: 20px auto;
+  margin: 0px auto 20px;
   position: relative;
   background-color: white;
   box-shadow: 0px 5px 10px -5px #aaa;
@@ -352,9 +379,19 @@ main .board .create-news {
   overflow: hidden;
 }
 
+main .board .create-news .title_header {
+  display: flex;
+  width: calc(100% - 20px);
+  margin: auto;
+  font-weight: bold;
+  color: var(--main-color);
+  line-height: 47px;
+  font-size: 1.2rem;
+}
+
 main .board .create-news .input {
   width: calc(100% - 20px);
-  height: 90px;
+  height: 180px;
   transition: all 0.25s;
   overflow: hidden;
   margin: 0 auto;
@@ -451,16 +488,13 @@ main .board .create-news .input .tool_news .input_modal_open .button {
 
 main .board .create-news .input:nth-child(1) {
   height: 40px;
-  border-bottom: 1px solid var(--main-color);
+  border-bottom: 1px solid var(--border-color);
   border-radius: 0;
-}
-
-main .board .create-news .input:nth-child(1) p {
-  font-size: 17px;
+  margin: 0 0 0 10px;
 }
 
 main .board .create-news .input:nth-child(1) .inputBox input {
-  color: var(--main-color);
+  font-weight: 300;
 }
 
 main .board .create-news .inputFocus {
@@ -538,6 +572,7 @@ main .board .item .msg .content img {
 
 main .board .item .msg .content .content_title {
   display: flex;
+  margin-bottom: 5px;
 }
 
 main .board .item .msg .content .content_title p {
@@ -545,7 +580,7 @@ main .board .item .msg .content .content_title p {
   overflow: hidden;
   text-overflow: ellipsis;
   font-weight: bolder;
-  font-size: 1.2rem;
+  font-size: 1.05rem;
   color: var(--main-color);
   width: calc(100% - 30px);
   cursor: pointer;
@@ -1051,19 +1086,23 @@ main .board .modalOpen {
 }
 
 main .board .tool_search {
-  background-color: white;
+  position: fixed;
+  background-color: var(--main-color);
   border-radius: 25px;
-  box-shadow: 0px 5px 10px -5px #888;
+  border: 1px solid var(--background-color);
   padding: 10px;
   display: flex;
-  width: 80%;
-  margin: 50px auto 10px;
-  color: var(--main-color);
-  padding-right: 15px;
+  width: max-content;
+  bottom: 55px;
+  right: 5px;
+  color: white;
+  z-index: 1;
+  opacity: 1;
+  box-shadow: 0px 0px 2px var(--border-color);
 }
 
 main .board .tool_search input {
-  display: block;
+  display: none;
   border: none;
   margin-left: 5px;
   font-size: 1.2rem;
@@ -1076,22 +1115,30 @@ main .board .tool_search input:focus {
 }
 
 main .board .tool_search svg {
-  color: var(--main-color);
+  color: white;
   cursor: pointer;
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 992px) {
   main .board .tool_search {
-    left: calc(50vw - 600px);
+    right: calc(50vw - 500px);
   }
 }
 
 main .board .toolOn {
-  width: max-content;
+  background-color: white;
+}
+
+main .board .toolOn input {
+  display: block;
+}
+
+main .board .toolOn svg {
+  color: var(--main-color);
 }
 
 main .footer {
-  height: 50px;
+  height: 100px;
   background-color: var(--main-color);
   justify-content: end;
   color: white;
@@ -1100,6 +1147,19 @@ main .footer {
   margin-top: auto;
   margin-bottom: 0;
   padding-bottom: 5px;
+  position: relative;
+}
+
+main .footer p {
+  position: absolute;
+  top: 25px;
+  left: calc(50vw - 46px);
+  text-align: center;
+  width: max-content;
+  font-size: 0.9rem;
+  cursor: pointer;
+  border-bottom: 1px solid;
+  padding-bottom: 2px;
 }
 
 @keyframes itemloading {
