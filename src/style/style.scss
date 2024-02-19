@@ -411,9 +411,7 @@ main {
             }
 
             p {
-
                 margin-bottom: 25px;
-
             }
 
         }
@@ -993,7 +991,7 @@ main {
 
                 .comments {
                     height: max-content;
-                    max-height: 310px;
+                    max-height: inherit;
                 }
 
                 .reply-input,
