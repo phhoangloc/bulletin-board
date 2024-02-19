@@ -88,13 +88,32 @@ const SignUp = (props: Props) => {
             <div className='signup center'>
                 <div className="box">
                     <h2>登録</h2>
-                    <Input name='メンバー番号' onChange={(e) => setUserNumber(e.target.value)} value={userNumber} warn={Error.userNumber} />
-                    <Input name='ニックネーム' onChange={(e) => setNickname(e.target.value)} value={nickname} warn={Error.nickname} />
-                    <Input type='password' name='パスワード' onChange={(e) => setPassword(e.target.value)} value={password} warn={Error.password} />
-                    <Input name='イメール' onChange={(e) => setEmail(e.target.value)} value={email} warn={Error.email} />
+                    <div className="element">
+                        <p>メンバー番号</p>
+                        <input onChange={(e) => setUserNumber(e.target.value)} value={userNumber}></input>
+                    </div>
+                    <p className='warn'>{Error.userNumber}</p>
+                    <div className="element">
+                        <p>ニックネーム</p>
+                        <input onChange={(e) => setNickname(e.target.value)} value={nickname}></input>
+                    </div>
+                    <p className='warn'>{Error.nickname}</p>
+                    <div className="element">
+                        <p>パスワード</p>
+                        <input type='password' onChange={(e) => setPassword(e.target.value)} value={password}></input>
+                    </div>
+                    <p className='warn'>{Error.password ? Error.password : "※半角英数字、○文字以上入力してください"}<br></br> </p>
+
+                    <div className="element">
+                        <p>メールアドレス</p>
+                        <input onChange={(e) => setEmail(e.target.value)} value={email}></input>
+                    </div>
+                    <p className='warn'>{Error.email}</p>
                     <p className='notice'>{notice}</p>
-                    <Button name='登録' onClick={() => SignUp()} />
-                    <p className='link' onClick={() => toPage.push('/login')}>ログイン</p>
+                    <div className="narbar">
+                        <Button name='新規登録' onClick={() => SignUp()} />
+                        <p className='link' onClick={() => toPage.push('/login')}>ログイン</p>
+                    </div>
 
                 </div>
             </div>

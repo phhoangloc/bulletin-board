@@ -29,7 +29,7 @@ const Header = () => {
                 <div className={"account " + m_plus.className}>
                     {user?.nickname ?
                         <p className='welcome'>ようこそ、{user?.nickname}さん</p> : null}
-                    <p className='logout' onClick={() => { localStorage.clear(); window.location.reload() }}>ログアウト</p>
+                    {user?.nickname ? <p className='logout' onClick={() => { localStorage.clear(); window.location.reload() }}>ログアウト</p> : null}
                 </div>
             </div>
         </div>

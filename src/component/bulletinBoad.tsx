@@ -90,6 +90,18 @@ const BulletinBoad = () => {
 
     return (
         <div className='board'>
+            <div className="intro">
+                <h1>パルコプ組合委員交流掲示板</h1>
+                <p>掲示板の説明/掲示板の説明/掲示板の説明/掲示板の説明/掲示板の説明/掲示板の説明/
+                    <br></br>
+                    掲示板の説明/掲示板の説明/
+                    掲示板の説明/
+                    <br></br>
+                    掲示板の説明/
+                    <br></br>
+                    掲示板の説明/
+                </p>
+            </div>
             <div className="user_create">{user?.nickname}</div>
             <div className="create-news">
                 <div className="title_header">Title<Input name='' value={title} onChange={(e) => setTitle(e.target.value)} /></div>
@@ -97,7 +109,7 @@ const BulletinBoad = () => {
                 {sending ? <LoopIcon /> : <SendIcon onClick={() => createPost(title, infor)} sx={infor ? { opacity: 1 } : { opacity: 0.1 }} />}
             </div>
             <div className='item'>
-                {posts.map((item, index) => <ItemBulletinBoard post={item} key={index} func={(modalOpen, postId) => { setModalOpen(modalOpen), setPostId(postId) }} />)}
+                {posts.map((item, index) => <ItemBulletinBoard post={item} key={index} func={(postId) => { setPostId(postId) }} />)}
                 {loading ? <ItemLoading /> :
                     <div className="page">
                         <p>{page === 1 ? null : <ArrowLeftIcon onClick={() => { setPage(prev => prev - 1); setPosts([]) }} />}</p>

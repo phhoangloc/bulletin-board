@@ -191,39 +191,40 @@ const Post = ({ slug }: Props) => {
                                 <TextArea name="コメント。。。" value={comment} onChange={(e) => setComment(e.target.value)} isFocus={commentFocus} />
                                 {sending ? <SyncIcon /> : <SendIcon onClick={() => sendComment(slug, comment)} />}
                             </div>
-                            {<div className='page-comment'>
-                                {/* {pageComment === 1 ? null : <span onClick={() => setPageCommnet(pre => pre - 1)}>前に<ArrowLeftIcon /></span>}
-                                {nextComment ? <span onClick={() => setPageCommnet(pre => pre + 1)}><ArrowRightIcon />つづき</span> : null} */}
-                                {comments.length ?
-                                    <div className='page-comment'>
-                                        {pageComment === 1 ? null : <span onClick={() => { setPageCommnet(pre => pre - 1); setComments([]) }}>前に<ArrowLeftIcon /></span>}
-                                        {nextComment ? <span onClick={() => { setPageCommnet(pre => pre + 1); setComments([]) }}><ArrowRightIcon />つづき</span> : null}
-                                    </div> :
-                                    loadingCom ? <div className='page-comment'><ItemLoading /></div> : null}
-                            </div>}
-                            {comments.map((com, index) =>
-                                <div className="replyItem" key={index}>
-                                    <div className="author"><span>{moment(com?.createDate).format('YY/MM/DD HH:mm')}</span> <br></br>{com.nicknameId.nickname}</div>
-                                    <div className="content">
-                                        {commentEditcontent && commentIndex === index ?
-                                            <div className="editCommentBox">
-                                                <textarea onChange={(e) => setCommentContent(e.target.value)} value={commentContent} />
-                                                <button onClick={() => { editComment() }}>確認</button>
-                                                <button onClick={() => { setcommentEditContent(false) }}>キャンセル</button>
-                                            </div> :
-                                            <div className='text'>{com.content}</div>}
-                                        {com.nicknameId._id.toString() === user?.id?.toString() ?
-                                            <MoreHorizIcon onClick={() => { setcommentEditModal(!commentEditModal); setCommentIndex(index); setCommentId(com._id.toString()) }} /> :
-                                            null}
-                                        {com.nicknameId._id.toString() === user?.id?.toString() ?
-                                            <div className={`commentEditModal ${commentEditModal && commentIndex === index ? "commentEditModalBlock" : ""}`} onMouseLeave={() => setcommentEditModal(false)}>
-                                                <p className='item' onClick={() => { setcommentEditContent(true), setcommentEditModal(false), setCommentContent(com.content.toString()) }}>編集</p>
-                                                <p className='item' onClick={() => deleteComment()}>削除</p>
-                                            </div> :
-                                            null}
+
+                            <div className="comments">
+                                {comments.map((com, index) =>
+                                    <div className="replyItem" key={index}>
+                                        <div className="author"><span>{moment(com?.createDate).format('YY/MM/DD HH:mm')}</span> <br></br>{com.nicknameId.nickname}</div>
+                                        <div className="content">
+                                            {commentEditcontent && commentIndex === index ?
+                                                <div className="editCommentBox">
+                                                    <textarea onChange={(e) => setCommentContent(e.target.value)} value={commentContent} />
+                                                    <button onClick={() => { editComment() }}>確認</button>
+                                                    <button onClick={() => { setcommentEditContent(false) }}>キャンセル</button>
+                                                </div> :
+                                                <div className='text'>{com.content}</div>}
+                                            {com.nicknameId._id.toString() === user?.id?.toString() ?
+                                                <MoreHorizIcon onClick={() => { setcommentEditModal(!commentEditModal); setCommentIndex(index); setCommentId(com._id.toString()) }} /> :
+                                                null}
+                                            {com.nicknameId._id.toString() === user?.id?.toString() ?
+                                                <div className={`commentEditModal ${commentEditModal && commentIndex === index ? "commentEditModalBlock" : ""}`} onMouseLeave={() => setcommentEditModal(false)}>
+                                                    <p className='item' onClick={() => { setcommentEditContent(true), setcommentEditModal(false), setCommentContent(com.content.toString()) }}>編集</p>
+                                                    <p className='item' onClick={() => deleteComment()}>削除</p>
+                                                </div> :
+                                                null}
+                                        </div>
                                     </div>
-                                </div>
-                            )}
+                                )}
+                                {<div className='page-comment'>
+                                    {comments.length ?
+                                        <div className='page-comment'>
+                                            {pageComment === 1 ? null : <span onClick={() => { setPageCommnet(pre => pre - 1); setComments([]) }}>前に<ArrowLeftIcon /></span>}
+                                            {nextComment ? <span onClick={() => { setPageCommnet(pre => pre + 1); setComments([]) }}><ArrowRightIcon />つづき</span> : null}
+                                        </div> :
+                                        loadingCom ? <div className='page-comment'><ItemLoading /></div> : null}
+                                </div>}
+                            </div>
                         </div>
                         <ModalEdit id={slug} modalOpen={modalOpen} cancel={() => { setPostId(""); setModalOpen(false) }} />
                     </div >

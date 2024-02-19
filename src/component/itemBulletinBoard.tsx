@@ -16,7 +16,7 @@ import ItemLoading from './itemLoading';
 import Loading from '@/app/loading';
 type Props = {
     post: { _id: string, nicknameId: { _id: string, nickname: string }, title: string, content: string, createDate: Date },
-    func: (modalOpen: boolean, postId: String) => void
+    func: (postId: String) => void
 }
 
 const ItemBulletinBoard = ({ post, func }: Props) => {
@@ -146,9 +146,9 @@ const ItemBulletinBoard = ({ post, func }: Props) => {
                 <div className="author">{post.nicknameId?.nickname} <span>{moment(post.createDate).format('YY/MM/DD HH:mm')}</span></div>
                 <div className="content">
                     <div className="content_title">
-                        <p onClick={() => toPage.push(`/post/${post._id}`)}>{post?.title}</p>
+                        <p>{post?.title}</p>
                         {user && user.id === post.nicknameId?._id &&
-                            <EditOutlinedIcon onClick={() => func(true, post._id)} />
+                            <EditOutlinedIcon onClick={() => toPage.push(`/post/${post._id}`)} />
                         }
                     </div>
                     <div className="content_content" dangerouslySetInnerHTML={{ __html: post ? post.content.replace(/\n/g, '<br>') : "" }}>
@@ -167,41 +167,43 @@ const ItemBulletinBoard = ({ post, func }: Props) => {
                     <TextArea name="コメント。。。" value={comment} onChange={(e) => setComment(e.target.value)} />
                     <SendIcon onClick={() => sendComment(comment)} />
                 </div>
-                {
-                    postId && comments.length ?
-                        comments.map((com, index) =>
-                            <div className="replyItem" key={index}>
-                                <div className="author"><span>{moment(com.createDate).format('YY/MM/DD HH:mm')}</span><br></br>{com.nicknameId.nickname}  </div>
-                                <div className="content">
-                                    {commentEditcontent && commentIndex === index ?
-                                        <div className="editCommentBox">
-                                            <textarea onChange={(e) => setCommentContent(e.target.value)} value={commentContent} />
-                                            <button onClick={() => { editComment() }}>確認</button>
-                                            <button onClick={() => { setcommentEditContent(false) }}>キャンセル</button>
-                                        </div> :
-                                        <p className='text'>{com.content}</p>}
-                                    {com.nicknameId._id.toString() === user?.id?.toString() ?
-                                        <MoreHorizIcon onClick={() => { setcommentEditModal(!commentEditModal); setCommentIndex(index); setCommentId(com._id.toString()) }} /> :
-                                        null}
-                                    {com.nicknameId._id.toString() === user?.id?.toString() ?
-                                        <div className={`commentEditModal ${commentEditModal && commentIndex === index ? "commentEditModalBlock" : ""}`} onMouseLeave={() => setcommentEditModal(false)}>
-                                            <p className='item' onClick={() => { setcommentEditContent(true), setcommentEditModal(false), setCommentContent(com.content.toString()) }}>編集</p>
-                                            <p className='item' onClick={() => deleteComment()}>削除</p>
-                                        </div> :
-                                        null}
+                <div className="comments">
+                    {
+                        postId && comments.length ?
+                            comments.map((com, index) =>
+                                <div className="replyItem" key={index}>
+                                    <div className="author"><span>{moment(com.createDate).format('YY/MM/DD HH:mm')}</span><br></br>{com.nicknameId.nickname}  </div>
+                                    <div className="content">
+                                        {commentEditcontent && commentIndex === index ?
+                                            <div className="editCommentBox">
+                                                <textarea onChange={(e) => setCommentContent(e.target.value)} value={commentContent} />
+                                                <button onClick={() => { editComment() }}>確認</button>
+                                                <button onClick={() => { setcommentEditContent(false) }}>キャンセル</button>
+                                            </div> :
+                                            <p className='text'>{com.content}</p>}
+                                        {com.nicknameId._id.toString() === user?.id?.toString() ?
+                                            <MoreHorizIcon onClick={() => { setcommentEditModal(!commentEditModal); setCommentIndex(index); setCommentId(com._id.toString()) }} /> :
+                                            null}
+                                        {com.nicknameId._id.toString() === user?.id?.toString() ?
+                                            <div className={`commentEditModal ${commentEditModal && commentIndex === index ? "commentEditModalBlock" : ""}`} onMouseLeave={() => setcommentEditModal(false)}>
+                                                <p className='item' onClick={() => { setcommentEditContent(true), setcommentEditModal(false), setCommentContent(com.content.toString()) }}>編集</p>
+                                                <p className='item' onClick={() => deleteComment()}>削除</p>
+                                            </div> :
+                                            null}
+                                    </div>
                                 </div>
-                            </div>
-                        ) :
-                        null
-                }
-                {
-                    postId && comments.length ?
-                        <div className='page-comment'>
-                            {pageComment === 1 ? null : <span onClick={() => { setPageCommnet(pre => pre - 1); setComments([]) }}>前に<ArrowLeftIcon /></span>}
-                            {nextComment ? <span onClick={() => { setPageCommnet(pre => pre + 1); setComments([]) }}><ArrowRightIcon />つづき</span> : null}
-                        </div> :
-                        loading ? <div className='page-comment'><ItemLoading /></div> : null
-                }
+                            ) :
+                            null
+                    }
+                    {
+                        postId && comments.length ?
+                            <div className='page-comment'>
+                                {pageComment === 1 ? null : <span onClick={() => { setPageCommnet(pre => pre - 1); setComments([]) }}>前に<ArrowLeftIcon /></span>}
+                                {nextComment ? <span onClick={() => { setPageCommnet(pre => pre + 1); setComments([]) }}><ArrowRightIcon />つづき</span> : null}
+                            </div> :
+                            loading ? <div className='page-comment'><ItemLoading /></div> : null
+                    }
+                </div>
             </div>
         </div>
     )

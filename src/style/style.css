@@ -219,10 +219,34 @@ body::-webkit-scrollbar-thumb {
   max-width: 375px;
   margin: auto;
   height: max-content;
-  padding: 10px 25px;
+  padding: 25px;
   background-color: white;
   border-radius: 10px;
   box-shadow: 0px 5px 10px -5px #888;
+}
+
+.login .box .element,
+.signup .box .element {
+  display: flex;
+  margin: 10px auto 0;
+}
+
+.login .box .element p,
+.signup .box .element p {
+  width: 120px;
+  background-color: var(--main-color);
+  color: white;
+  margin-right: 10px;
+  height: 35px;
+  line-height: 35px;
+  font-weight: bold;
+  font-size: 0.8rem;
+}
+
+.login .box .element input,
+.signup .box .element input {
+  width: calc(100% - 130px);
+  font-weight: 1.1rem;
 }
 
 .login .box h2,
@@ -230,23 +254,33 @@ body::-webkit-scrollbar-thumb {
   margin: 10px;
 }
 
-.login .box p,
-.signup .box p {
-  font-size: 0.8rem;
+.login .box .narbar,
+.signup .box .narbar {
+  display: flex;
+  width: max-content;
+  margin: auto;
 }
 
-.login .box .input,
-.signup .box .input {
-  border: 1px solid #ddd;
-  padding: 5px 10px;
-}
-
-.login .box .button,
-.signup .box .button {
+.login .box .narbar p,
+.login .box .narbar .button,
+.signup .box .narbar p,
+.signup .box .narbar .button {
   background-color: var(--main-color);
   color: white;
   border-radius: 5px;
-  margin-top: 5px;
+  margin-top: 15px;
+  height: 35px;
+  width: 100px;
+  line-height: 35px;
+  font-weight: bold;
+}
+
+.login .box .narbar .link,
+.signup .box .narbar .link {
+  background-color: white;
+  color: var(--main-color);
+  border: 1px solid var(--main-color);
+  margin-left: 10px;
 }
 
 .login .box .link,
@@ -255,6 +289,16 @@ body::-webkit-scrollbar-thumb {
   color: #4db8ff;
   margin: 25px 0;
   cursor: pointer;
+}
+
+.login .box .warn,
+.signup .box .warn {
+  color: red;
+  font-size: 0.75rem;
+  font-weight: 500;
+  height: 15px;
+  line-height: 15px;
+  margin-top: 5px;
 }
 
 .itemLoading {
@@ -353,6 +397,22 @@ main .header .account .logout:hover {
 main .board {
   position: relative;
   padding-top: 50px;
+}
+
+main .board .intro {
+  width: 90%;
+  max-width: 768px;
+  margin: auto;
+  padding: 0 10px;
+}
+
+main .board .intro h1 {
+  color: var(--main-color);
+  margin-bottom: 25px;
+}
+
+main .board .intro p {
+  margin-bottom: 25px;
 }
 
 main .board .user_create {
@@ -716,7 +776,7 @@ main .board .item .reply .text-comment {
 }
 
 main .board .item .reply .page-comment {
-  margin: 10px 0 0 auto;
+  margin: 0 0 0 auto;
   font-size: 0.6rem;
   width: max-content;
   display: flex;
@@ -862,9 +922,8 @@ main .board .item .reply .reply-input .input {
   border: 1px solid #ccc;
 }
 
-main .board .item .reply .reply-input .inputFocus {
-  box-shadow: 0px 5px 10px -5px #aaa;
-  border: none;
+main .board .item .reply .reply-input .input textarea::-webkit-scrollbar {
+  display: none;
 }
 
 main .board .item .reply .reply-input .inputFocus p {
@@ -889,6 +948,21 @@ main .board .item .reply .reply-input svg:hover {
   color: var(--main-color);
 }
 
+main .board .item .reply .comments {
+  height: max-content;
+  max-height: 310px;
+  overflow: auto;
+}
+
+main .board .item .reply .comments::-webkit-scrollbar {
+  width: 5px;
+}
+
+main .board .item .reply .comments::-webkit-scrollbar-thumb {
+  background-color: var(--border-color);
+  border-radius: 5px;
+}
+
 main .board .item .reply-on {
   height: max-content;
 }
@@ -899,10 +973,15 @@ main .board .item .reply-on-slugpage {
   margin: 10px 0;
 }
 
+main .board .item .reply-on-slugpage .comments {
+  height: max-content;
+  max-height: 310px;
+}
+
 main .board .item .reply-on-slugpage .reply-input,
 main .board .item .reply-on-slugpage .replyItem {
   width: 100%;
-  margin: auto;
+  margin: 5px 0 0 auto;
 }
 
 main .board .item .inputBox textarea {
