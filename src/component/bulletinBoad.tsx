@@ -91,7 +91,7 @@ const BulletinBoad = () => {
     return (
         <div className='board'>
             <div className="intro">
-                <h1>パルコプ組合委員交流掲示板</h1>
+                <h1>パルコープ組合委員交流掲示板</h1>
                 <p>掲示板の説明/掲示板の説明/掲示板の説明/掲示板の説明/掲示板の説明/掲示板の説明/
                     <br></br>
                     掲示板の説明/掲示板の説明/
