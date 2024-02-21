@@ -335,6 +335,7 @@ main .notice {
 
 main .header {
   width: 100%;
+  z-index: 2;
 }
 
 main .header .grey {
@@ -395,11 +396,13 @@ main .board {
   position: relative;
   padding-top: 50px;
   overflow: hidden;
+  z-index: 0;
 }
 
 main .board .background {
-  position: absolute;
-  z-index: 0;
+  position: fixed;
+  z-index: 1;
+  max-width: 40%;
 }
 
 main .board .background img {
@@ -408,15 +411,13 @@ main .board .background img {
 }
 
 main .board .background_top {
-  width: 40%;
-  top: 0;
+  top: 50px;
   left: -25%;
 }
 
 main .board .background_bottom {
-  width: 50%;
-  bottom: 100px;
-  right: -25%;
+  bottom: -100px;
+  right: -20%;
 }
 
 main .board .intro {
@@ -483,6 +484,7 @@ main .board .create-news {
   box-shadow: 0px 5px 10px -5px #aaa;
   border-radius: 10px;
   overflow: hidden;
+  z-index: 2;
 }
 
 main .board .create-news .title_header {
@@ -1220,11 +1222,10 @@ main .board .top {
   padding: 10px;
   display: flex;
   width: max-content;
-  bottom: 55px;
+  bottom: 155px;
   right: 5px;
   color: var(--main-color);
   z-index: 3;
-  opacity: 1;
   box-shadow: 0px 0px 2px var(--border-color);
 }
 
@@ -1269,7 +1270,7 @@ main .board .toolOn svg {
 }
 
 main .board .top {
-  bottom: 5px;
+  bottom: 105px;
   background-color: #f4ebb1;
   color: #444;
   margin-top: 0;
@@ -1292,6 +1293,8 @@ main .board .top span {
 
 main .footer {
   background-color: #f4ebb1;
+  position: relative;
+  z-index: 1;
 }
 
 main .footer .footer_top {
@@ -1330,6 +1333,7 @@ main .footer .footer_top .left .title {
 main .footer .footer_top .left .detail {
   margin: 10px 0;
   font-weight: bold;
+  letter-spacing: 0.1px;
 }
 
 main .footer .footer_top .right {

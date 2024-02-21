@@ -10,21 +10,6 @@ const oswald = Oswald({
 const Footer = () => {
     return (
         <div className="footer">
-            <div className='footer_top' id='aboutus'>
-                <div className="left">
-                    <h1 className={oswald.className}>About Us ？</h1>
-                    <div className="title">
-                        ぱるサ掲示板ってなにするところ？
-                    </div>
-                    <div className="detail">
-                        ここではぱるサポ（パルコープ 応援サポーター）の
-                        みなさんだけが書き込みできる交流掲示板です。
-                    </div>
-                </div>
-                <div className="right">
-                    <Image src="/img/footer.png" width={500} height={500} alt='' />
-                </div>
-            </div>
             <div className='footer_bottom center'>
                 <p><Link href={"#"}>トップページ</Link></p>
                 Copyrights ASTEM CO.,LTD.
