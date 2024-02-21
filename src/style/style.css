@@ -1324,6 +1324,7 @@ main .footer .footer_top .left .title {
   font-size: 1.2rem;
   text-align: center;
   padding: 10px 0;
+  cursor: pointer;
 }
 
 main .footer .footer_top .left .detail {

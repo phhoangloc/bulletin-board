@@ -98,7 +98,7 @@ const BulletinBoad = () => {
             <div className="intro">
                 <Image className='sx' src="/img/bulletin-board_sx.png" alt="" width={500} height={500} />
                 <Image className='md' src="/img/bulletin-board_md.png" alt="" width={500} height={500} />
-                <div className="title">ぱるサボ掲示板って？</div>
+                <div className="title"><Link href="#aboutus" >ぱるサボ掲示板って？</Link></div>
             </div>
             <div className="user_create">{user?.nickname}</div>
             <div className="create-news">

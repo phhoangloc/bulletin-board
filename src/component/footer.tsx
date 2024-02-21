@@ -10,7 +10,7 @@ const oswald = Oswald({
 const Footer = () => {
     return (
         <div className="footer">
-            <div className='footer_top'>
+            <div className='footer_top' id='aboutus'>
                 <div className="left">
                     <h1 className={oswald.className}>About Us ？</h1>
                     <div className="title">
