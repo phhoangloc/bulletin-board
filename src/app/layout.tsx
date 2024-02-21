@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
-import { Inter, M_PLUS_1, Noto_Sans_JP, Zen_Maru_Gothic } from 'next/font/google'
+import { Zen_Maru_Gothic, } from 'next/font/google'
 import "../style/style.css"
 import ProviderExport from '@/redux/Provider'
+import Image from 'next/image'
 const zen = Zen_Maru_Gothic({
   subsets: ['latin'],
   weight: ["300", "400", "500", "700", "900"]

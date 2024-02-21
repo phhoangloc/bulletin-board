@@ -13,7 +13,9 @@ import LoopIcon from '@mui/icons-material/Loop';
 import Tool from './tool';
 import Input from '@/items/Input';
 import ItemLoading from './itemLoading';
-
+import Image from 'next/image';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import Link from 'next/link';
 const BulletinBoad = () => {
 
     const [user, setCurrentUser] = useState<UserLogin | undefined>(store.getState().user)
@@ -90,17 +92,13 @@ const BulletinBoad = () => {
 
     return (
         <div className='board'>
+            <div className="background background_top">
+                <Image src="/img/bg_top.png" alt='' width={1000} height={1000} />
+            </div>
             <div className="intro">
-                <h1>パルコープ組合委員交流掲示板</h1>
-                <p>掲示板の説明/掲示板の説明/掲示板の説明/掲示板の説明/掲示板の説明/掲示板の説明/
-                    <br></br>
-                    掲示板の説明/掲示板の説明/
-                    掲示板の説明/
-                    <br></br>
-                    掲示板の説明/
-                    <br></br>
-                    掲示板の説明/
-                </p>
+                <Image className='sx' src="/img/bulletin-board_sx.png" alt="" width={500} height={500} />
+                <Image className='md' src="/img/bulletin-board_md.png" alt="" width={500} height={500} />
+                <div className="title">ぱるサボ掲示板って？</div>
             </div>
             <div className="user_create">{user?.nickname}</div>
             <div className="create-news">
@@ -116,10 +114,16 @@ const BulletinBoad = () => {
                         <p>{page}</p>
                         <p>{isNextPage ? <ArrowRightIcon onClick={() => { setPage(prev => prev + 1); setPosts([]) }} /> : null}</p>
                     </div>}
+            </div>
+            <div className="background background_bottom">
+                <Image src="/img/bg_bottom.png" alt='' width={1000} height={1000} />
 
             </div>
             <ModalEdit id={postId} modalOpen={modalOpen} cancel={() => { setPostId(""); setModalOpen(false) }} />
             <Tool func={(e) => setSearch(e)} />
+            <div className="top">
+                <KeyboardArrowUpIcon /><span><Link href="#"> TOP</Link></span>
+            </div>
         </div >
     )
 }
