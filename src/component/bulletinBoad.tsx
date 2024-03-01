@@ -117,7 +117,6 @@ const BulletinBoad = () => {
             </div>
             <div className="background background_bottom">
                 <Image src="/img/bg_bottom.png" alt='' width={1000} height={1000} />
-
             </div>
             <ModalEdit id={postId} modalOpen={modalOpen} cancel={() => { setPostId(""); setModalOpen(false) }} />
             <Tool func={(e) => setSearch(e)} />

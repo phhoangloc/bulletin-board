@@ -164,7 +164,7 @@ const ItemBulletinBoard = ({ post, func }: Props) => {
             </div>
             <div className={`reply ${postId === post._id ? "reply-on" : ""}`}>
                 <div className="reply-input">
-                    <TextArea name="コメント。。。" value={comment} onChange={(e) => setComment(e.target.value)} />
+                    <TextArea name="コメント..." value={comment} onChange={(e) => setComment(e.target.value)} />
                     <SendIcon onClick={() => sendComment(comment)} />
                 </div>
                 <div className="comments">

@@ -205,8 +205,9 @@ body::-webkit-scrollbar-thumb {
 
 .login,
 .signup {
-  width: 100%;
-  height: calc(100vh - 50px);
+  width: 90%;
+  height: calc(100vh - 165px);
+  margin: auto;
 }
 
 .login .box,
