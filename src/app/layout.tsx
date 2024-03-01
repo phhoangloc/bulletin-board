@@ -9,7 +9,7 @@ const zen = Zen_Maru_Gothic({
 })
 
 export const metadata: Metadata = {
-  title: 'おおさかパルコップ掲示板',
+  title: 'おおさかパルコープ掲示板',
   description: 'みんなをお知らせしましょう',
 }
 
