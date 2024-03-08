@@ -8,6 +8,7 @@ import { setRefresh } from "./reducer/RefreshReducer"
 import Loading from "@/app/loading"
 import io, { Socket } from 'socket.io-client';
 import axios from "axios"
+
 type Props = {
     children: React.ReactNode
 }
@@ -25,6 +26,7 @@ const ProviderExport = ({ children }: Props) => {
     update()
 
     const [loading, setLoading] = useState<boolean>(true)
+    // const [start, setStart] = useState<Date>()
 
     const checkLogin = async (token: any) => {
         setLoading(true)
@@ -51,15 +53,19 @@ const ProviderExport = ({ children }: Props) => {
         checkLogin(localStorage.token)
     }, [number])
 
-    // useEffect(() => {
-    //     const socket = io(`${process.env.SOCKET_URL_}`);
+    const handleBeforeUnload = async (start: any) => {
+        await axios.put("/api/auth/user", { start }, {
+            headers: {
+                'Authorization': localStorage.token,
+                'Content-Type': 'application/json'
+            },
+        })
+    };
+    useEffect(() => {
+        const start = new Date()
+        window.onbeforeunload = () => handleBeforeUnload(start)
+    }, []);
 
-    //     user?.id && socket.emit("idAndStart", ({ id: user?.id, start: Date.now() }))
-
-    //     return () => {
-    //         socket.disconnect();
-    //     };
-    // }, [user?.id]);
 
     return (
         <Provider store={store}>
