@@ -52,7 +52,7 @@ const ProviderExport = ({ children }: Props) => {
     }, [number])
 
     useEffect(() => {
-        const socket = io("http://localhost:4000");
+        const socket = io(`${process.env.SOCKET_URL}`);
 
         user?.id && socket.emit("idAndStart", ({ id: user?.id, start: Date.now() }))
 
