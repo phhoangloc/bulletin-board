@@ -6,6 +6,8 @@ import { setUser } from "./reducer/UserReducer"
 import { UserLogin } from "./reducer/UserReducer"
 import { setRefresh } from "./reducer/RefreshReducer"
 import Loading from "@/app/loading"
+import io, { Socket } from 'socket.io-client';
+import axios from "axios"
 type Props = {
     children: React.ReactNode
 }
@@ -48,6 +50,16 @@ const ProviderExport = ({ children }: Props) => {
     useEffect(() => {
         checkLogin(localStorage.token)
     }, [number])
+
+    useEffect(() => {
+        const socket = io("http://localhost:4000");
+
+        user?.id && socket.emit("idAndStart", ({ id: user?.id, start: Date.now() }))
+
+        return () => {
+            socket.disconnect();
+        };
+    }, [user?.id]);
 
     return (
         <Provider store={store}>

@@ -28,10 +28,41 @@ const userSchema = new Schema({
             message: "Please enter a valid email"
         },
     },
+    posts: [{
+        type: Schema.Types.ObjectId,
+        ref: "post"
+    }],
     active: {
         type: Boolean,
         default: false
     },
+
+    stayAtHome:
+        [{
+            start: {
+                type: Date,
+            },
+            end: {
+                type: Date,
+            }
+        }]
+    ,
+    stayAtPost: [
+        {
+            postId: {
+                type: Schema.Types.ObjectId,
+                ref: "post"
+            },
+            time: {
+                start: {
+                    type: Date,
+                },
+                end: {
+                    type: Date,
+                }
+            }
+        }
+    ]
 })
 
 export const userModel = mongoose.models.user || mongoose.model('user', userSchema)

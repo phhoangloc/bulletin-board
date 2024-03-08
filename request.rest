@@ -4,27 +4,36 @@ Content-Type: application/json
 Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1OWNkODc3YjRjYjAxZWY5MTdkZGFjZCIsImlhdCI6MTcwNzM4NDk0MywiZXhwIjoxNzA3NDcxMzQzfQ.VR2PQLpgeR3M_jhLflQnayaCwqueruk8kPiWC4B4_74
 
 ###
-POST  http://localhost:3000/api/auth/post
+GET  http://localhost:3000/api/auth/user
 Content-Type: application/json
-Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1OWNkODc3YjRjYjAxZWY5MTdkZGFjZCIsImlhdCI6MTcwNTM3OTA0NSwiZXhwIjoxNzA1NDY1NDQ1fQ.7jtboGh27SsUEVSMqLDtefnA4aFZ4hRshvdmDYn-gTI
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1OWNkODc3YjRjYjAxZWY5MTdkZGFjZCIsImlhdCI6MTcwOTYyMDIwNiwiZXhwIjoxNzA5NzA2NjA2fQ.oHUljgVSSC7wQXD7mHVN6ZrAzqCqzSWcsANhfQTDLKg
 
-{
-    "content":"Hello"
-}
 ###
- POST  http://localhost:3000/api/login
+POST  http://localhost:3000/api/login
 Content-Type: application/json
 
 {
     "nickname":"locpham",
     "password":"123456"
 }
+
+
+###
+GET  http://localhost:3000/api/user
+Content-Type: application/json
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1OWNkODc3YjRjYjAxZWY5MTdkZGFjZCIsImlhdCI6MTcwOTc3MzYxNywiZXhwIjoxNzA5ODYwMDE3fQ.kgrKz2jqBzK1Cs0DQVHbEeWSEPgQFg9zpRCQALG9_3E
 ###
 
-GET http://localhost:3000/api/auth/comment?postId=6597c97b0e29e243fa7d4976
+POST  http://localhost:3000/api/auth/post
 Content-Type: application/json
-Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1OGQwOGU3ZDFlNjViYmVhMzIzN2FmZCIsImlhdCI6MTcwNDQyMjI3NiwiZXhwIjoxNzA0NTA4Njc2fQ.50LgL5GkFo5utYNcGY2nFTfchqseH_Z6m7J9RQ9zTO8
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1OWNkODc3YjRjYjAxZWY5MTdkZGFjZCIsImlhdCI6MTcwOTYyMDIwNiwiZXhwIjoxNzA5NzA2NjA2fQ.oHUljgVSSC7wQXD7mHVN6ZrAzqCqzSWcsANhfQTDLKg
 
 {
-    "content":"おやすみなさい"
+    "title":"3月5日テスト",
+    "content":"3月5日テスト"
 }
+###
+
+DELETE  http://localhost:3000/api/auth/post?id=65e6dd6b22ed7a41ad6885ca
+Content-Type: application/json
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1OWNkODc3YjRjYjAxZWY5MTdkZGFjZCIsImlhdCI6MTcwOTYyMDIwNiwiZXhwIjoxNzA5NzA2NjA2fQ.oHUljgVSSC7wQXD7mHVN6ZrAzqCqzSWcsANhfQTDLKg

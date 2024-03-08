@@ -144,14 +144,14 @@ const ItemBulletinBoard = ({ post, func }: Props) => {
         <div>
             <div className="msg" >
                 <div className="author">{post.nicknameId?.nickname} <span>{moment(post.createDate).format('YY/MM/DD HH:mm')}</span></div>
-                <div className="content">
+                <div className="content" >
                     <div className="content_title">
                         <p>{post?.title}</p>
                         {user && user.id === post.nicknameId?._id &&
                             <EditOutlinedIcon onClick={() => toPage.push(`/post/${post._id}`)} />
                         }
                     </div>
-                    <div className="content_content" dangerouslySetInnerHTML={{ __html: post ? post.content.replace(/\n/g, '<br>') : "" }}>
+                    <div className="content_content" dangerouslySetInnerHTML={{ __html: post ? post.content.replace(/\n/g, '<br>') : "" }} onClick={() => { func(post._id) }}>
                     </div>
                 </div>
                 <div className='tool'>

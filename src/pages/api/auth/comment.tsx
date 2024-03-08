@@ -34,7 +34,7 @@ const Comment =
                 await commentModel.find()
                     .find(query.id ? { "_id": query.id } : {})
                     .find(query.postId ? { "postId": query.postId } : {})
-                    .populate("nicknameId", "nickname")
+                    .populate("postId nicknameId", "title nickname")
                     .sort({ "createDate": -1 })
                     .skip(query.skip)
                     .limit(query.limit ? query.limit : {})
@@ -54,6 +54,7 @@ const Comment =
                 const userComment = await userModel.findOne({ "_id": id })
                 const post = await postModel.findOne({ "_id": body.postId })
                 const userPostId = post.nicknameId
+                const comments = post.comments
                 const userPost = await userModel.findOne({ "_id": userPostId })
                 const emailPost = userPost.email
                 const emailComment = userComment.email
@@ -67,21 +68,23 @@ const Comment =
                         throw error.message
                     }).then(async (data: any) => {
 
+                        await postModel.updateOne({ "_id": body.postId }, { comments: [...comments, data._id] })
+
                         const mainOptions = {
                             from: '掲示板 (astem@gmail.com) <no-reply>',
                             to: emailPost,
                             subject: 'コメントについて',
                             html:
                                 `こんばんは！<br>
-                                こんにちは。掲示板 の ${nicknameComment} さんはあなたの掲示板にコメントしました。<br>
-                                <br>
-                                イメールから    ${emailComment}<br>
-                                <br>
-                                コンテンツ  ${body.content}<br>
-                                <br>
-                                上記の内容を確認するには、<a href="${process.env.HOMEPAGE_URL + "post/" + body.postId}" target="_blank">${process.env.HOMEPAGE_URL} </a>にアクセスしてください。
+                                    こんにちは。掲示板 の ${nicknameComment} さんはあなたの掲示板にコメントしました。<br>
+                                    <br>
+                                    イメールから    ${emailComment}<br>
+                                    <br>
+                                    コンテンツ  ${body.content}<br>
+                                    <br>
+                                    上記の内容を確認するには、<a href="${process.env.HOMEPAGE_URL + "post/" + body.postId}" target="_blank">${process.env.HOMEPAGE_URL} </a>にアクセスしてください。
 
-                                `
+                                    `
                         };
 
                         await transporter.sendMail(mainOptions)

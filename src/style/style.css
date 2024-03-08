@@ -1,12 +1,256 @@
 :root {
   --background-color: #F7F3ED;
+  --background-color-light: #fafafa;
   --main-color: #F35F18;
   --border-color: #aaaaaa;
+  --box-shadow: 0px 2.5px 5px -2.5px #888;
 }
 
 html {
   font-size: 16px;
   letter-spacing: 0.5px;
+}
+
+.grid_box {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.grid_box div {
+  margin: auto;
+}
+
+.xs0 {
+  width: 0%;
+  overflow: hidden;
+  margin: 0;
+}
+
+.xs2 {
+  width: calc(16.6% - 20px);
+}
+
+.xs3 {
+  width: calc(25% - 20px);
+}
+
+.xs4 {
+  width: calc(33.33% - 20px);
+}
+
+.xs6 {
+  width: calc(50% - 20px);
+}
+
+.xs8 {
+  width: calc(66.6% - 20px);
+}
+
+.xs9 {
+  width: calc(75% - 20px);
+}
+
+.xs12 {
+  width: calc(100% - 20px);
+}
+
+@media (min-width: 575px) {
+  .sm1 {
+    width: calc(8.33% - 20px);
+  }
+}
+
+@media (min-width: 575px) {
+  .sm2 {
+    width: calc(16.6% - 20px);
+  }
+}
+
+@media (min-width: 575px) {
+  .sm3 {
+    width: calc(25% - 20px);
+  }
+}
+
+@media (min-width: 575px) {
+  .sm4 {
+    width: calc(33.33% - 20px);
+  }
+}
+
+@media (min-width: 575px) {
+  .sm5 {
+    width: calc(41.6% - 20px);
+  }
+}
+
+@media (min-width: 575px) {
+  .sm6 {
+    width: calc(50% - 20px);
+  }
+}
+
+@media (min-width: 575px) {
+  .sm7 {
+    width: calc(58.3% - 20px);
+  }
+}
+
+@media (min-width: 575px) {
+  .sm8 {
+    width: calc(66.6% - 20px);
+  }
+}
+
+@media (min-width: 575px) {
+  .sm9 {
+    width: calc(75% - 20px);
+  }
+}
+
+@media (min-width: 575px) {
+  .sm10 {
+    width: calc(83.33% - 20px);
+  }
+}
+
+@media (min-width: 575px) {
+  .sm11 {
+    width: calc(91.66% - 20px);
+  }
+}
+
+@media (min-width: 768px) {
+  .md1 {
+    width: calc(8.33% - 20px);
+  }
+}
+
+@media (min-width: 768px) {
+  .md2 {
+    width: calc(16.6% - 20px);
+  }
+}
+
+@media (min-width: 768px) {
+  .md3 {
+    width: calc(25% - 20px);
+  }
+}
+
+@media (min-width: 768px) {
+  .md4 {
+    width: calc(33.33% - 20px);
+  }
+}
+
+@media (min-width: 768px) {
+  .md5 {
+    width: calc(41.6% - 20px);
+  }
+}
+
+@media (min-width: 768px) {
+  .md6 {
+    width: calc(50% - 20px);
+  }
+}
+
+@media (min-width: 768px) {
+  .md7 {
+    width: calc(58.3% - 20px);
+  }
+}
+
+@media (min-width: 768px) {
+  .md8 {
+    width: calc(66.6% - 20px);
+  }
+}
+
+@media (min-width: 768px) {
+  .md9 {
+    width: calc(75% - 20px);
+  }
+}
+
+@media (min-width: 768px) {
+  .md10 {
+    width: calc(83.33% - 20px);
+  }
+}
+
+@media (min-width: 768px) {
+  .md11 {
+    width: calc(91.66% - 20px);
+  }
+}
+
+@media (min-width: 992px) {
+  .lg1 {
+    width: calc(8.33% - 20px);
+  }
+}
+
+@media (min-width: 992px) {
+  .lg2 {
+    width: calc(16.6% - 20px);
+  }
+}
+
+@media (min-width: 992px) {
+  .lg3 {
+    width: calc(25% - 20px);
+  }
+}
+
+@media (min-width: 992px) {
+  .lg4 {
+    width: calc(33.33% - 20px);
+  }
+}
+
+@media (min-width: 992px) {
+  .lg5 {
+    width: calc(41.6% - 20px);
+  }
+}
+
+@media (min-width: 992px) {
+  .lg6 {
+    width: calc(50% - 20px);
+  }
+}
+
+@media (min-width: 992px) {
+  .lg7 {
+    width: calc(58.3% - 20px);
+  }
+}
+
+@media (min-width: 992px) {
+  .lg8 {
+    width: calc(66.6% - 20px);
+  }
+}
+
+@media (min-width: 992px) {
+  .lg9 {
+    width: calc(75% - 20px);
+  }
+}
+
+@media (min-width: 992px) {
+  .lg10 {
+    width: calc(83.33% - 20px);
+  }
+}
+
+@media (min-width: 992px) {
+  .lg11 {
+    width: calc(91.66% - 20px);
+  }
 }
 
 * {
@@ -397,7 +641,8 @@ main .board {
   position: relative;
   padding-top: 50px;
   overflow: hidden;
-  z-index: 0;
+  z-index: 2;
+  min-height: 100vh;
 }
 
 main .board .background {
@@ -717,6 +962,10 @@ main .board .item .msg .content .content_title_post p {
   overflow: inherit;
   text-overflow: inherit;
   text-align: center;
+}
+
+main .board .item .msg .content .content_content {
+  cursor: pointer;
 }
 
 main .board .item .msg .tool {
@@ -1040,7 +1289,8 @@ main .board .item .inputBox textarea {
   height: 50px;
 }
 
-main .board .modalEdit {
+main .board .modalEdit,
+main .board .modalView {
   position: fixed;
   width: 100%;
   height: 100vh;
@@ -1051,7 +1301,8 @@ main .board .modalEdit {
   display: none;
 }
 
-main .board .modalEdit .box {
+main .board .modalEdit .box,
+main .board .modalView .box {
   background-color: var(--background-color);
   width: 90%;
   height: max-content;
@@ -1059,11 +1310,13 @@ main .board .modalEdit .box {
   margin: auto;
 }
 
-main .board .modalEdit .box h2 {
+main .board .modalEdit .box h2,
+main .board .modalView .box h2 {
   margin: 10px 0;
 }
 
-main .board .modalEdit .box .input {
+main .board .modalEdit .box .input,
+main .board .modalView .box .input {
   height: max-content;
   transition: all 0.25s;
   overflow: hidden;
@@ -1072,33 +1325,40 @@ main .board .modalEdit .box .input {
   margin: 0;
 }
 
-main .board .modalEdit .box .input p {
+main .board .modalEdit .box .input p,
+main .board .modalView .box .input p {
   top: 5px;
   font-size: 20px;
   left: 15px;
   color: #888;
 }
 
-main .board .modalEdit .box .input .inputBox {
+main .board .modalEdit .box .input .inputBox,
+main .board .modalView .box .input .inputBox {
   height: 100%;
   width: 100%;
 }
 
-main .board .modalEdit .box .input .inputBox input {
+main .board .modalEdit .box .input .inputBox input,
+main .board .modalView .box .input .inputBox input {
   width: 100%;
   color: var(--main-color);
   font-weight: bold;
 }
 
 main .board .modalEdit .box .input .inputBox textarea,
-main .board .modalEdit .box .input .inputBox .textarea {
+main .board .modalEdit .box .input .inputBox .textarea,
+main .board .modalView .box .input .inputBox textarea,
+main .board .modalView .box .input .inputBox .textarea {
   resize: none;
   overflow: auto;
   margin: 10px 0 40px;
 }
 
 main .board .modalEdit .box .input .inputBox textarea img,
-main .board .modalEdit .box .input .inputBox .textarea img {
+main .board .modalEdit .box .input .inputBox .textarea img,
+main .board .modalView .box .input .inputBox textarea img,
+main .board .modalView .box .input .inputBox .textarea img {
   width: 75% !important;
   box-shadow: 1px 5px 10px -2.5px #aaa;
   display: block;
@@ -1107,23 +1367,28 @@ main .board .modalEdit .box .input .inputBox .textarea img {
 
 @media (min-width: 768px) {
   main .board .modalEdit .box .input .inputBox textarea img,
-  main .board .modalEdit .box .input .inputBox .textarea img {
+  main .board .modalEdit .box .input .inputBox .textarea img,
+  main .board .modalView .box .input .inputBox textarea img,
+  main .board .modalView .box .input .inputBox .textarea img {
     width: 50% !important;
   }
 }
 
-main .board .modalEdit .box .input .inputBox .textarea::-webkit-scrollbar {
+main .board .modalEdit .box .input .inputBox .textarea::-webkit-scrollbar,
+main .board .modalView .box .input .inputBox .textarea::-webkit-scrollbar {
   display: none;
 }
 
-main .board .modalEdit .box .input .tool_news {
+main .board .modalEdit .box .input .tool_news,
+main .board .modalView .box .input .tool_news {
   position: absolute;
   bottom: 0;
   display: flex;
   z-index: 6;
 }
 
-main .board .modalEdit .box .input .tool_news svg {
+main .board .modalEdit .box .input .tool_news svg,
+main .board .modalView .box .input .tool_news svg {
   position: relative;
   bottom: inherit;
   right: inherit;
@@ -1132,12 +1397,14 @@ main .board .modalEdit .box .input .tool_news svg {
   color: var(--main-color);
 }
 
-main .board .modalEdit .box .input .tool_news .input_modal {
+main .board .modalEdit .box .input .tool_news .input_modal,
+main .board .modalView .box .input .tool_news .input_modal {
   display: none;
   position: relative;
 }
 
-main .board .modalEdit .box .input .tool_news .input_modal_open {
+main .board .modalEdit .box .input .tool_news .input_modal_open,
+main .board .modalView .box .input .tool_news .input_modal_open {
   display: flex;
   height: 30px;
   margin: auto;
@@ -1146,7 +1413,8 @@ main .board .modalEdit .box .input .tool_news .input_modal_open {
   left: 90px;
 }
 
-main .board .modalEdit .box .input .tool_news .input_modal_open .input_text {
+main .board .modalEdit .box .input .tool_news .input_modal_open .input_text,
+main .board .modalView .box .input .tool_news .input_modal_open .input_text {
   width: 100px;
   text-align: left;
   border: 1px solid #aaa;
@@ -1155,60 +1423,404 @@ main .board .modalEdit .box .input .tool_news .input_modal_open .input_text {
   overflow: scroll;
 }
 
-main .board .modalEdit .box .input .tool_news .input_modal_open .input_text::-webkit-scrollbar {
+main .board .modalEdit .box .input .tool_news .input_modal_open .input_text::-webkit-scrollbar,
+main .board .modalView .box .input .tool_news .input_modal_open .input_text::-webkit-scrollbar {
   display: none;
 }
 
-main .board .modalEdit .box .input .tool_news .input_modal_open .input_text:focus {
+main .board .modalEdit .box .input .tool_news .input_modal_open .input_text:focus,
+main .board .modalView .box .input .tool_news .input_modal_open .input_text:focus {
   outline: none;
 }
 
-main .board .modalEdit .box .input .tool_news .input_modal_open .button {
+main .board .modalEdit .box .input .tool_news .input_modal_open .button,
+main .board .modalView .box .input .tool_news .input_modal_open .button {
   background-color: whitesmoke;
   width: max-content;
   height: 100%;
   margin-left: 5px;
 }
 
-main .board .modalEdit .box .input:nth-child(2) {
+main .board .modalEdit .box .input:nth-child(2),
+main .board .modalView .box .input:nth-child(2) {
   height: 40px;
 }
 
-main .board .modalEdit .box .input:nth-child(2) input {
+main .board .modalEdit .box .input:nth-child(2) input,
+main .board .modalView .box .input:nth-child(2) input {
   margin: 0;
   height: 100%;
   line-height: 100%;
   font-size: 1.2rem;
 }
 
-main .board .modalEdit .box .inputFocus {
+main .board .modalEdit .box .inputFocus,
+main .board .modalView .box .inputFocus {
   height: max-content;
 }
 
-main .board .modalEdit .box .inputFocus p {
+main .board .modalEdit .box .inputFocus p,
+main .board .modalView .box .inputFocus p {
   opacity: 0;
   top: 1rem;
 }
 
-main .board .modalEdit .box .tool {
+main .board .modalEdit .box .tool,
+main .board .modalView .box .tool {
   display: flex;
   width: 90%;
   margin: 10px auto;
 }
 
-main .board .modalEdit .box .tool .button {
+main .board .modalEdit .box .tool .button,
+main .board .modalView .box .tool .button {
   height: 40px;
   margin: 0 5px;
   background: var(--main-color);
   color: white;
 }
 
-main .board .modalEdit .box .tool svg {
+main .board .modalEdit .box .tool svg,
+main .board .modalView .box .tool svg {
   width: 25px;
   height: 25px;
   margin: 10px;
   cursor: pointer;
   color: var(--main-color);
+}
+
+main .board .modalEdit .modalView_box,
+main .board .modalView .modalView_box {
+  max-width: 992px !important;
+  height: 90% !important;
+  overflow-y: scroll;
+  position: relative;
+}
+
+main .board .modalEdit .modalView_box svg:nth-child(1),
+main .board .modalView .modalView_box svg:nth-child(1) {
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: var(--main-color);
+  z-index: 1;
+  cursor: pointer;
+}
+
+main .board .modalEdit .modalView_box .view_content,
+main .board .modalView .modalView_box .view_content {
+  min-height: 100%;
+  height: max-content;
+  background-color: white;
+  width: 100%;
+  padding: 5px;
+  top: 0;
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  main .board .modalEdit .modalView_box .view_content,
+  main .board .modalView .modalView_box .view_content {
+    position: sticky;
+  }
+}
+
+main .board .modalEdit .modalView_box .view_content .author,
+main .board .modalView .modalView_box .view_content .author {
+  text-align: left;
+  font-weight: bold;
+  height: 25px;
+}
+
+main .board .modalEdit .modalView_box .view_content .author .itemLoading,
+main .board .modalView .modalView_box .view_content .author .itemLoading {
+  margin: 0;
+}
+
+main .board .modalEdit .modalView_box .view_content .author span,
+main .board .modalView .modalView_box .view_content .author span {
+  font-size: 0.8rem;
+  opacity: 0.5;
+  margin-left: 10px;
+}
+
+main .board .modalEdit .modalView_box .view_content .content,
+main .board .modalView .modalView_box .view_content .content {
+  width: 90% !important;
+  margin: 10px auto;
+}
+
+main .board .modalEdit .modalView_box .view_content .content img,
+main .board .modalView .modalView_box .view_content .content img {
+  width: 100%;
+  border-radius: 5px;
+}
+
+main .board .modalEdit .modalView_box .view_comment,
+main .board .modalView .modalView_box .view_comment {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 10px 10px;
+}
+
+main .board .modalEdit .modalView_box .view_comment .view_comment_header,
+main .board .modalView .modalView_box .view_comment .view_comment_header {
+  text-align: left;
+  height: 40px;
+  line-height: 40px;
+  display: flex;
+}
+
+main .board .modalEdit .modalView_box .view_comment .view_comment_header .like_count,
+main .board .modalView .modalView_box .view_comment .view_comment_header .like_count {
+  position: relative;
+}
+
+main .board .modalEdit .modalView_box .view_comment .view_comment_header .like_count svg,
+main .board .modalView .modalView_box .view_comment .view_comment_header .like_count svg {
+  position: relative;
+  width: 17.5px;
+  height: 17.5px;
+  margin-right: 5px;
+}
+
+main .board .modalEdit .modalView_box .view_comment .reply-input,
+main .board .modalView .modalView_box .view_comment .reply-input {
+  margin: 0;
+  position: relative;
+  height: 150px;
+}
+
+main .board .modalEdit .modalView_box .view_comment .reply-input .input,
+main .board .modalView .modalView_box .view_comment .reply-input .input {
+  border: 1px solid #ccc;
+  height: 100%;
+}
+
+main .board .modalEdit .modalView_box .view_comment .reply-input .input textarea::-webkit-scrollbar,
+main .board .modalView .modalView_box .view_comment .reply-input .input textarea::-webkit-scrollbar {
+  display: none;
+}
+
+main .board .modalEdit .modalView_box .view_comment .reply-input .inputFocus p,
+main .board .modalView .modalView_box .view_comment .reply-input .inputFocus p {
+  opacity: 0;
+  top: -5px;
+}
+
+main .board .modalEdit .modalView_box .view_comment .reply-input svg,
+main .board .modalView .modalView_box .view_comment .reply-input svg {
+  cursor: pointer;
+  position: absolute;
+  bottom: 2.5px;
+  right: 2.5px;
+  z-index: 2;
+  border-radius: 5px;
+  color: var(--border-color);
+  padding: 5px;
+  background-color: var(--background-color);
+  width: 20px;
+  height: 20px;
+}
+
+main .board .modalEdit .modalView_box .view_comment .reply-input svg:hover,
+main .board .modalView .modalView_box .view_comment .reply-input svg:hover {
+  color: var(--main-color);
+}
+
+main .board .modalEdit .modalView_box .view_comment .replyItem,
+main .board .modalView .modalView_box .view_comment .replyItem {
+  flex-direction: row-reverse;
+  width: 80%;
+  text-align: right;
+  margin: 5px 0 0 auto;
+  font-size: 0.9rem;
+}
+
+main .board .modalEdit .modalView_box .view_comment .replyItem .author,
+main .board .modalView .modalView_box .view_comment .replyItem .author {
+  margin: 0px 2px 2px 0px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: var(--main-color);
+}
+
+main .board .modalEdit .modalView_box .view_comment .replyItem .author span,
+main .board .modalView .modalView_box .view_comment .replyItem .author span {
+  font-size: 0.6rem;
+  font-weight: 400;
+  color: #aaa;
+}
+
+main .board .modalEdit .modalView_box .view_comment .replyItem .content,
+main .board .modalView .modalView_box .view_comment .replyItem .content {
+  width: max-content;
+  max-width: 100%;
+  margin: 0 0 0 auto;
+  height: max-content;
+  display: flex;
+  flex-direction: row-reverse;
+  position: relative;
+}
+
+main .board .modalEdit .modalView_box .view_comment .replyItem .content .text,
+main .board .modalView .modalView_box .view_comment .replyItem .content .text {
+  background-color: white;
+  box-shadow: 0px 0px 1px #ccc;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+main .board .modalEdit .modalView_box .view_comment .replyItem .content svg,
+main .board .modalView .modalView_box .view_comment .replyItem .content svg {
+  margin: auto 5px;
+  height: 20px;
+  width: 20px;
+  border-radius: 5px;
+  opacity: 0.5;
+  transition: all 0.25s;
+}
+
+main .board .modalEdit .modalView_box .view_comment .replyItem .content svg:hover,
+main .board .modalView .modalView_box .view_comment .replyItem .content svg:hover {
+  opacity: 1;
+}
+
+main .board .modalEdit .modalView_box .view_comment .replyItem .content .commentEditModal,
+main .board .modalView .modalView_box .view_comment .replyItem .content .commentEditModal {
+  display: none;
+  position: absolute;
+  top: -200%;
+  left: -40px;
+  width: max-content;
+  box-shadow: 0px 0px 2.5px #ccc;
+  background-color: white;
+  z-index: 5;
+  border-radius: 5px;
+  width: max-content;
+}
+
+main .board .modalEdit .modalView_box .view_comment .replyItem .content .commentEditModal .item,
+main .board .modalView .modalView_box .view_comment .replyItem .content .commentEditModal .item {
+  width: 100%;
+  cursor: pointer;
+  margin: 2.5px;
+  padding: 5px;
+}
+
+main .board .modalEdit .modalView_box .view_comment .replyItem .content .commentEditModal .item:hover,
+main .board .modalView .modalView_box .view_comment .replyItem .content .commentEditModal .item:hover {
+  color: var(--main-color);
+}
+
+main .board .modalEdit .modalView_box .view_comment .replyItem .content .commentEditModalBlock,
+main .board .modalView .modalView_box .view_comment .replyItem .content .commentEditModalBlock {
+  display: block;
+}
+
+main .board .modalEdit .modalView_box .view_comment .replyItem .content .editCommentBox textarea,
+main .board .modalView .modalView_box .view_comment .replyItem .content .editCommentBox textarea {
+  background: none;
+  resize: none;
+  overflow: hidden;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  width: 100%;
+  border-radius: 5px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+}
+
+main .board .modalEdit .modalView_box .view_comment .replyItem .content .editCommentBox textarea:focus,
+main .board .modalView .modalView_box .view_comment .replyItem .content .editCommentBox textarea:focus {
+  background: white;
+  outline: none;
+  box-shadow: 0px 5px 10px -5px #ccc;
+}
+
+main .board .modalEdit .modalView_box .view_comment .replyItem .content .editCommentBox button,
+main .board .modalView .modalView_box .view_comment .replyItem .content .editCommentBox button {
+  margin: auto 5px;
+  border: none;
+  background-color: inherit;
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+main .board .modalEdit .modalView_box .view_comment .replyItem .content .editCommentBox button:hover,
+main .board .modalView .modalView_box .view_comment .replyItem .content .editCommentBox button:hover {
+  opacity: 1;
+  color: var(--main-color);
+}
+
+main .board .modalEdit .modalView_box .view_comment .replyItem .content .editCommentBox button:active,
+main .board .modalView .modalView_box .view_comment .replyItem .content .editCommentBox button:active {
+  background-color: #eee;
+}
+
+main .board .modalEdit .modalView_box .view_comment .page-comment,
+main .board .modalView .modalView_box .view_comment .page-comment {
+  margin: 10px 0 0 auto;
+  width: max-content;
+  display: flex;
+}
+
+main .board .modalEdit .modalView_box .view_comment .page-comment span,
+main .board .modalView .modalView_box .view_comment .page-comment span {
+  display: flex;
+  line-height: 25px;
+  cursor: pointer;
+  color: var(--main-color);
+  opacity: 0.75;
+}
+
+main .board .modalEdit .modalView_box .view_comment .page-comment span:hover,
+main .board .modalView .modalView_box .view_comment .page-comment span:hover {
+  color: var(--main-color);
+  opacity: 1;
+}
+
+main .board .modalEdit .modalView_box .view_comment .page-comment .itemLoading,
+main .board .modalView .modalView_box .view_comment .page-comment .itemLoading {
+  width: 40px;
+  margin: 0;
+}
+
+main .board .modalEdit .modalView_box .view_comment .page-comment p,
+main .board .modalView .modalView_box .view_comment .page-comment p {
+  width: 20px;
+  height: 20px;
+  font-size: 0.75rem;
+  line-height: 20px;
+  font-weight: bold;
+  color: var(--main-color);
+}
+
+main .board .modalEdit .modalView_box .view_comment .page-comment p svg,
+main .board .modalView .modalView_box .view_comment .page-comment p svg {
+  width: 20px;
+  height: 20px;
+  position: relative;
+  box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+  main .board .modalEdit .modalView_box .view_content,
+  main .board .modalEdit .modalView_box .view_comment,
+  main .board .modalView .modalView_box .view_content,
+  main .board .modalView .modalView_box .view_comment {
+    width: 50%;
+  }
+}
+
+main .board .modalEdit .modalView_box::-webkit-scrollbar,
+main .board .modalView .modalView_box::-webkit-scrollbar {
+  width: 5px;
+}
+
+main .board .modalEdit .modalView_box::-webkit-scrollbar-thumb,
+main .board .modalView .modalView_box::-webkit-scrollbar-thumb {
+  background-color: var(--border-color);
+  border-radius: 5px;
 }
 
 main .board .modalOpen {
@@ -1295,7 +1907,7 @@ main .board .top span {
 main .footer {
   background-color: #f4ebb1;
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 main .footer .footer_top {
@@ -1409,4 +2021,183 @@ main .footer .footer_bottom p {
   width: 100px;
   text-align: center;
   border: 1px solid;
+}
+
+.admin {
+  background-color: var(--background-color);
+  max-width: 1600px;
+  margin: auto;
+}
+
+.admin .header {
+  width: 100%;
+  z-index: 2;
+}
+
+.admin .header .grey {
+  height: 0px;
+  background: #FAFAF8;
+}
+
+.admin .header .gradiant {
+  height: 10px;
+  background: linear-gradient(to right, #f2c386, #f4ebb1);
+}
+
+.admin .header .header_box {
+  max-width: 1600px;
+  margin: auto;
+  padding: 0 10px;
+  display: flex;
+}
+
+.admin .header img {
+  height: 30px;
+  width: auto;
+  margin: 10px 0;
+}
+
+.admin .header .account {
+  margin: auto 0 auto auto;
+  height: max-content;
+  text-align: right;
+}
+
+.admin .header .account .welcome {
+  font-size: 15px;
+  font-weight: bold;
+  color: var(--main-color);
+}
+
+.admin .header .account .logout {
+  cursor: pointer;
+}
+
+.admin .header .account .logout:hover {
+  text-decoration: underline;
+  color: var(--main-color);
+}
+
+@media (min-width: 575px) {
+  .admin .header img {
+    height: 40px;
+    margin: 5px 0;
+  }
+  .admin .header .account {
+    font-size: 14px;
+  }
+}
+
+.admin .admin_header,
+.admin .admin_footer {
+  height: 30px;
+}
+
+.admin .admin_main {
+  height: max-content;
+  flex-direction: row;
+  position: relative;
+}
+
+.admin .admin_main .admin_main_left {
+  width: 50px;
+}
+
+.admin .admin_main .admin_main_left .menu_item {
+  display: flex;
+}
+
+.admin .admin_main .admin_main_left .menu_item svg {
+  width: 25px;
+  height: 25px;
+  padding: 5px;
+}
+
+.admin .admin_main .admin_main_left .menu_item p {
+  display: none;
+}
+
+.admin .admin_main .admin_main_right {
+  width: calc(100% - 50px);
+  min-height: calc(100% - 50px);
+}
+
+.admin .admin_main .admin_main_right .card {
+  height: max-content;
+  box-shadow: var(--box-shadow);
+  background-color: var(--background-color-light);
+  margin: 10px;
+  padding: 10px;
+}
+
+.admin .admin_main .admin_main_right .card .title {
+  font-weight: bold;
+  text-align: left;
+  margin: 5px;
+}
+
+.admin .admin_main .admin_main_right .card .post {
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+}
+
+.admin .admin_main .admin_main_right .card .post .post_title {
+  font-weight: 500;
+}
+
+.admin .admin_main .admin_main_right .card .userItem {
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  margin: 5px;
+  border-bottom: 1px solid var(--border-color);
+  padding: 5px;
+}
+
+.admin .admin_main .admin_main_right .card .userItem .col1,
+.admin .admin_main .admin_main_right .card .userItem .col2 {
+  width: 40%;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-wrap: nowrap;
+}
+
+.admin .admin_main .admin_main_right .card .userItem .col1 p,
+.admin .admin_main .admin_main_right .card .userItem .col2 p {
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.admin .admin_main .admin_main_right .card .userItem .col3 {
+  width: 80%;
+}
+
+.admin .admin_main .admin_main_right .card .userItem .count {
+  width: 20%;
+  text-align: center;
+}
+
+.admin .admin_main .admin_main_right .card .clock .date {
+  margin: 0;
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
+.admin .admin_main .admin_main_right .card .clock h2 {
+  font-size: 2rem;
+}
+
+@media (min-width: 768px) {
+  .admin .admin_main .admin_main_left {
+    width: 200px;
+  }
+  .admin .admin_main .admin_main_left .menu_item p {
+    display: block;
+    line-height: 40px;
+  }
+  .admin .admin_main .admin_main_right {
+    width: calc(100% - 200px);
+  }
 }

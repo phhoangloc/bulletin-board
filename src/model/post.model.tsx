@@ -12,6 +12,12 @@ const postSchema = new Schema({
     content: {
         type: String,
     },
+    comments: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "comment"
+        }
+    ],
     createDate: {
         type: Date,
         default: Date.now,

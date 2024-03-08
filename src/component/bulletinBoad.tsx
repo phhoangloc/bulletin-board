@@ -6,7 +6,6 @@ import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import SendIcon from '@mui/icons-material/Send';
 import axios from 'axios';
-import ModalEdit from './modalEdit';
 import ItemBulletinBoard from './itemBulletinBoard';
 import TextAreaV2 from '@/items/TextAreaVer2';
 import LoopIcon from '@mui/icons-material/Loop';
@@ -16,6 +15,8 @@ import ItemLoading from './itemLoading';
 import Image from 'next/image';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import Link from 'next/link';
+import ModalView from './modalView';
+import Footer from './footer';
 const BulletinBoad = () => {
 
     const [user, setCurrentUser] = useState<UserLogin | undefined>(store.getState().user)
@@ -103,11 +104,11 @@ const BulletinBoad = () => {
             <div className="user_create">{user?.nickname}</div>
             <div className="create-news">
                 <div className="title_header">Title<Input name='' value={title} onChange={(e) => setTitle(e.target.value)} /></div>
-                <TextAreaV2 name='' value={infor} onInput={(data) => setinfor(data)} />
+                <TextAreaV2 name='' value={""} onInput={(data) => setinfor(data)} />
                 {sending ? <LoopIcon /> : <SendIcon onClick={() => createPost(title, infor)} sx={infor ? { opacity: 1 } : { opacity: 0.1 }} />}
             </div>
             <div className='item'>
-                {posts.map((item, index) => <ItemBulletinBoard post={item} key={index} func={(postId) => { setPostId(postId) }} />)}
+                {posts.map((item, index) => <ItemBulletinBoard post={item} key={index} func={(postId) => { setPostId(postId), setModalOpen(true) }} />)}
                 {loading ? <ItemLoading /> :
                     <div className="page">
                         <p>{page === 1 ? null : <ArrowLeftIcon onClick={() => { setPage(prev => prev - 1); setPosts([]) }} />}</p>
@@ -118,7 +119,7 @@ const BulletinBoad = () => {
             <div className="background background_bottom">
                 <Image src="/img/bg_bottom.png" alt='' width={1000} height={1000} />
             </div>
-            <ModalEdit id={postId} modalOpen={modalOpen} cancel={() => { setPostId(""); setModalOpen(false) }} />
+            <ModalView id={postId} modalOpen={modalOpen} cancel={() => { setPostId(""); setModalOpen(false) }} />
             <Tool func={(e) => setSearch(e)} />
             <div className="top">
                 <KeyboardArrowUpIcon /><span><Link href="#"> TOP</Link></span>
@@ -140,6 +141,7 @@ const BulletinBoad = () => {
                     </div>
                 </div>
             </div>
+            <Footer />
         </div >
     )
 }

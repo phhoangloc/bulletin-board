@@ -50,7 +50,6 @@ const Upload = () => {
             })
         }
     }
-
     const getList = async () => {
         const result = await axios.get(`/api/user_number`)
         if (result.data.length) {
@@ -59,7 +58,6 @@ const Upload = () => {
             setLists([])
         }
     }
-
     useEffect(() => {
         getList()
     }, [])

@@ -47,25 +47,25 @@ const TextAreaV2 = ({ id, name, value, onInput }: TextAreaType) => {
 
 
     useEffect(() => {
-        value === "" ? inputRef.current.innerHTML = "" : null
-    }, [value])
+        inputRef.current ? inputRef.current.innerHTML = value : null
+    }, [inputRef.current, value])
 
-    useEffect(() => {
-        const getPostbyId = async (id: String) => {
-            const result = await axios.get(`/api/auth/post?id=${id}`,
-                {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': localStorage.token,
-                    }
+    // useEffect(() => {
+    //     const getPostbyId = async (id: String) => {
+    //         const result = await axios.get(`/api/auth/post?id=${id}`,
+    //             {
+    //                 headers: {
+    //                     'Content-Type': 'application/json',
+    //                     'Authorization': localStorage.token,
+    //                 }
 
-                })
-            if (result.data.success) {
-                inputRef.current.innerHTML = result.data.data.content
-            }
-        }
-        id && getPostbyId(id)
-    }, [id])
+    //             })
+    //         if (result.data.success) {
+    //             inputRef.current.innerHTML = result.data.data[0].content
+    //         }
+    //     }
+    //     id && getPostbyId(id)
+    // }, [id])
 
     return (
         <div className={`input ${focus ? "inputFocus" : ""} ${inputRef.current && inputRef.current.innerHTML ? "inputFocus inputBlur" : ""} `}>

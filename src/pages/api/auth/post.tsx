@@ -29,7 +29,17 @@ const Post =
         switch (method) {
             case "GET":
                 await postModel.find()
-                    .findOne(query.id ? { "_id": query.id } : {})
+                    .find(query.id ? { "_id": query.id } : {})
+                    // .populate("nicknameId comments", "nickname content nicknameId")
+                    .populate({
+                        path: 'nicknameId',
+                        select: ' nickname',
+                    })
+                    .populate({
+                        path: 'comments',
+                        select: 'content nicknameId',
+                        populate: { path: 'nicknameId', select: "nickname" }
+                    })
                     .catch((error: Error) => {
                         result.success = false
                         result.message = error.message
@@ -50,6 +60,10 @@ const Post =
                         res.send(result)
                         throw error.message
                     }).then(async (data: any) => {
+                        const user = await userModel.findOne({ "_id": id }, "posts")
+                        const posts = user.posts
+                        console.log(posts)
+                        await userModel.updateOne({ "_id": id }, { posts: [...posts, data._id] })
                         result.success = true
                         result.message = "your post is created"
                         res.json(result)

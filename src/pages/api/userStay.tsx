@@ -12,17 +12,24 @@ export default async function handler(
 
     connectMongoDB()
     switch (method) {
-
         case "GET":
             await userModel
-                .find(query.nickname ? { "nickname": query.nickname } : {})
-                .find(query.email ? { "email": query.email } : {})
+                .findOne({ "_id": query.id }, query.stayAtHome ? "nickname stayAtHome" : {})
                 .catch((error: Error) => {
                     res.json(false)
                     throw error.message
                 })
                 .then((data: any) => {
-                    data[0] ? res.json(true) : res.json(false)
+                    res.json(data)
+                })
+        case "PUT":
+            await userModel.updateOne({ "_id": query.id }, body)
+                .catch((error: Error) => {
+                    res.json(false)
+                    throw error.message
+                })
+                .then((data: any) => {
+                    res.json(data)
                 })
     }
 }

@@ -26,7 +26,7 @@ export default function Home() {
     <main className='center'>
       <Header />
       {reCom}
-      <Footer />
+      {/* <Footer /> */}
     </main>
   )
 }
