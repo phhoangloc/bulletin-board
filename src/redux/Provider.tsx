@@ -51,15 +51,15 @@ const ProviderExport = ({ children }: Props) => {
         checkLogin(localStorage.token)
     }, [number])
 
-    useEffect(() => {
-        const socket = io(`${process.env.SOCKET_URL}`);
+    // useEffect(() => {
+    //     const socket = io(`${process.env.SOCKET_URL_}`);
 
-        user?.id && socket.emit("idAndStart", ({ id: user?.id, start: Date.now() }))
+    //     user?.id && socket.emit("idAndStart", ({ id: user?.id, start: Date.now() }))
 
-        return () => {
-            socket.disconnect();
-        };
-    }, [user?.id]);
+    //     return () => {
+    //         socket.disconnect();
+    //     };
+    // }, [user?.id]);
 
     return (
         <Provider store={store}>
