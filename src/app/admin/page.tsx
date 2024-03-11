@@ -90,7 +90,6 @@ const Admin = (props: Props) => {
             <div className='card xs12 sm6 '>
                 <Clock />
             </div>
-
             <div className='card xs12'>
                 <div className="title">メンバー</div>
                 <div className='userItem'>

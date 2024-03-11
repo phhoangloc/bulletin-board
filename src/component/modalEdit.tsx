@@ -35,10 +35,12 @@ const ModalEdit = ({ modalOpen, id, cancel }: Props) => {
 
         if (result.data.success) {
             setinfor(result.data.data[0].content)
+            setNewInfor(result.data.data[0].content)
             setTitle(result.data.data[0].title)
         }
     }
     const updatePostbyId = async (id: String) => {
+
         const result = await axios.put(`/api/auth/post?id=${id}`,
             { title, content: newinfor },
             {
@@ -81,7 +83,7 @@ const ModalEdit = ({ modalOpen, id, cancel }: Props) => {
                 <TextAreaV2 name='内容' value={infor} onInput={(data) => setNewInfor(data)} id={id} />
                 <div className="tool">
                     <DeleteIcon onClick={() => { id && deletePostbyId(id) }} />
-                    <Button name='cancel' onClick={() => { cancel(), setTitle("") }} />
+                    <Button name='cancel' onClick={() => { cancel() }} />
                     <Button name="save" onClick={() => { id && updatePostbyId(id) }} />
                 </div>
             </div>
