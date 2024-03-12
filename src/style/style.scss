@@ -704,7 +704,6 @@ main {
                             font-size: 1.05rem;
                             color: var(--main-color);
                             width: calc(100% - 30px);
-                            cursor: pointer;
                         }
 
                         svg {
@@ -1257,7 +1256,7 @@ main {
                 svg:nth-child(1) {
                     position: absolute;
                     right: 0;
-                    top: 0;
+                    top: 5px;
                     color: var(--main-color);
                     z-index: 1;
                     cursor: pointer;
@@ -1295,6 +1294,16 @@ main {
                     .content {
                         width: 90% !important;
                         margin: 10px auto;
+
+                        .content_title {
+                            margin-bottom: 5px;
+
+                            p {
+                                font-weight: bolder;
+                                font-size: 1.05rem;
+                                color: var(--main-color);
+                            }
+                        }
 
                         img {
                             width: 100%;

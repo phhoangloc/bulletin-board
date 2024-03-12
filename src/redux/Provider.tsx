@@ -63,8 +63,8 @@ const ProviderExport = ({ children }: Props) => {
     };
     useEffect(() => {
         const start = new Date()
-        window.onbeforeunload = () => handleBeforeUnload(start)
-    }, []);
+        window.onbeforeunload = () => user?.id && handleBeforeUnload(start)
+    }, [user?.id]);
 
 
     return (

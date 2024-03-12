@@ -939,7 +939,6 @@ main .board .item .msg .content .content_title p {
   font-size: 1.05rem;
   color: var(--main-color);
   width: calc(100% - 30px);
-  cursor: pointer;
 }
 
 main .board .item .msg .content .content_title svg {
@@ -1501,7 +1500,7 @@ main .board .modalEdit .modalView_box svg:nth-child(1),
 main .board .modalView .modalView_box svg:nth-child(1) {
   position: absolute;
   right: 0;
-  top: 0;
+  top: 5px;
   color: var(--main-color);
   z-index: 1;
   cursor: pointer;
@@ -1548,6 +1547,18 @@ main .board .modalEdit .modalView_box .view_content .content,
 main .board .modalView .modalView_box .view_content .content {
   width: 90% !important;
   margin: 10px auto;
+}
+
+main .board .modalEdit .modalView_box .view_content .content .content_title,
+main .board .modalView .modalView_box .view_content .content .content_title {
+  margin-bottom: 5px;
+}
+
+main .board .modalEdit .modalView_box .view_content .content .content_title p,
+main .board .modalView .modalView_box .view_content .content .content_title p {
+  font-weight: bolder;
+  font-size: 1.05rem;
+  color: var(--main-color);
 }
 
 main .board .modalEdit .modalView_box .view_content .content img,

@@ -14,7 +14,7 @@ export default async function handler(
     let result: isDataType = { success: false };
     const authorization = req.headers['authorization']
     const token = authorization && authorization.split(" ")[1]
-    const id = await jwt.verify(token, 'secretToken').id
+    const id = token && await jwt.verify(token, 'secretToken').id
     connectMongoDB()
     switch (method) {
         case "GET":
@@ -35,8 +35,8 @@ export default async function handler(
         case "PUT":
             const end = new Date()
             const user = await userModel.findOne({ "_id": id }, "stayAtHome stayAtPost")
-            const stayAtHome = user.stayAtHome
-            await userModel.updateOne({ "_id": id }, { stayAtHome: [...stayAtHome, { start: body.start, end: end }] })
+            const stayAtHome = user?.stayAtHome
+            stayAtHome && await userModel.updateOne({ "_id": id }, { stayAtHome: [...stayAtHome, { start: body.start, end: end }] })
                 .catch((error: Error) => {
                     result.success = false
                     result.message = error.message
