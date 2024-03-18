@@ -83,8 +83,8 @@ const ModalEdit = ({ modalOpen, id, cancel }: Props) => {
                 <TextAreaV2 name='内容' value={infor} onInput={(data) => setNewInfor(data)} id={id} />
                 <div className="tool">
                     <DeleteIcon onClick={() => { id && deletePostbyId(id) }} />
-                    <Button name='cancel' onClick={() => { cancel() }} />
-                    <Button name="save" onClick={() => { id && updatePostbyId(id) }} />
+                    <Button name='キャンセル' onClick={() => { cancel() }} />
+                    <Button name="保存" onClick={() => { id && updatePostbyId(id) }} />
                 </div>
             </div>
         </div>

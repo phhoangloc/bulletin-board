@@ -181,10 +181,9 @@ const Post = ({ slug }: Props) => {
                             </div>
                         </div>
                         <div className='tool_slug'>
-                            <p>修正{user?.id === item?.nicknameId?._id && <EditOutlinedIcon onClick={() => setModalOpen(true)} />}</p>
-                            <p>コメント <CommentOutlinedIcon onClick={() => setcommentFocus(prev => prev + 1)} />
-                                {CommentNumber !== 0 && <span className='commentNumber'>{CommentNumber}</span>}
+                            <p onClick={() => setcommentFocus(prev => prev + 1)}>コメント {CommentNumber !== 0 && <span className='commentNumber'>（{CommentNumber}）</span>}
                             </p>
+                            <p onClick={() => setModalOpen(true)}>修正</p>
                         </div>
                         <div className={`reply reply-on reply-on-slugpage`}>
                             <div className="reply-input">

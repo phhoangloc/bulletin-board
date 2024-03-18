@@ -278,7 +278,7 @@ body::-webkit-scrollbar-thumb {
                 background-color: white;
                 color: var(--main-color);
                 border: 1px solid var(--main-color);
-                margin-left: 10px;
+                margin-right: 10px;
             }
 
         }
@@ -787,6 +787,7 @@ main {
                     display: flex;
                     margin: auto;
                     position: relative;
+                    cursor: pointer;
 
                     svg {
                         width: 25px;
@@ -806,9 +807,13 @@ main {
                         height: max-content;
                         margin: auto 5px auto 0;
                         color: #888;
+                        opacity: 0.75;
                     }
                 }
 
+                p:hover {
+                    color: var(--main-color);
+                }
 
             }
 
@@ -1529,6 +1534,7 @@ main {
                                 height: 20px;
                                 position: relative;
                                 box-sizing: border-box;
+                                top: 0;
                             }
                         }
                     }

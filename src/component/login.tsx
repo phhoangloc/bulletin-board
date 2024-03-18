@@ -39,12 +39,10 @@ const Login = () => {
                     <p>パスワード</p>
                     <input type='password' onChange={(e) => setPassword(e.target.value)} value={password}></input>
                 </div>
-                {/* <Input name='nickname' onChange={(e) => setNickname(e.target.value)} value={nickname} />
-                <Input type='password' name='password' onChange={(e) => setPassword(e.target.value)} value={password} /> */}
                 <p className='notice'>{notice}</p>
                 <div className="narbar">
-                    <Button name='ログイン' onClick={() => login()} />
                     <p className='link' onClick={() => toPage.push('/signup')}>登録</p>
+                    <Button name='ログイン' onClick={() => login()} />
                 </div>
             </div>
         </div>
