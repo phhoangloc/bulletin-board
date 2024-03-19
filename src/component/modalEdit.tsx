@@ -84,7 +84,7 @@ const ModalEdit = ({ modalOpen, id, cancel }: Props) => {
                 <div className="tool">
                     <DeleteIcon onClick={() => { id && deletePostbyId(id) }} />
                     <Button name='キャンセル' onClick={() => { cancel() }} />
-                    <Button name="保存" onClick={() => { id && updatePostbyId(id) }} />
+                    <Button name="保存" onClick={() => { id && updatePostbyId(id), toPage.push("/") }} />
                 </div>
             </div>
         </div>
