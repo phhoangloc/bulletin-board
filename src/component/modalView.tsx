@@ -40,7 +40,7 @@ const ModalView = ({ modalOpen, id, cancel }: Props) => {
     const [loading, setLoading] = useState<boolean>(true)
     const [sending, setSending] = useState<boolean>(false)
     const [like, setLike] = useState<boolean>(false)
-
+    const [likes, setLikes] = useState<string[]>([])
     const [commentIndex, setCommentIndex] = useState<number>(-1)
     const [commentId, setCommentId] = useState<String>("")
     const [commentEditModal, setcommentEditModal] = useState<boolean>(false)
@@ -50,10 +50,8 @@ const ModalView = ({ modalOpen, id, cancel }: Props) => {
 
     const [pageComment, setPageComment] = useState<number>(1)
     const [limitComment, setLimitComment] = useState<number>(10)
-    const [nextComment, setNextComment] = useState<boolean>(false)
-    const [CommentNumber, setCommentNumber] = useState<number>(0)
     const [refresh, setRefresh] = useState<number>(0)
-    const [commentFocus, setcommentFocus] = useState<number>(0)
+    const [refreshLike, setRefreshLike] = useState<number>(0)
 
     const getPostbyId = async (id: String) => {
         const result = await axios.get(`/api/auth/post?id=${id}`,
@@ -64,10 +62,11 @@ const ModalView = ({ modalOpen, id, cancel }: Props) => {
                 }
 
             })
-        console.log(result.data.data)
+
         if (result.data.success) {
             setLoading(false)
             setPost(result.data.data[0])
+            setLikes(result.data.data[0].likes)
         }
     }
 
@@ -123,6 +122,22 @@ const ModalView = ({ modalOpen, id, cancel }: Props) => {
         setRefresh(refresh + 1)
     }
 
+    const likeAPost = async (id: string) => {
+        const result = await axios.post(`/api/auth/like?id=${id}`,
+            { likes },
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': localStorage.token,
+                }
+
+            })
+    }
+
+    useEffect(() => {
+        refreshLike && likeAPost(post?._id)
+    }, [refreshLike])
+
     return (
         <div className={`modalView center ${modalOpen ? "modalOpen" : ""} `}>
             <div className="box modalView_box grid_box">
@@ -141,7 +156,9 @@ const ModalView = ({ modalOpen, id, cancel }: Props) => {
 
                 <div className="view_comment">
                     <div className='view_comment_header'>
-                        <p className='like_count'>{like ? < FavoriteIcon onClick={() => setLike(false)} /> : <FavoriteBorderOutlinedIcon onClick={() => setLike(true)} />}いい（0）</p>
+                        <p className='like_count'>{user?.id && likes.includes(user?.id) ?
+                            < FavoriteIcon onClick={() => { setLike(false), setLikes((p) => p.filter((item: string) => item != user?.id)), setRefreshLike(refreshLike + 1) }} /> :
+                            <FavoriteBorderOutlinedIcon onClick={() => { setLike(true), setLikes((p) => user?.id ? [...p, user?.id] : [...p]), setRefreshLike(refreshLike + 1) }} />}いい（{likes.length}）</p>
                         <p className='comment_count'>コメント（{post?.comments?.length}）</p>
                     </div>
                     <div className="reply-input">

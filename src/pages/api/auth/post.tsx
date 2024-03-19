@@ -30,7 +30,6 @@ const Post =
             case "GET":
                 await postModel.find()
                     .find(query.id ? { "_id": query.id } : {})
-                    // .populate("nicknameId comments", "nickname content nicknameId")
                     .populate({
                         path: 'nicknameId',
                         select: ' nickname',

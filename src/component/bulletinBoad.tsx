@@ -17,6 +17,7 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import Link from 'next/link';
 import ModalView from './modalView';
 import Footer from './footer';
+import { setRefresh } from '@/redux/reducer/RefreshReducer';
 const BulletinBoad = () => {
 
     const [user, setCurrentUser] = useState<UserLogin | undefined>(store.getState().user)
@@ -56,14 +57,13 @@ const BulletinBoad = () => {
         }
     }
 
-    const [posts, setPosts] = useState<{ _id: string, nicknameId: { _id: string, nickname: string }, title: string, content: string, createDate: Date }[]>([])
+    const [posts, setPosts] = useState<{ _id: string, nicknameId: { _id: string, nickname: string }, title: string, content: string, createDate: Date, likes: [] }[]>([])
     const [isNextPage, setIsNextPage] = useState<Boolean>(true)
     const [search, setSearch] = useState<string>("")
     const [page, setPage] = useState<number>(1)
     const [limit, setLimit] = useState<number>(10)
     const [postId, setPostId] = useState<String | undefined>()
     const [modalOpen, setModalOpen] = useState<boolean>(false)
-
     const [loading, setLoading] = useState<boolean>(false)
 
     const getPost = async (limit: number, page: number, search: string) => {
@@ -84,7 +84,6 @@ const BulletinBoad = () => {
 
         }
         setLoading(false)
-
     }
 
     useEffect(() => {
@@ -119,7 +118,9 @@ const BulletinBoad = () => {
             <div className="background background_bottom">
                 <Image src="/img/bg_bottom.png" alt='' width={1000} height={1000} />
             </div>
-            <ModalView id={postId} modalOpen={modalOpen} cancel={() => { setPostId(""); setModalOpen(false) }} />
+            <ModalView id={postId} modalOpen={modalOpen} cancel={() => {
+                setPostId(""); setModalOpen(false); store.dispatch(setRefresh())
+            }} />
             <Tool func={(e) => setSearch(e)} />
             <div className="top">
                 <KeyboardArrowUpIcon /><span><Link href="#"> TOP</Link></span>

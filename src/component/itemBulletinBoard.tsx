@@ -13,9 +13,10 @@ import CommentOutlinedIcon from '@mui/icons-material/CommentOutlined';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import { useRouter } from 'next/navigation';
 import ItemLoading from './itemLoading';
-import Loading from '@/app/loading';
+import Favorite from '@mui/icons-material/Favorite';
+import FavoriteBorderOutlined from '@mui/icons-material/FavoriteBorderOutlined';
 type Props = {
-    post: { _id: string, nicknameId: { _id: string, nickname: string }, title: string, content: string, createDate: Date },
+    post: { _id: string, nicknameId: { _id: string, nickname: string }, title: string, content: string, createDate: Date, likes: [] },
     func: (postId: String) => void
 }
 
@@ -43,8 +44,9 @@ const ItemBulletinBoard = ({ post, func }: Props) => {
     const [nextComment, setNextComment] = useState<boolean>(false)
     const [CommentNumber, setCommentNumber] = useState<number>(0)
     const [refresh, setRefresh] = useState<number>(0)
-
     const [loading, setLoading] = useState<boolean>(false)
+    const [like, setLike] = useState<boolean>(false)
+    const [likes, setLikes] = useState<string[]>(post.likes)
 
     const countComment = async (id: string) => {
         const result = await axios.get(`/api/auth/comment?postId=${id}`,
@@ -132,6 +134,22 @@ const ItemBulletinBoard = ({ post, func }: Props) => {
         setRefresh(refresh + 1)
     }
 
+    const likeAPost = async (id: string) => {
+        const result = await axios.post(`/api/auth/like?id=${id}`,
+            { likes },
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': localStorage.token,
+                }
+
+            })
+    }
+
+    useEffect(() => {
+        refresh && likeAPost(post._id)
+    }, [refresh])
+
     useEffect(() => {
         postId && getComment(postId)
     }, [pageComment])
@@ -139,6 +157,7 @@ const ItemBulletinBoard = ({ post, func }: Props) => {
     useEffect(() => {
         countComment(post._id)
     }, [refresh])
+
 
     return (
         <div>
@@ -155,6 +174,10 @@ const ItemBulletinBoard = ({ post, func }: Props) => {
                     </div>
                 </div>
                 <div className='tool'>
+                    {user?.id && likes.includes(user?.id) ?
+                        <Favorite onClick={() => { setLike(false), setLikes((p) => p.filter((item: string) => item != user?.id)), setRefresh(refresh + 1) }} /> :
+                        <FavoriteBorderOutlined onClick={async () => { setLike(true), setLikes((p) => user?.id ? [...p, user?.id] : [...p]), setRefresh(refresh + 1) }} />}
+                    <p className='commentNumber'>{likes.length}</p>
                     {postId ?
                         <CloseIcon onClick={() => { setPostId(undefined) }} /> :
                         <CommentOutlinedIcon onClick={() => { setPostId(post._id), getComment(post._id), setPageCommnet(1) }} />
