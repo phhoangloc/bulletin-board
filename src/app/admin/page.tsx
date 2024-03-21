@@ -122,12 +122,12 @@ const Admin = (props: Props) => {
                             </div>
                         </div>)}
             </div>
-            <div className='card xs12'>
-                <div className="title">投稿</div>
+            <div className='card xs12 md6'>
+                <div className="title">コメントの多かった投稿</div>
                 <div className='userItem'>
                     <div className='col3'>タイト</div>
                     <div ></div>
-                    <div className='count'>コメント</div>
+                    <div className='count'>数量</div>
                 </div>
                 {loading2 ? <ItemLoading /> :
                     post?.sort((a: any, b: any) => b.comments.length - a.comments.length)
@@ -136,6 +136,22 @@ const Admin = (props: Props) => {
                                 <div className='col3'>{item?.title ? item?.title : "タイトなし"}</div>
                                 <div ></div>
                                 <div className='count'>{item.comments.length}</div>
+                            </div>)}
+            </div>
+            <div className='card xs12 md6'>
+                <div className="title">「いいね！」の多かった投稿</div>
+                <div className='userItem'>
+                    <div className='col3'>タイト</div>
+                    <div ></div>
+                    <div className='count'>数量</div>
+                </div>
+                {loading2 ? <ItemLoading /> :
+                    post?.sort((a: any, b: any) => b.likes.length - a.likes.length)
+                        .slice(0, 5).map((item: any, index: number) =>
+                            <div className='userItem' key={index}>
+                                <div className='col3'>{item?.title ? item?.title : "タイトなし"}</div>
+                                <div ></div>
+                                <div className='count'>{item.likes.length}</div>
                             </div>)}
             </div>
         </div>

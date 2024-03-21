@@ -19,9 +19,9 @@ Content-Type: application/json
 
 
 ###
-GET  http://localhost:3000/api/user
+GET  http://localhost:3000/api/post
 Content-Type: application/json
-Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1OWNkODc3YjRjYjAxZWY5MTdkZGFjZCIsImlhdCI6MTcwOTc3MzYxNywiZXhwIjoxNzA5ODYwMDE3fQ.kgrKz2jqBzK1Cs0DQVHbEeWSEPgQFg9zpRCQALG9_3E
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1OWNkODc3YjRjYjAxZWY5MTdkZGFjZCIsImlhdCI6MTcxMDgxMzM2OSwiZXhwIjoxNzEwODk5NzY5fQ.MyR4nAuSKTLbdlaroxlS-XDN5jFNj74wtgHKXfL6o40
 ###
 
 POST  http://localhost:3000/api/auth/post
